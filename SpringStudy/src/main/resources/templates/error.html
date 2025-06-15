@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>에러 발생</title>
+    <link rel="stylesheet" href="/list.css"> <!-- 기존 스타일 유지 -->
+    <style>
+        body {
+            background-color: #fff6f6;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .error-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            text-align: center;
+        }
+
+        .error-wrapper h1 {
+            font-size: 72px;
+            color: #d62828;
+            margin-bottom: 10px;
+        }
+
+        .error-wrapper p {
+            font-size: 20px;
+            color: #555;
+        }
+
+        .error-wrapper a {
+            margin-top: 30px;
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #4a90e2;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+
+        .error-wrapper a:hover {
+            background-color: #357ABD;
+        }
+    </style>
+</head>
+<body>
+<div class="error-wrapper">
+    <h1>🚫 에러 발생</h1>
+    <p>비정상적인 요청이 감지되었습니다.<br>요청하신 페이지를 찾을 수 없거나 문제가 발생했습니다.</p>
+    <a href="/">🏠 메인으로 돌아가기</a>
+</div>
+</body>
+</html>

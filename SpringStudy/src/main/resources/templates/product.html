@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="'상품 상세 | ' + ${product.title}">상품 상세</title>
+    <link rel="stylesheet" href="/list.css">
+    <link rel="stylesheet" href="/product.css"> <!-- 분리된 CSS -->
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="/" class="logo">🛒 Spring Shop</a>
+    <div class="nav-links">
+        <a href="/list">List</a>
+        <a href="/write">Write</a>
+    </div>
+</nav>
+
+<div class="product-container">
+    <img src="https://placehold.co/400x300" alt="상품 이미지">
+    <h2 th:text="${product.title}">상품명</h2>
+    <p>가격: <span th:text="${product.price}">0</span> 원</p>
+    <a href="/list" class="btn">← 목록으로</a>
+</div>
+
+<footer>
+    <p>ⓒ 2025 Spring Study Team</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>SSG 랜더스 6월 경기일정</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4a90e2;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        main {
+            max-width: 900px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            color: #4a90e2;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 14px 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4a90e2;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #eef7ff;
+        }
+
+        .home-tag {
+            font-size: 14px;
+            color: #4a90e2;
+        }
+
+        .no-game {
+            text-align: center;
+            color: #aaa;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h2>📅 SSG 랜더스 6월 경기 일정</h2>
+</header>
+
+<main>
+    <h1>6월 경기 리스트</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>날짜</th>
+                <th>시간</th>
+                <th>경기장</th>
+                <th>대진</th>
+                <th>비고</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>06.17 (화)</td>
+                <td>18:30</td>
+                <td>고척 스카이돔</td>
+                <td>SSG vs 키움</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>06.20 (금)</td>
+                <td>18:30</td>
+                <td>인천 SSG 랜더스 필드</td>
+                <td>KIA vs SSG</td>
+                <td><span class="home-tag">🏠 홈</span></td>
+            </tr>
+            <tr>
+                <td>06.23 (월)</td>
+                <td colspan="4" class="no-game">경기 없음</td>
+            </tr>
+            <tr>
+                <td>06.24 (화)</td>
+                <td>18:30</td>
+                <td>잠실야구장</td>
+                <td>SSG vs 두산</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>06.27 (금)</td>
+                <td>18:30</td>
+                <td>인천 SSG 랜더스 필드</td>
+                <td>한화 vs SSG</td>
+                <td><span class="home-tag">🏠 홈</span></td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+
+</body>
+</html>

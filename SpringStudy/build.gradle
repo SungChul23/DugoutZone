@@ -27,6 +27,8 @@ dependencies {
     runtimeOnly 'com.mysql:mysql-connector-j' //MySQL DB에 JDBC로 접속하기 위한 드라이버 (RDS든 로컬이든 MySQL이면 필수)
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa' //	Spring Data JPA 기능을 사용하기 위한 스타터 패키지 (ORM 매핑)
 
+    compileOnly 'org.projectlombok:lombok' //롬복을 사용하여 getter, setter 등 줄이기
+    annotationProcessor 'org.projectlombok:lombok'
 
 }
 

@@ -1,22 +1,42 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 리스트 | Spring Study</title>
+    <link rel="stylesheet" href="/list.css">
+
 </head>
 <body>
-<div>
-    <img>
-    <h4 th:text="${name}">바지</h4>
-    <p th:text="${money}">7억</p>
-</div>
-<div>
-    <img>
-    <h4>셔츠</h4>
-    <p>4억</p>
-</div>
+
+<!-- ✅ 네비게이션 바 추가 -->
+<nav class="navbar">
+    <a href="/" class="logo">🛒 Spring Shop</a>
+    <div class="nav-links">
+        <a href="/list">List</a>
+        <a href="/write">Write</a>
+    </div>
+</nav>
+
+<header>
+    <h2>🛍️ 상품 리스트</h2>
+    <p>스프링 연습용 상품 페이지입니다.</p>
+</header>
+
+<main class="container">
+    <div class="card" th:each="item : ${items}">
+        <img src="https://placehold.co/300x200" alt="상품 이미지">
+        <h4>
+            <a th:href="@{'/list/product/' + ${item.id}}" th:text="${item.title}">상품명</a>
+        </h4>
+        <p>가격: <span th:text="${item.price}">0</span> 원</p>
+
+    </div>
+</main>
+
+<footer>
+    <a href="/" class="btn">메인으로 돌아가기</a>
+    <p>ⓒ 2025 Spring Study Team</p>
+</footer>
 </body>
 </html>

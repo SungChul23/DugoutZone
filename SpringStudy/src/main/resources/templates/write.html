@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>상품 추가 | Spring Study</title>
+  <link rel="stylesheet" href="/list.css">
+  <link rel="stylesheet" href="/write.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="/" class="logo">🛒 Spring Shop</a>
+  <div class="nav-links">
+    <a href="/list">List</a>
+    <a href="/write">Write</a>
+  </div>
+</nav>
+
+<div class="form-container">
+  <h2>상품 추가</h2>
+  <form action="/add" method="POST">
+    <div class="form-group">
+      <label for="title">상품명</label>
+      <input type="text" id="title" name="title" required>
+    </div>
+    <div class="form-group">
+      <label for="price">가격</label>
+      <input type="number" id="price" name="price" required>
+    </div>
+    <button type="submit" class="submit-btn">전송</button>
+  </form>
+</div>
+
+<footer>
+  <a href="/" class="btn">메인으로 돌아가기</a>
+  <p>ⓒ 2025 Spring Study Team</p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>SSG 랜더스 경기 일정</title>
+    <link rel="stylesheet" href="/ssggames.css"> <!-- CSS 분리 -->
+</head>
+<body>
+
+<header>
+    <h2>SSG 랜더스 6월 경기 일정</h2>
+    <p>🔥 승리를 향한 여정! 홈과 원정을 모두 확인하세요.</p>
+</header>
+
+<main>
+    <h1>📅 6월 경기 일정표</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>날짜</th>
+            <th>요일</th>
+            <th>상대팀</th>
+            <th>홈/원정</th>
+            <th>구장</th>
+            <th>시간</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="i : ${SSGGames}">
+            <td th:text="${i.date}">06.17</td>
+            <td th:text="${i.day}">화</td>
+            <td th:text="${i.opponent}">키움</td>
+            <td th:text="${i.ssg_side}">away</td>
+            <td th:text="${i.stadium}">고척 스카이돔</td>
+            <td th:text="${i.time}">18:30</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="center">
+        <a href="/" class="btn">🏠 메인으로 돌아가기</a>
+    </div>
+</main>
+
+<footer>
+    ⓒ 2025 Spring Study Team
+</footer>
+
+</body>
+</html>

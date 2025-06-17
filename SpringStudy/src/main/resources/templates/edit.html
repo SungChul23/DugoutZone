@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>상품 수정 | Spring Study</title>
+    <link rel="stylesheet" href="/list.css">
+    <link rel="stylesheet" href="/write.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="/" class="logo">🛒 Spring Shop</a>
+    <div class="nav-links">
+        <a href="/list">상품 목록</a>
+    </div>
+</nav>
+
+<div class="form-container">
+    <h2>상품 수정</h2>
+    <form action="/edit" method="POST">
+        <!-- ✅ ID는 반드시 hidden으로 처리 -->
+        <input type="hidden" name="id" th:value="${items.id}">
+
+        <div class="form-group">
+            <input name="title" th:value="${items.title}" required>
+        </div>
+        <div class="form-group">
+            <input name="price" type="number" th:value="${items.price}" required>
+        </div>
+        <button type="submit" class="submit-btn">전송</button>
+    </form>
+
+</div>
+
+<footer>
+    <a href="/" class="btn">메인으로 돌아가기</a>
+    <p>ⓒ 2025 Spring Study Team</p>
+</footer>
+</body>
+</html>

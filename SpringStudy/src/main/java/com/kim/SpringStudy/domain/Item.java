@@ -18,4 +18,6 @@ public class Item {
     @Setter
     private Integer price;
 
+    public void setId(Long id) {
+    }
 }

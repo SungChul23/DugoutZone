@@ -13,8 +13,8 @@
 <nav class="navbar">
     <a href="/" class="logo">🛒 Spring Shop</a>
     <div class="nav-links">
-        <a href="/list">List</a>
-        <a href="/write">Write</a>
+        <a href="/list">상품 목록</a>
+        <a href="/write">상품 등록</a>
     </div>
 </nav>
 
@@ -30,6 +30,8 @@
             <a th:href="@{'/list/product/' + ${item.id}}" th:text="${item.title}">상품명</a>
         </h4>
         <p>가격: <span th:text="${item.price}">0</span> 원</p>
+        <a th:href="@{'/edit/' + ${item.id}}">수정</a>
+        <a th:href="@{'/delete/' + ${item.id}}">삭제</a>
 
     </div>
 </main>
@@ -38,5 +40,9 @@
     <a href="/" class="btn">메인으로 돌아가기</a>
     <p>ⓒ 2025 Spring Study Team</p>
 </footer>
+
+<script>
+    feach
+</script>
 </body>
 </html>

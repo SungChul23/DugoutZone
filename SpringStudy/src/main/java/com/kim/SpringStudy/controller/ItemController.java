@@ -96,12 +96,10 @@ public class ItemController {
     }
 
     @PostMapping("/delete")
-    public String deletepost(@RequestParam Long id, @RequestParam String title, @RequestParam Integer price) {
-        itemService.deleteItem(id, title, price);
+    public String deletepost(@RequestParam Long id) {
+        itemService.deleteItem(id);
         return "redirect:/list";
     }
-
-
 }
 
 

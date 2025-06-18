@@ -44,11 +44,7 @@ public class ItemService {
     }
 
     //상품 삭제
-    public void deleteItem(Long id, String title, Integer price){
-        Optional<Item>deleteItem = itemRepository.findById(id);
-        Item item = deleteItem.get();
-        item.setTitle(title);
-        item.setPrice(price);
-        itemRepository.delete(item);
+    public void deleteItem(Long id){
+        itemRepository.deleteById(id);
     }
 }

@@ -18,33 +18,35 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Grant execute permission to scripts
+        run: chmod +x scripts/*.sh
+
       - name: Build with Gradle
         run: ./gradlew clean build
 
-      - name: Give execute permission to deploy scripts
-        run: chmod +x scripts/*.sh
+      - name: Create deployment ZIP (app.zip)
+        run: zip -r app.zip build/libs/*.jar appspec.yml scripts/
 
-      - name: Upload JAR to S3
+      - name: Upload app.zip to S3
         uses: jakejarvis/s3-sync-action@master
         with:
-          args: --acl private --follow-symlinks --delete
+          args: --acl private
         env:
           AWS_S3_BUCKET: myspringstudybucket
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_CICD_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_CICD_SECREAT_KEY }}
           AWS_REGION: ap-northeast-2
-          SOURCE_DIR: build/libs
+          SOURCE_DIR: .
           DEST_DIR: /
 
-      - name: Trigger CodeDeploy
-        uses: webfactory/create-aws-codedeploy-deployment@v1
-        with:
-          application-name: SpringStudy-CICD
-          deployment-group: cicd-springstudy-group
-          deployment-config-name: CodeDeployDefault.AllAtOnce
-          s3-bucket: myspringstudybucket
-          s3-bundle-key: app.jar
+      - name: Trigger AWS CodeDeploy
+        run: |
+          aws deploy create-deployment \
+            --application-name SpringStudy-CICD \
+            --deployment-group-name cicd-springstudy-group \
+            --deployment-config-name CodeDeployDefault.AllAtOnce \
+            --s3-location bucket=myspringstudybucket,bundleType=zip,key=app.zip
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_CICD_ACCESS_KEY }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_CICD_SECREAT_KEY }}
-          AWS_REGION: ap-northeast-2
+          AWS_DEFAULT_REGION: ap-northeast-2

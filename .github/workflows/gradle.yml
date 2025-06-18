@@ -21,6 +21,9 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
+      - name: Give execute permission to deploy scripts
+        run: chmod +x scripts/*.sh
+
       - name: Upload JAR to S3
         uses: jakejarvis/s3-sync-action@master
         with:

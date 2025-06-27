@@ -1,21 +1,14 @@
 package com.kim.SpringStudy.controller;
 
-import com.kim.SpringStudy.domain.Item;
 import com.kim.SpringStudy.domain.User;
 import com.kim.SpringStudy.domain.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.parameters.P;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -62,4 +55,25 @@ public class UserController {
     String ShowLogin(){
         return "login";
     }
+
+
+    @GetMapping("/user/1")
+    @ResponseBody
+    public UserDTO getUser(){
+        var  a= userRepository.findById("kimsam0923");
+        var result = a.get();
+        var data = new UserDTO(result.getUsername(), result.getDisplayName());
+        return data;
+    }
+    //DTO
+    //DTO를 통해 계층간(Controller ↔ Service ↔ Repository)에 데이터를 전달함
+    class UserDTO{
+        public String username;
+        public String displayName;
+        UserDTO(String a, String b){
+            this.username = a;
+            this.displayName =b;
+        }
+    }
+
 }

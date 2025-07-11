@@ -107,4 +107,39 @@ footer {
 .btn:hover {
     background-color: #357ABD;
 }
+/* 검색 폼 */
+.search-form {
+    display: flex;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.search-form input[name="searchText"] {
+    padding: 10px 15px;
+    border: 2px solid #4a90e2;
+    border-radius: 5px 0 0 5px;
+    font-size: 16px;
+    width: 250px;
+    outline: none;
+    transition: border-color 0.3s;
+}
+
+.search-form input[name="searchText"]:focus {
+    border-color: #357ABD;
+}
+
+.search-form button {
+    padding: 10px 20px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-form button:hover {
+    background-color: #357ABD;
+}
 

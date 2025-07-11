@@ -1,8 +1,11 @@
 package com.kim.SpringStudy.controller;
 
+import com.kim.SpringStudy.domain.Comment;
+import com.kim.SpringStudy.domain.CommentRespository;
 import com.kim.SpringStudy.domain.Item;
 import com.kim.SpringStudy.domain.ItemRepository;
 import com.kim.SpringStudy.service.ItemService;
+import com.kim.SpringStudy.service.S3Service;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,6 +29,8 @@ public class ItemController {
     //오브젝트 뽑아서  넣어주세요.(레포지, 서비스)
     private final ItemRepository itemRepository;
     private final ItemService itemService; //서비스 폴더내 saveItem함수를 사용하기 위한 변수 설정
+    private final S3Service s3Service;
+    private  final CommentRespository commentRespository;
 
 //    @Autowired (롬복 미사용 시)
 //    public ItemController(ItemRepository itemRepository, ItemService itemService) {
@@ -40,6 +46,7 @@ public class ItemController {
         return "list";
     }
 
+    //상세페이지 + 댓글
     @GetMapping("/list/product/{id}")
     String product(@PathVariable long id, Model model) {
 
@@ -47,6 +54,9 @@ public class ItemController {
             Optional<Item> product = itemRepository.findById(id);
             if (product.isPresent()) { //값이 있나요?
                 model.addAttribute("product", product.get()); //optional 타입
+
+                List<Comment> comments = commentRespository.findByParentId(id);
+                model.addAttribute("comments" ,comments);
                 return "product";
             } else {
                 return "redirect:/list";
@@ -56,6 +66,7 @@ public class ItemController {
             return "redirect:/list";
         }
 
+
     }
 
     @GetMapping("/write")
@@ -64,8 +75,13 @@ public class ItemController {
     }
 
     @PostMapping("/add")
-    String addpost(String title, Integer price) {
-        itemService.saveItem(title, price); //오브젝 뽑아쓴걸 사용 = 디펜던시 인젝션 패턴
+    String addpost(@RequestParam String title,
+                   @RequestParam Integer price,
+                   @RequestParam String imageUrl) {
+        //오브젝 뽑아쓴걸 사용 = 디펜던시 인젝션 패턴
+        itemService.saveItem(title, price, imageUrl);
+        System.out.println("받은 imageUrl = " + imageUrl);
+
         return "redirect:/list";
     }
 
@@ -80,8 +96,11 @@ public class ItemController {
     }
 
     @PostMapping("/edit")
-    public String editpost(@RequestParam Long id, @RequestParam String title, @RequestParam Integer price) {
-        itemService.editItem(id, title, price);
+    public String editpost(@RequestParam Long id,
+                           @RequestParam String title,
+                           @RequestParam Integer price,
+                           @RequestParam String imageUrl) {
+        itemService.editItem(id, title, price, imageUrl);
         return "redirect:/list";
     }
 
@@ -100,6 +119,30 @@ public class ItemController {
         itemService.deleteItem(id);
         return "redirect:/list";
     }
+
+
+    @GetMapping("/presigned-url")
+    @ResponseBody
+    String getURL(@RequestParam String filename) {
+        var result = s3Service.createPresignedUrl("test/" + filename);
+        System.out.println(result);
+        return result;
+    }
+
+    //댓글 추가
+    @PostMapping("/comment/add")
+    public String addComment(@RequestParam Long parentId,
+                             @RequestParam String content,
+                             Principal principal){
+        Comment comment = new Comment();
+        comment.setParentId(parentId);
+        comment.setContent(content);
+        comment.setUsername(principal.getName()); // 현재 로그인한 유저명
+
+        commentRespository.save(comment);
+        return "redirect:/list/product/" + parentId;
+    }
+
 }
 
 

@@ -23,6 +23,16 @@
     <p>스프링 연습용 상품 페이지입니다.</p>
 </header>
 
+
+<form action="/search" method="post" class="search-form">
+    <input name="searchText" type="text" placeholder="상품명을 입력하세요">
+    <button type="submit">검색</button>
+</form>
+
+<div th:if="${emptyResult}" style="text-align: center; font-size: 18px; margin-top: 20px;">
+    검색 결과가 없습니다.
+</div>
+
 <main class="container">
     <div class="card" th:each="item : ${items}">
         <img src="https://placehold.co/300x200" alt="상품 이미지">

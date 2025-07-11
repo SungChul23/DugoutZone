@@ -8,6 +8,8 @@ import lombok.ToString;
 @Entity
 @Getter
 @ToString
+//인덱스 생성
+@Table(indexes = @Index(columnList = "title" , name = "상품검색"))
 public class Item {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,0 +1,17 @@
+-댓글 기능-
+1. 각 상품별 댓글 기능이 목표
+2. 각 상품은 id로 되어잇음
+3. 테이블은 comment이고 칼럼은 id(자동 증가), content(댓글), parentId(어떤 글에 달려있는지), username(누가 달았는지)
+4. product.html에 댓글 기능이 있어야함
+5. username은 현재 로그인 한 사람이 어야하고
+
+
+- 검색 기능-
+1. 폼 생성후 입력해서 post 요청으로 서버에게 보냄(POST API 생성)
+2. 서버에서 POST 요청을 받는 컨트롤러 작성 (model 사용해서 결과 값을 view에게 넘김 + 없으면 없다고 예외)
+3. 근데 like문은 나중에 서버에 부하가 올 수 있음 --> index 사용 숙지
+4. index으로 이진탐색을 할려고함 그치만 사본을 만드는거라 용량도 용량이지만 이상현상이 일어나면 안됌, 즉 필요하 때만
+5. findAllByTitleContains -> 결국 레포지에서 함수를 작성 했지만 인덱스를 사용하지 못함 저함수는
+where title like %검색어% 랑 같은 뜻임 %가 앞에 있으면 느려짐 -> full text index 사용
+6. 한글은 영어와 다르게 단어별로 쪼개면 힘들어짐 -> n-gram 파서 사용
+7. table에 full text index 생성 후 item레포지에 @Query 작성 후 함수 생성 -> JPA 문법이 없음.

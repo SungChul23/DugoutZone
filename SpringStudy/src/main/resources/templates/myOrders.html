@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>내 주문 내역</title>
+  <link rel="stylesheet" href="/myOrders.css"> <!-- 필요시 스타일 추가 -->
+</head>
+<body>
+<h1>🛒 내 주문 내역</h1>
+
+<div th:if="${#lists.isEmpty(orders)}">
+  <p>아직 주문 내역이 없습니다.</p>
+</div>
+
+<table th:if="${!#lists.isEmpty(orders)}" border="1">
+  <thead>
+  <tr>
+    <th>상품명</th>
+    <th>가격</th>
+    <th>수량</th>
+    <th>주문일자</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="order : ${orders}">
+    <td th:text="${order.itemName}">상품명</td>
+    <td th:text="${order.price}">가격</td>
+    <td th:text="${order.count}">수량</td>
+    <td th:text="${#temporals.format(order.created, 'yyyy-MM-dd HH:mm')}">주문일자</td>
+  </tr>
+  </tbody>
+</table>
+
+<a href="/list">← 상품 목록으로</a>
+</body>
+</html>

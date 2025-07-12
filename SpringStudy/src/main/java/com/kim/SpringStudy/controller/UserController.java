@@ -55,6 +55,10 @@ public class UserController {
     String ShowLogin(){
         return "login";
     }
+    @GetMapping("/logout")
+    String Logout(){
+        return "index";
+    }
 
 
     @GetMapping("/user/1")

@@ -23,6 +23,10 @@ public class CommentController {
                              @RequestParam String content,
                              Principal principal) {
 
+        if(principal == null){
+            return "redirect:/login?message=needLogin";
+        }
+
         String username = principal.getName(); // 사용자 이름만 얻기 가능
 
         var data = new Comment();

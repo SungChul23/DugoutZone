@@ -1,16 +1,18 @@
 package com.kim.SpringStudy.controller;
 
 import com.kim.SpringStudy.domain.Comment;
-import com.kim.SpringStudy.domain.CommentRespository;
+import com.kim.SpringStudy.domain.CommentRepository;
 import com.kim.SpringStudy.domain.Item;
 import com.kim.SpringStudy.domain.ItemRepository;
 import com.kim.SpringStudy.service.ItemService;
 import com.kim.SpringStudy.service.S3Service;
+
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -30,7 +32,7 @@ public class ItemController {
     private final ItemRepository itemRepository;
     private final ItemService itemService; //서비스 폴더내 saveItem함수를 사용하기 위한 변수 설정
     private final S3Service s3Service;
-    private  final CommentRespository commentRespository;
+    private  final CommentRepository commentRepository;
 
 //    @Autowired (롬복 미사용 시)
 //    public ItemController(ItemRepository itemRepository, ItemService itemService) {
@@ -55,7 +57,7 @@ public class ItemController {
             if (product.isPresent()) { //값이 있나요?
                 model.addAttribute("product", product.get()); //optional 타입
 
-                List<Comment> comments = commentRespository.findByParentId(id);
+                List<Comment> comments = commentRepository.findByParentId(id);
                 model.addAttribute("comments" ,comments);
                 return "product";
             } else {
@@ -73,6 +75,7 @@ public class ItemController {
     String write() {
         return "write.html";
     }
+
 
     @PostMapping("/add")
     String addpost(@RequestParam String title,
@@ -129,19 +132,17 @@ public class ItemController {
         return result;
     }
 
-    //댓글 추가
-    @PostMapping("/comment/add")
-    public String addComment(@RequestParam Long parentId,
-                             @RequestParam String content,
-                             Principal principal){
-        Comment comment = new Comment();
-        comment.setParentId(parentId);
-        comment.setContent(content);
-        comment.setUsername(principal.getName()); // 현재 로그인한 유저명
+    //상품 검색
+    @PostMapping("/search")
+    public String searchItem(@RequestParam String title, Model model) {
+        var result = itemRepository.rawQuery(title);
+        model.addAttribute("items", result);
+        model.addAttribute("emptyResult", result == null || result.isEmpty());
+        System.out.println("출력문: " + result);
 
-        commentRespository.save(comment);
-        return "redirect:/list/product/" + parentId;
+        return "list";
     }
+
 
 }
 

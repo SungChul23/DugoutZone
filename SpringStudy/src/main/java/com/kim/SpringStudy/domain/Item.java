@@ -19,6 +19,9 @@ public class Item {
     private String title;
     @Setter
     private Integer price;
+    @Setter
+    @Getter
+    private String imageUrl;
 
     public void setId(Long id) {
     }

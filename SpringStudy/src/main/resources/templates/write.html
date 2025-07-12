@@ -23,15 +23,55 @@
       <label for="title">상품명</label>
       <input type="text" id="title" name="title" required>
     </div>
+
     <div class="form-group">
       <label for="price">가격</label>
       <input type="number" id="price" name="price" required>
     </div>
+
+    <div class="form-group">
+      <label for="image">상품 이미지</label>
+      <input type="file" id="image" name="image" onchange="uploadImage(this)" required>
+    </div>
+
+    <!-- 업로드된 이미지 URL을 담을 숨겨진 필드 -->
+    <input type="hidden" id="imageUrl" name="imageUrl">
+
     <button type="submit" class="submit-btn">상품 추가</button>
   </form>
-</div>
 
-<footer>
+  <script>
+    async function uploadImage(input) {
+      const file = input.files[0];
+      if (!file) return;
+
+      const encodedName = encodeURIComponent(file.name);
+
+      // 1. presigned URL 요청
+      const res = await fetch('/presigned-url?filename=' + encodedName);
+      const url = await res.text();
+      console.log("Presigned URL:", url);
+
+      // 2. S3에 PUT으로 파일 업로드
+      await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': file.type,
+        },
+        body: file
+      });
+
+      // 3. 최종 이미지 URL 구성 (읽기용 URL)
+      const imageUrl = url.split('?')[0];  // 쿼리 제거해서 S3 공개 URL로
+
+      // 4. 숨겨진 input에 넣기
+      document.getElementById('imageUrl').value = imageUrl;
+      console.log("최종 이미지 URL:", imageUrl);
+    }
+  </script>
+
+
+  <footer>
   <a href="/" class="btn">메인으로 돌아가기</a>
   <p>ⓒ 2025 Spring Study Team</p>
 </footer>

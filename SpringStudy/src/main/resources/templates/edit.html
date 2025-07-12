@@ -19,7 +19,7 @@
 <div class="form-container">
     <h2>상품 수정</h2>
     <form action="/edit" method="POST">
-        <!-- ✅ ID는 반드시 hidden으로 처리 -->
+        <!-- ID는 반드시 hidden -->
         <input type="hidden" name="id" th:value="${items.id}">
 
         <div class="form-group">
@@ -28,8 +28,12 @@
         <div class="form-group">
             <input name="price" type="number" th:value="${items.price}" required>
         </div>
+        <div class="form-group">
+            <input name="imageUrl" type="text" placeholder="이미지 URL" th:value="${items.imageUrl}" required>
+        </div>
         <button type="submit" class="submit-btn">전송</button>
     </form>
+
 
 </div>
 

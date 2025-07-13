@@ -1,8 +1,18 @@
 package com.kim.SpringStudy.controller;
 
+import com.kim.SpringStudy.JWT.JwtUtil;
 import com.kim.SpringStudy.domain.User;
-import com.kim.SpringStudy.domain.UserRepository;
+import com.kim.SpringStudy.repository.UserRepository;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +25,9 @@ import java.util.Map;
 public class UserController {
     private final UserRepository userRepository; //유저 레포지 객체 생성
     private final PasswordEncoder passwordEncoder; //시큐리티에서 만든 비번인코더 객체(bean)
-
+    //JWT 객체 주입
+    private final AuthenticationManagerBuilder authenticationManagerBuilderm;
+    private final JwtUtil jwtUtil;
 
 
     @GetMapping("/register")
@@ -52,32 +64,92 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    String ShowLogin(){
+    String ShowLogin() {
         return "login";
     }
+
     @GetMapping("/logout")
-    String Logout(){
-        return "index";
+    String Logout() {
+        return "/";
     }
 
 
     @GetMapping("/user/1")
     @ResponseBody
-    public UserDTO getUser(){
-        var  a= userRepository.findById("kimsam0923");
+    public UserDTO getUser() {
+        var a = userRepository.findById("kimsam0923");
         var result = a.get();
         var data = new UserDTO(result.getUsername(), result.getDisplayName());
         return data;
     }
+
     //DTO
     //DTO를 통해 계층간(Controller ↔ Service ↔ Repository)에 데이터를 전달함
-    class UserDTO{
+    class UserDTO {
         public String username;
         public String displayName;
-        UserDTO(String a, String b){
+
+        UserDTO(String a, String b) {
             this.username = a;
-            this.displayName =b;
+            this.displayName = b;
         }
     }
 
+    @PostMapping("/login/jwt")
+    @ResponseBody
+    public String loginJWT(@RequestBody Map<String, String> data, HttpServletResponse httpServletResponse) {
+
+        var authToken = new UsernamePasswordAuthenticationToken(
+                data.get("username"), data.get("password"));
+        var auth = authenticationManagerBuilderm.getObject().authenticate(authToken);
+        SecurityContextHolder.getContext().setAuthentication(auth);
+
+        var jwt = JwtUtil.createToken(SecurityContextHolder.getContext().getAuthentication());
+        System.out.println(jwt);
+
+        // 쿠키에 JWT 저장
+        var cookie = new Cookie("jwt", jwt);
+        cookie.setMaxAge(86400); // 하루
+        cookie.setHttpOnly(true); // JS 접근 막음
+        cookie.setPath("/"); // 모든 URL에 적용
+        httpServletResponse.addCookie(cookie);
+
+        return "OK"; // redirect 대신 OK 반환
+    }
+
+    @GetMapping("/my-page/jwt")
+    @ResponseBody
+    public String myPage(@CookieValue("jwt") String jwt) {
+        String username = JwtUtil.getUsernameFromToken(jwt);
+        return username + "님의 마이페이지입니다.";
+    }
+
+    @GetMapping("/user/info")
+    @ResponseBody
+    public UserInfoResponse getUserInfo(@CookieValue("jwt") String jwt) {
+        String username = JwtUtil.getUsernameFromToken(jwt);
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("유저 없음"));
+        return new UserInfoResponse(user.getUsername(), user.getDisplayName());
+    }
+
+
+
+
+    public class UserInfoResponse {
+        private String username;
+        private String displayName;
+
+        public UserInfoResponse(String username, String displayName) {
+            this.username = username;
+            this.displayName = displayName;
+        }
+        // getters
+    }
+
+
+
 }
+
+//TIP 유저의 요청은 바로 컨트롤러에 가는 것 보다 필터를 통해 확인하고 간다
+// EX)JWT 토큰 확인후 아니면 빠구 ㄱ , 아마 미들웨어랑 비슷한 개념 ㅇㅇ

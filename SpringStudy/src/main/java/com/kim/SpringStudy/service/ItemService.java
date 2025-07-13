@@ -1,7 +1,7 @@
 package com.kim.SpringStudy.service;
 
 import com.kim.SpringStudy.domain.Item;
-import com.kim.SpringStudy.domain.ItemRepository;
+import com.kim.SpringStudy.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

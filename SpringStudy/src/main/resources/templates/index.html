@@ -10,13 +10,17 @@
 
 <!-- ✅ 상단 네비게이션 바 추가 -->
 <nav class="navbar">
-    <a href="/" class="logo">🛒 Spring Shop</a>
+    <a href="/" class="logo">🌍 Spring World</a>
     <div class="nav-links">
+        <div th:if="${username}">
+            <a href="/logout">로그아웃</a>
+        </div>
         <a href="/login">로그인</a>
-        <a href="/logout">로그아웃</a>
         <a href="/register">회원가입</a>
     </div>
+    </div>
 </nav>
+
 
 <header>
     <h2>🌱 Spring Study</h2>
@@ -135,11 +139,47 @@
             <li>DB정규화 (2정규형) -> 기존 칼럼을 사용(@ManyToOne) -> DB 생성</li>
             <li>계정별 내 주문 내역 확인 기능 추가</li>
         </ul>
+        <h4>✅ 25/07/13</h4>
+        <ul>
+            <li>주문 기능 중 @OntToMany 사용</li>
+            <li>주문 기능 중 타 사용자의 주문목록 노출 수정</li>
+            <li>JWT 학습(개념, 토큰 발급)</li>
+            <li>로그인 시큐리티 수정 JWT</li>
+        </ul>
     </div>
 </main>
 
 <footer>
     ⓒ 2025 Spring Study Team. All rights reserved.
 </footer>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const welcomeMessage = document.getElementById('welcomeMessage');
+        const loginLink = document.getElementById('loginLink');
+        const registerLink = document.getElementById('registerLink');
+        const logoutLink = document.getElementById('logoutLink');
+
+        fetch('/user/info')
+            .then(response => {
+                if (!response.ok) throw new Error('유저 정보 요청 실패');
+                return response.json();
+            })
+            .then(user => {
+                // 👋 누구누구님 환영 메시지
+                welcomeMessage.textContent = `👋 환영합니다, ${user.displayName}님!`;
+
+                // 네비게이션 토글
+                loginLink.style.display = 'none';
+                registerLink.style.display = 'none';
+                logoutLink.style.display = 'inline-block';
+            })
+            .catch(err => {
+                console.error(err);
+                welcomeMessage.textContent = '로그인 해주세요!';
+            });
+    });
+
+</script>
 </body>
 </html>

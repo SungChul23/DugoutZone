@@ -1,5 +1,6 @@
-package com.kim.SpringStudy.domain;
+package com.kim.SpringStudy.repository;
 
+import com.kim.SpringStudy.domain.Item;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 

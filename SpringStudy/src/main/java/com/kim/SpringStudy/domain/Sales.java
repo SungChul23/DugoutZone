@@ -1,4 +1,4 @@
-package com.kim.SpringStudy.sales;
+package com.kim.SpringStudy.domain;
 
 
 import com.kim.SpringStudy.domain.User;
@@ -26,7 +26,7 @@ public class Sales {
     Integer count; // 수량
     //String username; // 구매자 id -> 이미 유저테이블에 있음
     //String displayName; //구매자 실명 -> 이미 유저테이블에 있음
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) //필요할 때 가져와 주쇼
             @JoinColumn(
                     name = "memberId",
                     foreignKey = @ForeignKey(ConstraintMode.NO_CONSTRAINT)

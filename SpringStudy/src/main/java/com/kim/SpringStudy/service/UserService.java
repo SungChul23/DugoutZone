@@ -2,7 +2,7 @@ package com.kim.SpringStudy.service;
 
 
 import com.kim.SpringStudy.domain.User;
-import com.kim.SpringStudy.domain.UserRepository;
+import com.kim.SpringStudy.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

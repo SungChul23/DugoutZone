@@ -2,8 +2,8 @@ package com.kim.SpringStudy.service;
 
 import com.kim.SpringStudy.domain.SSG;
 import com.kim.SpringStudy.domain.SSGGames;
-import com.kim.SpringStudy.domain.SSGGamesRepository;
-import com.kim.SpringStudy.domain.SSGRepository;
+import com.kim.SpringStudy.repository.SSGGamesRepository;
+import com.kim.SpringStudy.repository.SSGRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

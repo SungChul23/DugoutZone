@@ -1,9 +1,10 @@
 package com.kim.SpringStudy.controller;
 
 import com.kim.SpringStudy.domain.*;
+import com.kim.SpringStudy.repository.SSGGamesRepository;
+import com.kim.SpringStudy.repository.SSGRepository;
 import com.kim.SpringStudy.service.SSGService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.Banner;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.swing.plaf.PanelUI;
 import java.util.List;
 
 @Controller

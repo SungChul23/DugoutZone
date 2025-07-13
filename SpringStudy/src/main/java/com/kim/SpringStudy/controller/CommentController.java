@@ -1,8 +1,8 @@
 package com.kim.SpringStudy.controller;
 
 import com.kim.SpringStudy.domain.Comment;
-import com.kim.SpringStudy.domain.CommentRepository;
-import com.kim.SpringStudy.domain.UserRepository;
+import com.kim.SpringStudy.repository.CommentRepository;
+import com.kim.SpringStudy.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;

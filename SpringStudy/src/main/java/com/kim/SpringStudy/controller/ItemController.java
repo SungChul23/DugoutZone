@@ -1,26 +1,22 @@
 package com.kim.SpringStudy.controller;
 
 import com.kim.SpringStudy.domain.*;
-import com.kim.SpringStudy.sales.Sales;
-import com.kim.SpringStudy.sales.SalesRepository;
+import com.kim.SpringStudy.repository.CommentRepository;
+import com.kim.SpringStudy.repository.ItemRepository;
+import com.kim.SpringStudy.repository.UserRepository;
+import com.kim.SpringStudy.domain.Sales;
+import com.kim.SpringStudy.repository.SalesRepository;
 import com.kim.SpringStudy.service.ItemService;
 import com.kim.SpringStudy.service.S3Service;
 
+import com.kim.SpringStudy.service.SalesService;
 import com.kim.SpringStudy.service.UserService;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,10 +29,11 @@ public class ItemController {
     private final ItemRepository itemRepository;
     private final ItemService itemService; //서비스 폴더내 saveItem함수를 사용하기 위한 변수 설정
     private final S3Service s3Service;
-    private  final CommentRepository commentRepository;
+    private final CommentRepository commentRepository;
     private final SalesRepository salesRepository;
     private final UserService userService;
     private final UserRepository userRepository;
+    private final SalesService salesService;
 
 //    @Autowired (롬복 미사용 시)
 //    public ItemController(ItemRepository itemRepository, ItemService itemService) {
@@ -62,7 +59,7 @@ public class ItemController {
                 model.addAttribute("product", product.get()); //optional 타입
 
                 List<Comment> comments = commentRepository.findByParentId(id);
-                model.addAttribute("comments" ,comments);
+                model.addAttribute("comments", comments);
                 return "product";
             } else {
                 return "redirect:/list";
@@ -146,47 +143,30 @@ public class ItemController {
 
         return "list";
     }
+
     //상품 주문
     @PostMapping("/order")
     public String orderItem(@RequestParam String title,
-                            @RequestParam Integer count,
-                            @RequestParam Integer price
-                            ){
-
-        //로그인한 사람 유저정보 가져오기
-        User user = userService.getCurrentLoggedInUser();
-
-        //sales 서비스 작성
-        Sales sale = new Sales();
-        sale.setItemName(title);
-        sale.setPrice(price);
-        sale.setCount(count);
-        sale.setUser(user);
-        salesRepository.save(sale);
-        System.out.println("저장완료" +salesRepository.save(sale));
-
-        return "myOrders";
+                            @RequestParam Integer price,
+                            @RequestParam Integer count
+    ) {
+        salesService.orderItem(title, price, count);
+        return "redirect:/myOrders";
     }
-    @GetMapping("/myOrders")
-    public String orderAll(Model model ,Principal principal)
-    {
 
-        if(principal == null){
+    @GetMapping("/myOrders")
+    public String orderAll(Model model, Principal principal) {
+
+        if (principal == null) {
             return "redirect:/login?message=needLogin";
         }
-
         String username = principal.getName();
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("유저정보 x"));
-
-        //사용자 엔터티 조회
-        List<Sales> myOrders = salesRepository.findByUser(user);
-        System.out.println("내 주문 내역" + myOrders);
-
-        model.addAttribute("orders" , myOrders);
-
+        List<Sales> myOrder = salesService.getMyOrders(username);
+        System.out.println("내 주문 내역" + myOrder);
+        model.addAttribute("orders", myOrder);
         return "myOrders";
     }
+
 }
 
 

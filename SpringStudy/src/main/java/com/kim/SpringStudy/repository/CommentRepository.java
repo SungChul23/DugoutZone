@@ -1,5 +1,6 @@
-package com.kim.SpringStudy.domain;
+package com.kim.SpringStudy.repository;
 
+import com.kim.SpringStudy.domain.Comment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

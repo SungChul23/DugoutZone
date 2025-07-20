@@ -148,9 +148,10 @@ public class ItemController {
     @PostMapping("/order")
     public String orderItem(@RequestParam String title,
                             @RequestParam Integer price,
-                            @RequestParam Integer count
+                            @RequestParam Integer count,
+                            @RequestParam long id
     ) {
-        salesService.orderItem(title, price, count);
+        salesService.orderItem(title, price, count , id);
         return "redirect:/myOrders";
     }
 

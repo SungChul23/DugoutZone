@@ -42,6 +42,7 @@
             <a th:href="@{'/list/product/' + ${item.id}}" th:text="${item.title}">상품명</a>
         </h4>
         <p>가격: <span th:text="${item.price}">0</span> 원</p>
+        <p>수량: <span th:text="${item.count}">0</span> 개</p>
         <a th:href="@{'/edit/' + ${item.id}}">수정</a>
         <a th:href="@{'/delete/' + ${item.id}}">삭제</a>
 

@@ -6,6 +6,8 @@ import com.kim.SpringStudy.repository.UserRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -69,8 +71,14 @@ public class UserController {
     }
 
     @GetMapping("/logout")
-    String Logout() {
-        return "/";
+    String Logout(HttpServletResponse response) {
+        // 쿠키삭제
+        Cookie cookie = new Cookie("jwt" , null);
+        cookie.setMaxAge(0); //즉시삭제
+        cookie.setPath("/"); //모든경로
+        response.addCookie(cookie);
+
+        return "redirect:/";
     }
 
 
@@ -134,20 +142,12 @@ public class UserController {
     }
 
 
-
-
+    @Data
+    @AllArgsConstructor
     public class UserInfoResponse {
         private String username;
         private String displayName;
-
-        public UserInfoResponse(String username, String displayName) {
-            this.username = username;
-            this.displayName = displayName;
-        }
-        // getters
     }
-
-
 
 }
 

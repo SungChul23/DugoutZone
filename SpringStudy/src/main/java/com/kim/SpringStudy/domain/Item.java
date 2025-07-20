@@ -22,6 +22,8 @@ public class Item {
     @Setter
     @Getter
     private String imageUrl;
+    @Setter
+    private Integer count; //상품 재고 추가
 
     public void setId(Long id) {
     }

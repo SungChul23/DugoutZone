@@ -29,6 +29,7 @@ public class ItemService {
         item.setTitle(title);
         item.setPrice(price);
         item.setImageUrl(imageUrl);
+        item.setCount(10); //상품 10개씩 발행
         itemRepository.save(item);
     }
     //상품 출력

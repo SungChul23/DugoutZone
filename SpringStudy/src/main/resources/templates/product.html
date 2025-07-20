@@ -50,6 +50,7 @@
     <div class="order-form">
         <h3>📦 주문하기</h3>
         <form action="/order" method="POST">
+            <input type="hidden" name="id" th:value="${product.id}">
             <input type="hidden" name="title" th:value="${product.title}">
             <input type="hidden" name="price" th:value="${product.price}">
             <label for="count">수량</label>

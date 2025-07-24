@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>KBO 팀 순위</title>
+    <link rel="stylesheet" th:href="@{/teamRank.css}">
+</head>
+<body>
+
+<div class="container">
+    <h1>KBO 팀 순위</h1>
+
+    <!-- 날짜 선택 -->
+    <form method="get" action="/kbo/teamRank">
+        <label for="date-select">날짜 선택:</label>
+        <select name="date" id="date-select" onchange="this.form.submit()">
+            <option th:each="d : ${dates}"
+                    th:value="${d}"
+                    th:text="${d}"
+                    th:selected="${d} == ${selectedDate}">
+            </option>
+        </select>
+    </form>
+
+    <!-- 선택된 날짜 표시 -->
+    <p><strong>선택한 날짜:</strong> <span th:text="${selectedDate}">2025-07-24</span></p>
+
+    <!-- 팀 순위 테이블 -->
+    <table class="rank-table">
+        <thead>
+        <tr>
+            <th>순위</th>
+            <th>팀명</th>
+            <th>경기</th>
+            <th>승</th>
+            <th>패</th>
+            <th>무</th>
+            <th>승률</th>
+            <th>게임차</th>
+            <th>최근10경기</th>
+            <th>연속</th>
+            <th>홈</th>
+            <th>방문</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="team : ${teams}">
+            <td th:text="${team.rankNum}">1</td>
+            <td th:text="${team.teamName}">한화</td>
+            <td th:text="${team.game}">92</td>
+            <td th:text="${team.win}">56</td>
+            <td th:text="${team.lose}">34</td>
+            <td th:text="${team.draw}">2</td>
+            <td th:text="${team.winRate}">0.622</td>
+            <td th:text="${team.gameGap}">0.0</td>
+            <td th:text="${team.recent10}">9승0무1패</td>
+            <td th:text="${team.streak}">1패</td>
+            <td th:text="${team.home}">28-2-13</td>
+            <td th:text="${team.away}">28-0-21</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- 메인으로 이동 -->
+    <div class="back-btn">
+        <a href="/" class="btn">🏠 메인으로 가기</a>
+    </div>
+</div>
+
+</body>
+</html>

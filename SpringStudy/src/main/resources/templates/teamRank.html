@@ -7,8 +7,9 @@
 </head>
 <body>
 
+
 <div class="container">
-    <h1>KBO 팀 순위</h1>
+    <h1>2025년 KBO 팀 순위</h1>
 
     <!-- 날짜 선택 -->
     <form method="get" action="/kbo/teamRank">
@@ -22,50 +23,110 @@
         </select>
     </form>
 
-    <!-- 선택된 날짜 표시 -->
     <p><strong>선택한 날짜:</strong> <span th:text="${selectedDate}">2025-07-24</span></p>
 
-    <!-- 팀 순위 테이블 -->
-    <table class="rank-table">
-        <thead>
-        <tr>
-            <th>순위</th>
-            <th>팀명</th>
-            <th>경기</th>
-            <th>승</th>
-            <th>패</th>
-            <th>무</th>
-            <th>승률</th>
-            <th>게임차</th>
-            <th>최근10경기</th>
-            <th>연속</th>
-            <th>홈</th>
-            <th>방문</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="team : ${teams}">
-            <td th:text="${team.rankNum}">1</td>
-            <td th:text="${team.teamName}">한화</td>
-            <td th:text="${team.game}">92</td>
-            <td th:text="${team.win}">56</td>
-            <td th:text="${team.lose}">34</td>
-            <td th:text="${team.draw}">2</td>
-            <td th:text="${team.winRate}">0.622</td>
-            <td th:text="${team.gameGap}">0.0</td>
-            <td th:text="${team.recent10}">9승0무1패</td>
-            <td th:text="${team.streak}">1패</td>
-            <td th:text="${team.home}">28-2-13</td>
-            <td th:text="${team.away}">28-0-21</td>
-        </tr>
-        </tbody>
-    </table>
+    <!-- 🔹 팀 순위 + 그래프 가로 정렬 -->
+    <div class="rank-graph-wrapper">
+        <!-- 왼쪽: 팀 순위 테이블 -->
+        <div class="rank-table-container">
+            <table class="rank-table">
+                <thead>
+                <tr>
+                    <th>순위</th>
+                    <th>팀명</th>
+                    <th>경기</th>
+                    <th>승</th>
+                    <th>패</th>
+                    <th>무</th>
+                    <th>승률</th>
+                    <th>게임차</th>
+                    <th>최근10경기</th>
+                    <th>연속</th>
+                    <th>홈</th>
+                    <th>원정</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="team : ${teams}">
+                    <td th:text="${team.rankNum}">1</td>
+                    <td th:text="${team.teamName}">한화</td>
+                    <td th:text="${team.game}">92</td>
+                    <td th:text="${team.win}">56</td>
+                    <td th:text="${team.lose}">34</td>
+                    <td th:text="${team.draw}">2</td>
+                    <td th:text="${team.winRate}">0.622</td>
+                    <td th:text="${team.gameGap}">0.0</td>
+                    <td th:text="${team.recent10}">9승0무1패</td>
+                    <td th:text="${team.streak}">1패</td>
+                    <td th:text="${team.home}">28-2-13</td>
+                    <td th:text="${team.away}">28-0-21</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
-    <!-- 메인으로 이동 -->
+        <!-- 오른쪽: 그래프 -->
+        <div class="chart-container">
+            <canvas id="winrateChart" width="500" height="400"></canvas>
+        </div>
+    </div>
+
+    <!-- 메인으로 -->
     <div class="back-btn">
-        <a href="/" class="btn">🏠 메인으로 가기</a>
+        <a href="/dugout" class="btn">🏠 더그아웃으로 가기</a>
     </div>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script th:inline="javascript">
+
+    const teamColorMap = {
+        'KIA': '#C8102E',
+        '삼성': '#005BAC',
+        'LG': '#000000',
+        '한화': '#EF7C00',
+        '롯데': '#002F6C',
+        'SSG': '#C8102E',
+        'KT': '#1D1D1D',
+        'NC': '#0C234B',
+        '키움': '#862633',
+        '두산': '#002244'
+    };
+
+
+    const teamNames = /*[[${teamNames}]]*/ [];
+    const winRates = /*[[${winRates}]]*/ [];
+
+    const backgroundColors = teamNames.map(name => teamColorMap[name] || '#888');
+    const borderColors = backgroundColors;
+
+    const ctx = document.getElementById('winrateChart').getContext('2d');
+    const chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: teamNames,
+            datasets: [{
+                label: '팀별 승률',
+                data: winRates,
+                backgroundColor: backgroundColors,
+                borderColor: borderColors,
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: false,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    max: 1.0
+                }
+            }
+        }
+    });
+
+
+</script>
 
 </body>
 </html>

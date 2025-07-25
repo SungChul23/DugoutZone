@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>티켓 예매 - 더그아웃</title>
+    <link rel="stylesheet" href="tickets.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<div class="hero">
+    <h1>티켓 예매</h1>
+    <p>원하는 구단의 경기를 가장 가까이에서 즐기세요!</p>
+</div>
+
+<div class="container">
+    <!-- 1번째 줄 (상단 5개) -->
+    <div class="ticket-row">
+        <div class="team-card" th:each="team : ${topTeams}"
+             th:class="'team-card ' + ${team.cssClass}">
+            <img th:src="${team.logoUrl}" th:alt="${team.name}" class="team-logo" />
+            <div class="team-info">
+                <h3 th:text="${team.name}">구단 이름</h3>
+                <a class="btn" th:href="${team.ticketUrl}" target="_blank">예매하기</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2번째 줄 (하단 5개) -->
+    <div class="ticket-row">
+        <div class="team-card" th:each="team : ${bottomTeams}"
+             th:class="'team-card ' + ${team.cssClass}">
+            <img th:src="${team.logoUrl}" th:alt="${team.name}" class="team-logo" />
+            <div class="team-info">
+                <h3 th:text="${team.name}">구단 이름</h3>
+                <a class="btn" th:href="${team.ticketUrl}" target="_blank">예매하기</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<footer>
+    © 2025 더그아웃. 전 구단 예매, 한 곳에서.
+</footer>
+</body>
+</html>

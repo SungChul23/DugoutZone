@@ -1,0 +1,122 @@
+/* 네온 다크 테마 색상: 남색 배경, 네온 블루 & 바이올렛 포인트, 밝은 텍스트 */
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #0f172a, #1e293b);
+    color: #e2e8f0; /* 밝은 회색 */
+}
+
+.hero {
+    background: linear-gradient(90deg, #1e293b 0%, #334155 100%);
+    text-align: center;
+    padding: 60px 20px;
+    color: #00f0ff;
+    box-shadow: 0 4px 20px rgba(0, 255, 255, 0.1);
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #a0aec0;
+}
+
+.container {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    border-radius: 15px;
+    padding: 25px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.2);
+}
+
+.card h5 {
+    font-size: 1.3rem;
+    color: #8b5cf6; /* 네온 바이올렛 */
+    margin-bottom: 15px;
+}
+
+.card ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.card ul li {
+    margin: 10px 0;
+    color: #e2e8f0;
+}
+
+.card ul li::before {
+    content: '⚾';
+    margin-right: 10px;
+    color: #00f0ff;
+}
+
+.chart-section {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.chart-section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+    color: #8b5cf6;
+}
+
+canvas {
+    max-width: 600px;
+    width: 100%;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #94a3b8;
+    background-color: #0f172a;
+    font-size: 0.9rem;
+}
+.btn-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.btn {
+    display: inline-block;
+    text-align: center;
+    padding: 12px 20px;
+    background-color: #00f0ff;
+    color: #0f172a;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #8b5cf6;
+    color: white;
+}

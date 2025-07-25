@@ -1,0 +1,113 @@
+/* 티켓 예매 페이지 전용 스타일 */
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(to right, #0f172a, #1e293b);
+    color: #e2e8f0;
+}
+
+.hero {
+    background: linear-gradient(90deg, #1e293b 0%, #334155 100%);
+    text-align: center;
+    padding: 60px 20px;
+    color: #00f0ff;
+    box-shadow: 0 4px 20px rgba(0, 255, 255, 0.1);
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: #a0aec0;
+}
+
+.container {
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.ticket-row {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 40px;
+    flex-wrap: nowrap;
+}
+
+.team-card {
+    width: 200px;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 12px;
+    padding: 20px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.team-card:hover {
+    transform: translateY(-5px);
+}
+
+.team-logo {
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+.team-info h3 {
+    margin: 10px 0;
+    font-size: 1.1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100%;
+}
+
+.btn {
+    display: inline-block;
+    text-align: center;
+    padding: 12px 20px;
+    background-color: #00f0ff;
+    color: #0f172a;
+    font-weight: 600;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #8b5cf6;
+    color: white;
+}
+
+/* 각 구단 색상 클래스 */
+.kia { background-color: #C8102E; }
+.samsung { background-color: #005BAC; }
+.lg { background-color: #000000; }
+.hanwha { background-color: #EF7C00; }
+.lotte { background-color: #002F6C; }
+.ssg { background-color: #C8102E; }
+.kt { background-color: #1D1D1D; }
+.nc { background-color: #0C234B; }
+.kiwoom { background-color: #862633; }
+.doosan { background-color: #002244; }
+
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #94a3b8;
+    background-color: #0f172a;
+    font-size: 0.9rem;
+}

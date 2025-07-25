@@ -32,54 +32,56 @@
 </header>
 
 <main>
-    <div class="card">
-        <h1>환영합니다!</h1>
-        <p>이 페이지는 Spring Framework를 학습하는 스터디 메인 페이지입니다.</p>
-        <a href="/study/join" class="btn">스터디 참여하기(API 미구현)</a>
-    </div>
+    <div class="card-container">
 
-    <div class="card">
-        <h1>📱 상품 리스트 바로가기</h1>
-        <p>이 페이지는 상품 리스트 구현에 대한 페이지 입니다.</p>
-        <a href="/list" class="btn">상품 리스트 바로가기</a>
-    </div>
+        <div class="card">
+            <h1>🏠 더그아웃!</h1>
+            <p>“당신의 손 안에 있는 야구장, 여기는 더그아웃입니다.”</p>
+            <a href="/dugout" class="btn">몸 풀러가기</a>
+        </div>
 
-    <div class="card">
-        <h1>🥇 25시즌 KBO 팀 순위 보러가기</h1>
-        <p>25년도 KBO 팀 순위에 대한 페이지 입니다.</p>
-        <a href="/kbo/teamRank" class="btn">25시즌 KBO 순위 바로가기</a>
-    </div>
+        <div class="card">
+            <h1>📱 상품 리스트 바로가기</h1>
+            <p>상품 리스트 구현 페이지입니다.</p>
+            <a href="/list" class="btn">상품 리스트 보기</a>
+        </div>
 
-    <div class="card">
-        <h1>⚾ SSG 선수단 바로가기</h1>
-        <p>SSG 랜더스 선수단에 대한 페이지 입니다.</p>
-        <a href="/list/ssg/page/1" class="btn">SSG 선수단 바로가기</a>
-    </div>
+        <div class="card">
+            <h1>🥇 25시즌 KBO 팀 순위</h1>
+            <p>25년도 KBO 팀 순위 페이지입니다.</p>
+            <a href="/kbo/teamRank" class="btn">KBO 순위 보기</a>
+        </div>
 
-    <div class="card">
-        <h1>🗓️ SSG 랜더스 6월 경기 일정</h1>
-        <p>SSG 랜더스 6월 경기 일정에 대한 페이지 입니다.</p>
-        <a href="/list/ssg/games" class="btn">경기 일정 바로가기</a>
-    </div>
+        <div class="card">
+            <h1>⚾ SSG 선수단</h1>
+            <p>SSG 랜더스 선수단 페이지입니다.</p>
+            <a href="/list/ssg/page/1" class="btn">SSG 선수단 보기</a>
+        </div>
 
-    <div class="card">
-        <h1>🎟️ SSG 랜더스 티켓 예매</h1>
-        <p>티켓링크에서 SSG 경기 티켓을 예매할 수 있습니다.</p>
-        <a href="https://www.ticketlink.co.kr/sports/137/476" class="btn" target="_blank">티켓 예매하기</a>
-    </div>
+        <div class="card">
+            <h1>🗓️ 6월 경기 일정</h1>
+            <p>SSG 랜더스 6월 경기 일정입니다.</p>
+            <a href="/list/ssg/games" class="btn">경기 일정 보기</a>
+        </div>
 
-    <div class="card">
-        <h2>📌 스터디 개요</h2>
-        <ul>
-            <li>📘 Spring Boot 실습</li>
-            <li>🧪 API 개발 및 테스트</li>
-            <li>💾 JPA, DB 연동</li>
-            <li>🌐 배포 & 클라우드 경험</li>
-            <li>🪪 OAuth2 인증</li>
-        </ul>
-    </div>
+        <div class="card">
+            <h1>🎟️ 티켓 예매</h1>
+            <p>티켓링크에서 SSG 경기 예매가 가능합니다.</p>
+            <a href="https://www.ticketlink.co.kr/sports/137/476" class="btn" target="_blank">예매하러 가기</a>
+        </div>
 
-    <div class="card">
+        <div class="card" style="grid-column: 1 / -1;">
+            <h2>📌 스터디 개요</h2>
+            <ul>
+                <li>📘 Spring Boot 실습</li>
+                <li>🧪 API 개발 및 테스트</li>
+                <li>💾 JPA, DB 연동</li>
+                <li>🌐 배포 & 클라우드 경험</li>
+                <li>🪪 OAuth2 인증</li>
+            </ul>
+        </div>
+
+    <div class="card" style="grid-column: 1 / -1;">
         <h2>🗓️ 학습 기록</h2>
         <h4>✅ 25/06/15</h4>
         <ul>
@@ -167,12 +169,19 @@
             <Li>아이템 테이블에서 상품 겟수(총 10개) 설정 이후 주문 기능에서 차감하여 트렌잭션 학습 </Li>
 
         </ul>
-        <h4>✅ 25/07/25</h4>
+        <h4>✅ 25/07/24</h4>
         <ul>
             <li>25시즌 KBO 구단 순위 기능 추가</li>
             <li>파이썬 셀리니움 크롤링 -> DB 저장 -> 스프링으로 구현</li>
             <Li>00:00 시마다 크롤링 후 DB 저장 이후 view로 노출</Li>
 
+        </ul>
+        <h4>✅ 25/07/25</h4>
+        <ul>
+            <li>"더그아웃" 프로젝트 시작</li>
+            <li>"더그아웃" 프로젝트 기능 추가</li>
+            <li>"더그아웃" - 구단 별 예매, 구단 순위 기능 + 구단별 승률 그래프 시각화(chat.js)</li>
+            <li>메인 화면 정렬</li>
         </ul>
     </div>
 </main>

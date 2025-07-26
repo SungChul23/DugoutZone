@@ -1,0 +1,145 @@
+body {
+    background-color: #0e0e0e;
+    color: #f0f0f0;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 0;
+    padding: 30px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.team-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.team-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 6px #00ffcc88;
+}
+
+.team-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 12px #00ffcc;
+}
+
+.news-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.news-card {
+    background-color: #1a1a1a;
+    border: 2px solid #00ffcc40;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px #00ffcc33;
+    transition: transform 0.3s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px #00ffcc88;
+}
+
+.news-card h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.news-card a {
+    color: #00ccee;
+    text-decoration: none;
+}
+
+.news-card a:hover {
+    text-decoration: underline;
+}
+
+.news-card .date {
+    font-size: 0.85rem;
+    color: #aaa;
+    margin-top: 8px;
+}
+.kbo { background-color: #00ffcc; color: #000; }
+.ssg { background-color: #C8102E; color: #fff; }
+.lg { background-color: #000000; color: #fff; }
+.doosan { background-color: #002244; color: #fff; }
+.lotte { background-color: #002F6C; color: #fff; }
+.nc { background-color: #0C234B; color: #fff; }
+.kia { background-color: #C8102E; color: #fff; }
+.kiwoom { background-color: #862633; color: #fff; }
+.hanwha { background-color: #EF7C00; color: #fff; }
+.kt { background-color: #1D1D1D; color: #fff; }
+.samsung { background-color: #005BAC; color: #fff; }
+
+body {
+    background-color: #0e0e0e;
+    background-image: radial-gradient(circle at 50% 0%, #1f1f1f 0%, #0e0e0e 100%);
+}
+.back-btn {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-btn .btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+}
+
+.back-btn .btn:hover {
+    background-color: #0056b3;
+}
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #94a3b8;
+    background-color: #0f172a;
+    font-size: 0.9rem;
+}
+.pagination {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.page-btn {
+    display: inline-block;
+    background-color: #1a1a1a;
+    color: #00ffcc;
+    border: 1px solid #00ffcc;
+    padding: 8px 14px;
+    margin: 0 4px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.page-btn:hover {
+    background-color: #00ffcc;
+    color: #000;
+}
+
+.page-btn.active {
+    background-color: #00ffcc;
+    color: #000;
+    font-weight: bold;
+    box-shadow: 0 0 10px #00ffccaa;
+}

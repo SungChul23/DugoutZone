@@ -1,0 +1,200 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fff6f6;
+    color: #333;
+}
+
+header {
+    background-color: #d62828;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+header img {
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+main {
+    padding: 40px;
+    max-width: 1000px;
+    margin: auto;
+}
+
+h1 {
+    text-align: center;
+    color: #d62828;
+    margin-bottom: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+th, td {
+    padding: 14px 16px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #ffba08;
+    color: #000;
+    font-weight: bold;
+}
+
+tr:hover {
+    background-color: #ffe8e8;
+}
+
+.center {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn {
+    display: inline-block;
+    background-color: #d62828;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #a91414;
+}
+
+footer {
+    text-align: center;
+    font-size: 14px;
+    color: #888;
+    padding: 20px;
+    margin-top: 40px;
+}
+/* ssg.css에 추가할 빨간색 테마 페이징 및 버튼 스타일 */
+
+.pagination a {
+    text-decoration: none;
+    color: #d32f2f;           /* 진한 빨간색 텍스트 */
+    padding: 8px 12px;
+    border: 1px solid #d32f2f; /* 진한 빨간색 테두리 */
+    border-radius: 4px;
+    font-weight: 500;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination a:hover {
+    background-color: #d32f2f; /* 배경 빨간색 */
+    color: white;             /* 글자 하얀색 */
+}
+
+.pagination .active a {
+    background-color: #d32f2f;
+    color: white;
+    cursor: default;
+}
+
+.pagination .disabled a {
+    color: #f4cccc;           /* 연한 빨간색 (비활성) */
+    border-color: #f4cccc;
+    cursor: default;
+}
+
+/* 버튼도 빨간색 스타일로 변경 */
+.btn {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #d32f2f; /* 진한 빨간색 배경 */
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #9a1c1c; /* 좀 더 진한 빨간색 */
+}
+/* 페이지네이션 컨테이너 */
+.pagination {
+    margin: 30px auto;
+    text-align: center;
+}
+
+/* 버튼들을 가로로 정렬 */
+.pagination ul {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    list-style: none;
+    gap: 8px;
+    flex-wrap: wrap; /* 화면 작아지면 줄 바꿈 */
+}
+
+/* 각 버튼 항목 */
+.pagination li {
+    display: inline-block;
+}
+
+/* 링크 버튼 기본 */
+.pagination a {
+    display: inline-block;
+    padding: 8px 14px;
+    text-decoration: none;
+    color: #d32f2f;
+    border: 1px solid #d32f2f;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+/* 호버 효과 */
+.pagination a:hover {
+    background-color: #d32f2f;
+    color: white;
+}
+
+/* 현재 페이지 표시 */
+.pagination .active a {
+    background-color: #d32f2f;
+    color: white;
+    pointer-events: none;
+}
+
+/* 비활성 상태 */
+.pagination .disabled a {
+    color: #f4cccc;
+    border-color: #f4cccc;
+    pointer-events: none;
+}
+/* 검색 폼 입력창 */
+.search-form .search-input {
+    padding: 9px 15px;
+    font-size: 16px;
+    border: 2px solid #d32f2f;
+    border-radius: 4px 0 0 4px;
+    outline: none;
+    width: 250px;
+    max-width: 80%;
+    transition: border-color 0.3s;
+}
+
+.search-form .search-input:focus {
+    border-color: #9a1c1c;
+}
+
+/* 검색 버튼은 이미 .btn 스타일 사용 중 */
+.search-form .btn {
+    border-radius: 0 4px 4px 0;
+    margin-left: -5px; /* 버튼과 인풋 사이 공백 제거 */
+}
+

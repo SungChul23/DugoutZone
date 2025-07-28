@@ -1,0 +1,110 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #0f172a;
+    color: #e2e8f0;
+}
+
+.team-hero {
+    background: linear-gradient(135deg, #E6002E, #000000);
+    color: white;
+    padding: 60px 30px;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.team-hero-content {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.team-hero-info h1 {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.team-hero-info .season-rank {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.team-hero-info .team-record {
+    font-size: 1rem;
+    opacity: 0.9;
+    margin-bottom: 8px;
+}
+
+.team-hero-info .slogan {
+    font-size: 1rem;
+    font-style: italic;
+    opacity: 0.85;
+}
+
+.team-hero-logo img {
+    width: 200px;
+    height: auto;
+}
+
+.section {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.btn-group {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.btn {
+    background-color: #E6002E;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #b40024;
+}
+
+footer {
+    text-align: center;
+    padding: 40px 0;
+    font-size: 0.9rem;
+    color: #94a3b8;
+}
+.team-slogan {
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 600;
+    color: #ffffff; /* 흰색 글자 */
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); /* 흰색 네온 느낌 */
+    margin-top: 10px;
+    animation: sloganFade 2s ease-in-out forwards;
+    opacity: 0;
+}
+
+/* 애니메이션 */
+@keyframes sloganFade {
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

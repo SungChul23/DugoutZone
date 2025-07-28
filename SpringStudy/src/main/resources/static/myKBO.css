@@ -120,3 +120,37 @@ footer {
     background-color: #8b5cf6;
     color: white;
 }
+.team-marquee {
+    width: 100%;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 0;
+    margin-bottom: 20px;
+}
+
+.marquee-track {
+    display: flex;
+    animation: scrollLeft 10s linear infinite;
+}
+
+.marquee-track img {
+    height: 150px;
+    margin: 0 24px;
+    opacity: 0.9;
+    transition: transform 0.3s;
+}
+
+.marquee-track img:hover {
+    transform: scale(1.15);
+    opacity: 1;
+}
+
+@keyframes scrollLeft {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-50%);
+    }
+}

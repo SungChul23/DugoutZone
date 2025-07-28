@@ -9,12 +9,14 @@ import lombok.Getter;
 import java.time.LocalDate;
 
 import lombok.Setter;
+import lombok.ToString;
 
 
 @Entity
 @IdClass(KBOId.class)  // 추가!
 @Getter
 @Setter
+@ToString
 public class KBO {
     @Id
     private String teamName;

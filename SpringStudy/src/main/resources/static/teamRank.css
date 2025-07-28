@@ -6,13 +6,16 @@ body {
 }
 
 .container {
-    max-width: 1000px;
+    max-width: 1600px;
     margin: 0 auto;
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(0, 240, 255, 0.2);
+    border-radius: 20px;
+    padding: 20px 20px; /* 👈 줄임 */
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.05);
+    backdrop-filter: blur(12px);
 }
+
 
 h1 {
     text-align: center;
@@ -66,16 +69,7 @@ body {
     padding: 40px 20px;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(0, 240, 255, 0.2);
-    border-radius: 20px;
-    padding: 40px;
-    box-shadow: 0 0 20px rgba(0, 240, 255, 0.05);
-    backdrop-filter: blur(12px);
-}
+
 
 h1 {
     text-align: center;
@@ -189,4 +183,6 @@ p {
     flex: 1;
     min-width: 400px;
     max-width: 500px;
+    display: flex;
+    justify-content: flex-end; /* 그래프 오른쪽 정렬 */
 }

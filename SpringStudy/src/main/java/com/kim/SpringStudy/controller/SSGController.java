@@ -29,7 +29,7 @@ public class SSGController {
         List<SSG> result = ssgService.findPlayer();
         model.addAttribute("SSG", result);
 
-        return "ssg.html";
+        return "ssgv2.html";
     }
     //선수단 목록 페이지네이션
     @GetMapping("/list/ssg/page/{pageNum}")

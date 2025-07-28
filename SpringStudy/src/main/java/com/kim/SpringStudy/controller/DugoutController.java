@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
@@ -27,7 +29,21 @@ public class DugoutController {
     private final KBOService kboService;
     private final KBOTeamRepository kboTeamRepository;
     private final TeamNewsService teamNewsService;
+    private final KBORepository kboRepository;
 
+    //키 + 벨류 = DB + 경로
+    private static final Map<String, String> TEAM_MAP = Map.ofEntries(
+            Map.entry("LG", "lg"),
+            Map.entry("SSG", "ssg"),
+            Map.entry("KIA", "kia"),
+            Map.entry("KT", "kt"),
+            Map.entry("NC", "nc"),
+            Map.entry("두산", "doosan"),
+            Map.entry("롯데", "lotte"),
+            Map.entry("삼성", "samsung"),
+            Map.entry("키움", "kiwoom"),
+            Map.entry("한화", "hanwha")
+    );
 
     //더그 아웃 입장
     @GetMapping("/dugout")
@@ -77,6 +93,7 @@ public class DugoutController {
         model.addAttribute("team", team); // Thymeleaf에서 JS로 넘겨줄 값
         return "newsView"; // → templates/newsView.html
     }
+
     @GetMapping("/news/{team}")
     @ResponseBody
     public List<NewsDTO> getTeamNews(@PathVariable String team,
@@ -99,5 +116,25 @@ public class DugoutController {
 
         return teamNewsService.getNewsByTeam(query, page, display);
     }
+
+    //각 팀 사이트 배너에 객체들
+    @GetMapping("/team/{teamName}")
+    public String teamPage(@PathVariable String teamName, Model model) {
+        String key = teamName.toUpperCase(); // 영어든 한글이든 대문자 기준
+
+        String viewFolder = TEAM_MAP.getOrDefault(key, null);
+        if (viewFolder == null) {
+            return "error";
+        }
+
+        Optional<KBO> record = kboRepository.findLatestByTeamName(key);
+        if (record.isEmpty()) {
+            return "error";
+        }
+
+        model.addAttribute("record", record.get());
+        return viewFolder;  // ex. team/lg
+    }
+
 
 }

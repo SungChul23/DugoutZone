@@ -1,0 +1,13 @@
+.team-hero {
+    background: linear-gradient(135deg, #005BAC, #aaaaaa); /* 삼성 블루 → 블랙 */
+    color: white;
+}
+
+.btn {
+    background-color: #005BAC; /* 삼성 파란색 */
+    color: white;
+}
+
+.btn:hover {
+    background-color: #004080; /* 어두운 블루 */
+}

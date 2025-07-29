@@ -6,8 +6,6 @@ body {
 }
 
 .team-hero {
-    background: linear-gradient(135deg, #E6002E, #000000);
-    color: white;
     padding: 60px 30px;
     border-radius: 0 0 30px 30px;
     box-shadow: 0 8px 20px rgba(0,0,0,0.3);
@@ -24,24 +22,18 @@ body {
 
 .team-hero-info h1 {
     font-size: 2.5rem;
-    margin-bottom: 12px;
     font-weight: 700;
+    margin-bottom: 12px;
 }
 
-.team-hero-info .season-rank {
-    font-size: 1.4rem;
-    margin-bottom: 8px;
-    font-weight: 500;
-}
-
-.team-hero-info .team-record {
-    font-size: 1rem;
-    opacity: 0.9;
+.team-hero-info .season-rank,
+.team-hero-info .team-record,
+.team-hero-info .slogan {
+    font-size: 1.2rem;
     margin-bottom: 8px;
 }
 
 .team-hero-info .slogan {
-    font-size: 1rem;
     font-style: italic;
     opacity: 0.85;
 }
@@ -49,12 +41,6 @@ body {
 .team-hero-logo img {
     width: 200px;
     height: auto;
-}
-
-.section {
-    max-width: 1000px;
-    margin: 60px auto;
-    padding: 0 20px;
 }
 
 .btn-group {
@@ -66,8 +52,6 @@ body {
 }
 
 .btn {
-    background-color: #E6002E;
-    color: white;
     padding: 12px 24px;
     border: none;
     border-radius: 8px;
@@ -76,8 +60,10 @@ body {
     transition: background 0.3s ease;
 }
 
-.btn:hover {
-    background-color: #b40024;
+.section {
+    max-width: 1000px;
+    margin: 60px auto;
+    padding: 0 20px;
 }
 
 footer {
@@ -86,18 +72,19 @@ footer {
     font-size: 0.9rem;
     color: #94a3b8;
 }
+
+/* 공통 애니메이션 */
 .team-slogan {
     font-size: 1.5rem;
     font-style: italic;
     font-weight: 600;
-    color: #ffffff; /* 흰색 글자 */
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8); /* 흰색 네온 느낌 */
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
     margin-top: 10px;
     animation: sloganFade 2s ease-in-out forwards;
     opacity: 0;
 }
 
-/* 애니메이션 */
 @keyframes sloganFade {
     from {
         transform: translateY(10px);
@@ -107,4 +94,26 @@ footer {
         transform: translateY(0);
         opacity: 1;
     }
+}
+.back-home-section {
+    text-align: center;
+    margin: 40px 0 20px;
+}
+
+.neon-home-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #00f0ff;
+    color: #0f172a;
+    border-radius: 8px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+}
+
+.neon-home-btn:hover {
+    background-color: #8b5cf6;
+    color: white;
+    box-shadow: 0 0 18px rgba(139, 92, 246, 0.6);
 }

@@ -1,0 +1,13 @@
+/* kiwoom.css */
+.team-hero {
+    background: linear-gradient(135deg, #771F36, #4C0F23);
+}
+
+.btn {
+    background-color: #771F36;
+    color: #ffffff;
+}
+
+.btn:hover {
+    background-color: #9B2C4B;
+}

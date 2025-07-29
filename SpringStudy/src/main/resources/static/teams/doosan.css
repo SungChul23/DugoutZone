@@ -1,0 +1,15 @@
+/* 두산 베어스 전용 스타일 */
+
+.team-hero {
+    background: linear-gradient(to right, #0D1632, #e6f2ff);
+    color: white;
+}
+
+.btn {
+    background-color: #e6f2ff;
+    color: black;
+}
+
+.btn:hover {
+    background-color: #c4001f;
+}

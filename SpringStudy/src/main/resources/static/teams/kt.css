@@ -1,0 +1,15 @@
+/* KT 위즈 전용 스타일 오버라이드 */
+
+.team-hero {
+    background: linear-gradient(to right, #000000, #E60012); /* 블랙 → 레드 */
+    color: white;
+}
+
+.btn {
+    background-color: #000000;
+    color: white;
+}
+
+.btn:hover {
+    background-color: #ff4c4c;
+}

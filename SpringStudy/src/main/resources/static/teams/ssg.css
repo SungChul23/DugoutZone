@@ -1,0 +1,19 @@
+/* SSG 전용 스타일 오버라이드 */
+
+.team-hero {
+    background: linear-gradient(to right, #B40000, #910000); /* SSG 그라데이션 */
+}
+
+.btn {
+    background-color: #C8102E; /* SSG 레드 */
+    color: white;
+}
+
+.btn:hover {
+    background-color: #a0001f; /* hover 시 더 어두운 레드 */
+}
+
+.team-slogan {
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
+}

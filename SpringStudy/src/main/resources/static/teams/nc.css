@@ -1,0 +1,16 @@
+/* NC 다이노스 전용 스타일 */
+
+.team-hero {
+    background: linear-gradient(to right, #012D5A, #B9975B); /* 네이비 → 골드 */
+    color: white;
+}
+
+.btn {
+    background-color: #B9975B;
+    color: #012D5A;
+}
+
+.btn:hover {
+    background-color: #d1b074;
+    color: #012D5A;
+}

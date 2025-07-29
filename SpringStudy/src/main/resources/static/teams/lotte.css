@@ -1,0 +1,13 @@
+/* lotte.css */
+.team-hero {
+    background: linear-gradient(135deg, #002F6C, #C60C30);
+}
+
+.btn {
+    background-color: #C60C30;
+    color: #ffffff;
+}
+
+.btn:hover {
+    background-color: #9b0a25;
+}

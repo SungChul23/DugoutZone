@@ -1,0 +1,13 @@
+
+.team-hero {
+    background: linear-gradient(135deg, #E6002E, #000000);
+}
+
+.btn {
+    background-color: #B71C1C;
+    color: white;
+}
+
+.btn:hover {
+    background-color: #d32f2f;
+}

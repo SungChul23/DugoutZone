@@ -32,23 +32,59 @@ public class DugoutController {
     private final KBORepository kboRepository;
 
     //키 + 벨류 = DB + 경로
+
     private static final Map<String, String> TEAM_MAP = Map.ofEntries(
             Map.entry("LG", "lg"),
             Map.entry("SSG", "ssg"),
             Map.entry("KIA", "kia"),
             Map.entry("KT", "kt"),
             Map.entry("NC", "nc"),
+            Map.entry("DOOSAN", "doosan"),
             Map.entry("두산", "doosan"),
+
+            Map.entry("LOTTE", "lotte"),
             Map.entry("롯데", "lotte"),
+
+            Map.entry("SAMSUNG", "samsung"),
             Map.entry("삼성", "samsung"),
+
+            Map.entry("KIWOOM", "kiwoom"),
             Map.entry("키움", "kiwoom"),
+
+            Map.entry("HANWHA", "hanwha"),
             Map.entry("한화", "hanwha")
     );
+
+
+    private static final Map<String, String> DB_TEAM_NAME_MAP = Map.ofEntries(
+            Map.entry("LG", "LG"),
+            Map.entry("SSG", "SSG"),
+            Map.entry("KIA", "KIA"),
+            Map.entry("KT", "KT"),
+            Map.entry("NC", "NC"),
+            Map.entry("DOOSAN", "두산"),
+            Map.entry("두산", "두산"),
+
+            Map.entry("LOTTE", "롯데"),
+            Map.entry("롯데", "롯데"),
+
+            Map.entry("SAMSUNG", "삼성"),
+            Map.entry("삼성", "삼성"),
+
+            Map.entry("KIWOOM", "키움"),
+            Map.entry("키움", "키움"),
+
+            Map.entry("HANWHA", "한화"),
+            Map.entry("한화", "한화")
+    );
+
+
+
 
     //더그 아웃 입장
     @GetMapping("/dugout")
     public String Dugout() {
-        return "myKBO";
+        return "dugout";
     }
 
     //팀별 순위 그래프
@@ -120,21 +156,28 @@ public class DugoutController {
     //각 팀 사이트 배너에 객체들
     @GetMapping("/team/{teamName}")
     public String teamPage(@PathVariable String teamName, Model model) {
-        String key = teamName.toUpperCase(); // 영어든 한글이든 대문자 기준
+        String key = teamName.toUpperCase(); // URL에서 받은 팀 이름 (영어 또는 한글)
 
         String viewFolder = TEAM_MAP.getOrDefault(key, null);
         if (viewFolder == null) {
-            return "error";
+            throw new IllegalArgumentException("지원하지 않는 팀명 (viewFolder): " + teamName);
         }
 
-        Optional<KBO> record = kboRepository.findLatestByTeamName(key);
+        String dbTeamName = DB_TEAM_NAME_MAP.getOrDefault(key, null);
+        if (dbTeamName == null) {
+            throw new IllegalArgumentException("지원하지 않는 팀명 (DB 조회용): " + teamName);
+        }
+
+        Optional<KBO> record = kboRepository.findLatestByTeamName(dbTeamName);
         if (record.isEmpty()) {
-            return "error";
+            throw new IllegalStateException("기록이 존재하지 않습니다: " + teamName);
         }
 
         model.addAttribute("record", record.get());
-        return viewFolder;  // ex. team/lg
+        return "teams/" + viewFolder;
     }
+
+
 
 
 }

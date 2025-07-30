@@ -3,8 +3,10 @@ package com.kim.SpringStudy.controller;
 
 import com.kim.SpringStudy.domain.KBO;
 import com.kim.SpringStudy.domain.KBOTeam;
+import com.kim.SpringStudy.domain.KBOplayerInfo;
 import com.kim.SpringStudy.repository.KBORepository;
 import com.kim.SpringStudy.repository.KBOTeamRepository;
+import com.kim.SpringStudy.repository.KBOplayerInfoRepository;
 import com.kim.SpringStudy.service.KBOService;
 import com.kim.SpringStudy.service.TeamNewsService;
 import com.kim.SpringStudy.dto.NewsDTO;
@@ -12,10 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -30,6 +29,7 @@ public class DugoutController {
     private final KBOTeamRepository kboTeamRepository;
     private final TeamNewsService teamNewsService;
     private final KBORepository kboRepository;
+    private final KBOplayerInfoRepository kbOplayerInfoRepository;
 
     //키 + 벨류 = DB + 경로
 
@@ -77,8 +77,6 @@ public class DugoutController {
             Map.entry("HANWHA", "한화"),
             Map.entry("한화", "한화")
     );
-
-
 
 
     //더그 아웃 입장
@@ -178,6 +176,18 @@ public class DugoutController {
     }
 
 
+    @GetMapping("player/{team}")
+    public String viewPlayerInfo(@PathVariable String team,
+                                 @RequestParam(defaultValue = "투수") String position,
+                                 Model model) {
+
+        List <KBOplayerInfo> result = kbOplayerInfoRepository.findByTeamAndPosition(team, position);
+
+        model.addAttribute("players" , result);
+
+        return "/";
+
+    }
 
 
 }

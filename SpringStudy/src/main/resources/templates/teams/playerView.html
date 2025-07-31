@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title th:text="${teamName.toUpperCase()} + ' 선수단'">선수단</title>
+
+    <!-- 공통 CSS -->
+    <link rel="stylesheet" href="/teams/team-base.css" />
+    <!-- 팀별 CSS (예: ssg.css) -->
+    <link rel="stylesheet" th:href="@{'/teams/' + ${teamName.toLowerCase()} + '.css'}" />
+
+    <link rel="icon" href="/dugout.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+<section class="team-hero">
+    <div class="team-hero-content">
+        <div class="team-hero-info">
+            <h1 th:text="${teamName.toUpperCase()} + ' 선수단'">SSG 선수단</h1>
+            <p class="team-slogan">NO LIMITS AMAZING LANDERS</p>
+        </div>
+        <div class="team-hero-logo">
+            <img th:src="@{'https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/' + ${teamName.toLowerCase()} + '.png'}"
+                 alt="팀 로고" />
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2 style="text-align:center;">포지션 선택</h2>
+    <div class="btn-group">
+        <a th:href="@{'/team/' + ${teamName} + '/player?position=투수'}" class="btn">투수</a>
+        <a th:href="@{'/team/' + ${teamName} + '/player?position=포수'}" class="btn">포수</a>
+        <a th:href="@{'/team/' + ${teamName} + '/player?position=내야수'}" class="btn">내야수</a>
+        <a th:href="@{'/team/' + ${teamName} + '/player?position=외야수'}" class="btn">외야수</a>
+    </div>
+</section>
+
+<section class="section">
+    <h2 th:text="${position} + ' 명단'">선수 명단</h2>
+    <div class="player-list">
+        <div th:each="player : ${players}" class="player-card">
+            <img th:src="${player.imageUrl}" alt="선수 사진" class="player-img" />
+            <div class="player-info">
+                <h3 th:text="${player.nameKr}">선수명</h3>
+                <p>등번호: <span th:text="${player.uniformNumber}"></span></p>
+                <p th:text="'신장: ' + ${player.heightCm} + 'cm | 체중: ' + ${player.weightKg} + 'kg'">신체</p>
+                <p th:if="${player.pitchHand != null}" th:text="'투타: ' + ${player.pitchHand}"></p>
+                <p th:text="'생년월일: ' + ${player.birth}"></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="back-home-section">
+    <a href="/dugout" class="btn neon-home-btn">🏠 더그아웃으로 가기</a>
+</div>
+
+<footer>
+    ⓒ 2025 더그아웃. <span th:text="${teamName.toUpperCase()}">팀명</span> 선수단.
+</footer>
+</body>
+</html>

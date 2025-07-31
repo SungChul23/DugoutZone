@@ -17,9 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -111,6 +109,26 @@ public class DugoutController {
 
         return "teamRank";
     }
+    @GetMapping("/kbo/rank-timeline")
+    @ResponseBody
+    public Map<String, Map<String, Integer>> getRankTimeline() {
+        List<KBO> records = kboRepository.findAllByOrderByRecordDateAscTeamNameAsc();
+
+        Map<String, Map<String, Integer>> timeline = new TreeMap<>();
+
+        for (KBO record : records) {
+            String date = record.getRecordDate().toString();
+            String team = record.getTeamName();
+            Integer rank = record.getRankNum();
+
+            timeline
+                    .computeIfAbsent(date, k -> new HashMap<>())
+                    .put(team, rank);
+        }
+
+        return timeline;
+    }
+
 
     //구단 별 예매 링크
     @GetMapping("/tickets")
@@ -176,18 +194,25 @@ public class DugoutController {
     }
 
 
-    @GetMapping("player/{team}")
-    public String viewPlayerInfo(@PathVariable String team,
-                                 @RequestParam(defaultValue = "투수") String position,
-                                 Model model) {
+    @GetMapping("/team/{teamName}/player")
+    public String player(@PathVariable String teamName,
+                         @RequestParam(defaultValue = "투수") String position,
+                         Model model) {
 
-        List <KBOplayerInfo> result = kbOplayerInfoRepository.findByTeamAndPosition(team, position);
+        String key = teamName.toUpperCase(); // DB에 조회할려고 어퍼케이스
 
-        model.addAttribute("players" , result);
+        String dbTeamName = DB_TEAM_NAME_MAP.getOrDefault(key, null);
 
-        return "/";
+        if (dbTeamName == null) {
+            throw new IllegalArgumentException("지원하지 않는 팀명 (DB 조회용): " + teamName);
+        }
 
+        List<KBOplayerInfo> players = kbOplayerInfoRepository.findByTeamAndPosition(dbTeamName, position);
+
+        model.addAttribute("teamName", teamName);
+        model.addAttribute("position", position);
+        model.addAttribute("players", players);
+        return "teams/playerView";
     }
-
 
 }

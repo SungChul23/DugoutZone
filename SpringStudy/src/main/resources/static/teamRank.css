@@ -1,4 +1,4 @@
-body {
+    body {
     font-family: "Arial", sans-serif;
     background-color: #f9f9f9;
     margin: 0;
@@ -179,10 +179,17 @@ p {
     min-width: 600px;
 }
 
-.chart-container {
-    flex: 1;
-    min-width: 400px;
-    max-width: 500px;
-    display: flex;
-    justify-content: flex-end; /* 그래프 오른쪽 정렬 */
-}
+
+
+    .chart-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 30px; /* 그래프 간 간격 */
+    }
+
+    .chart-container canvas {
+        width: 500px;
+        height: 300px;
+    }
+

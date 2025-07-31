@@ -26,6 +26,8 @@
                 <span th:text="${record.lose}"></span>패 |
                 승률 <span th:text="${#numbers.formatDecimal(record.winRate, 1, 3)}"></span>
             </p>
+            <p class="champion-info">🏆 한국시리즈 우승 <strong>2회</strong> (1984, 1992)</p>
+
             <p class="team-slogan">투혼투지: 승리를 위한 전진</p>
         </div>
         <div class="team-hero-logo">
@@ -39,6 +41,7 @@
     <div class="btn-group">
         <a href="/news/view/롯데" class="btn">팀 뉴스</a>
         <a href="/kbo/teamRank" class="btn">2025 순위 보기</a>
+        <a href="/team/lotte/player" class="btn">선수단 보기</a>
         <a href="https://www.giantsclub.com/html/?pcode=339" target="_blank" class="btn">티켓 예매</a>
         <a href="https://www.giantsclub.com/html/" target="_blank" class="btn">공식 홈페이지</a>
         <link rel="icon" type="image/png" href="/dugout.png" />

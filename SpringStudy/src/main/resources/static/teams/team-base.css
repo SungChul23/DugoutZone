@@ -117,3 +117,40 @@ footer {
     color: white;
     box-shadow: 0 0 18px rgba(139, 92, 246, 0.6);
 }
+
+
+.player-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.player-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.2);
+}
+
+.player-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 12px;
+}
+
+.player-info h3 {
+    font-size: 1.2rem;
+    margin-bottom: 6px;
+}
+
+.champion-info {
+    margin-top: 10px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #ffd700; /* 금색 느낌 */
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
+}

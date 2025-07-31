@@ -65,12 +65,15 @@
                 </tbody>
             </table>
         </div>
-
-        <!-- 오른쪽: 그래프 -->
+        <!-- 오른쪽: 바 차트 + 라인 차트 세로 배치 -->
         <div class="chart-container">
-            <canvas id="winrateChart" width="500" height="400"></canvas>
+            <canvas id="winrateChart" width="500" height="300"></canvas>
+            <canvas id="rankTrendChart" width="500" height="300" style="margin-top: 30px;"></canvas>
         </div>
+
+
     </div>
+
 
     <!-- 메인으로 -->
     <div class="back-btn">
@@ -126,7 +129,54 @@
         }
     });
 
+</script>
 
+
+<script>
+    fetch('/kbo/rank-timeline')
+        .then(res => res.json())
+        .then(data => {
+            const dates = Object.keys(data).sort();
+            const teams = Object.keys(data[dates[0]]);
+
+            const teamColorMap = {
+                'KIA': '#C8102E', '삼성': '#005BAC', 'LG': '#000000',
+                '한화': '#EF7C00', '롯데': '#002F6C', 'SSG': '#C8102E',
+                'KT': '#1D1D1D', 'NC': '#0C234B', '키움': '#862633', '두산': '#002244'
+            };
+
+            const datasets = teams.map(team => ({
+                label: team,
+                data: dates.map(date => data[date][team] ?? null),
+                borderColor: teamColorMap[team] || 'gray',
+                fill: false,
+                tension: 0.3
+            }));
+
+            new Chart(document.getElementById("rankTrendChart"), {
+                type: 'line',
+                data: { labels: dates, datasets },
+                options: {
+                    responsive: false,
+                    scales: {
+                        y: {
+                            min: 1,
+                            max: 10,
+                            reverse: true,
+                            ticks: {
+                                stepSize: 1,
+                                precision: 0
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+        });
 </script>
 
 </body>

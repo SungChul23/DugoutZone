@@ -20,4 +20,7 @@ public interface KBORepository extends JpaRepository<KBO,String> {
             "(SELECT MAX(k2.recordDate) FROM KBO k2 WHERE k2.teamName = :teamName)")
     Optional<KBO> findLatestByTeamName(@Param("teamName") String teamName);
 
+    // 팀 순위 추세 그래프
+    List<KBO> findAllByOrderByRecordDateAscTeamNameAsc();
+
 }

@@ -39,6 +39,16 @@
 </section>
 
 <section class="section">
+    <h2 style="text-align:center;">선수 검색</h2>
+    <form method="get" th:action="@{'/team/' + ${teamName} + '/player'}" class="search-form">
+        <input type="text" name="keyword" placeholder="선수 이름 검색" th:value="${keyword}" class="search-input" />
+        <button type="submit" class="search-button">🔍 검색</button>
+    </form>
+
+</section>
+
+
+<section class="section">
     <h2 th:text="${position} + ' 명단'">선수 명단</h2>
     <div class="player-list">
         <div th:each="player : ${players}" class="player-card">

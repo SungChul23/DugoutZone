@@ -109,6 +109,7 @@ public class DugoutController {
 
         return "teamRank";
     }
+
     @GetMapping("/kbo/rank-timeline")
     @ResponseBody
     public Map<String, Map<String, Integer>> getRankTimeline() {
@@ -193,25 +194,31 @@ public class DugoutController {
         return "teams/" + viewFolder;
     }
 
-
     @GetMapping("/team/{teamName}/player")
     public String player(@PathVariable String teamName,
                          @RequestParam(defaultValue = "투수") String position,
+                         @RequestParam(required = false) String keyword,
                          Model model) {
 
-        String key = teamName.toUpperCase(); // DB에 조회할려고 어퍼케이스
-
+        String key = teamName.toUpperCase();
         String dbTeamName = DB_TEAM_NAME_MAP.getOrDefault(key, null);
-
         if (dbTeamName == null) {
-            throw new IllegalArgumentException("지원하지 않는 팀명 (DB 조회용): " + teamName);
+            throw new IllegalArgumentException("DB 팀명 매핑 실패: " + teamName);
         }
 
-        List<KBOplayerInfo> players = kbOplayerInfoRepository.findByTeamAndPosition(dbTeamName, position);
+        List<KBOplayerInfo> result;
 
-        model.addAttribute("teamName", teamName);
+        if (keyword != null && !keyword.isBlank()) {
+            result = kbOplayerInfoRepository.findByTeamAndNameKrContaining(dbTeamName, keyword);
+        } else {
+            result = kbOplayerInfoRepository.findByTeamAndPosition(dbTeamName, position);
+        }
+
+        model.addAttribute("players", result);
+        model.addAttribute("teamName", teamName); // ← URL용 원본
         model.addAttribute("position", position);
-        model.addAttribute("players", players);
+        model.addAttribute("keyword", keyword);
+
         return "teams/playerView";
     }
 

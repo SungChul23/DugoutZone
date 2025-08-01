@@ -8,6 +8,9 @@ import java.util.List;
 public interface KBOplayerInfoRepository extends JpaRepository<KBOplayerInfo,Long> {
 
 
-    //팀명과 포지션을 찾아 선수단보기에 출력
-    List<KBOplayerInfo> findByTeamAndPosition (String name, String position);
+    // 포지션으로 필터
+    List<KBOplayerInfo> findByTeamAndPosition(String team, String position);
+
+    // 이름으로 검색 (포지션 무시)
+    List<KBOplayerInfo> findByTeamAndNameKrContaining(String team, String keyword);
 }

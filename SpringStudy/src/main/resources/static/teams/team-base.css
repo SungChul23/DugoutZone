@@ -154,3 +154,40 @@ footer {
     color: #ffd700; /* 금색 느낌 */
     text-shadow: 0 0 5px rgba(255, 215, 0, 0.7);
 }
+.search-form {
+    text-align: center;
+    margin: 30px auto;
+}
+
+.search-input {
+    width: 220px;
+    padding: 10px 14px;
+    font-size: 16px;
+    border: 2px solid #00ffe1;  /* 네온 블루 */
+    background-color: #121212;
+    color: #fff;
+    border-radius: 8px;
+    outline: none;
+    transition: box-shadow 0.3s ease;
+}
+
+.search-input:focus {
+    box-shadow: 0 0 10px #00ffe1;
+}
+
+.search-button {
+    padding: 10px 18px;
+    margin-left: 10px;
+    font-size: 16px;
+    background-color: #00ffe1;
+    color: #000;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.search-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 8px #00ffe1;
+}

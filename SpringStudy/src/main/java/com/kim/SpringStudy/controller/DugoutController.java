@@ -4,9 +4,11 @@ package com.kim.SpringStudy.controller;
 import com.kim.SpringStudy.domain.KBO;
 import com.kim.SpringStudy.domain.KBOTeam;
 import com.kim.SpringStudy.domain.KBOplayerInfo;
+import com.kim.SpringStudy.dto.GameDateDTO;
 import com.kim.SpringStudy.repository.KBORepository;
 import com.kim.SpringStudy.repository.KBOTeamRepository;
 import com.kim.SpringStudy.repository.KBOplayerInfoRepository;
+import com.kim.SpringStudy.service.GameDateService;
 import com.kim.SpringStudy.service.KBOService;
 import com.kim.SpringStudy.service.TeamNewsService;
 import com.kim.SpringStudy.dto.NewsDTO;
@@ -17,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 @Controller
@@ -28,6 +31,7 @@ public class DugoutController {
     private final TeamNewsService teamNewsService;
     private final KBORepository kboRepository;
     private final KBOplayerInfoRepository kbOplayerInfoRepository;
+    private final GameDateService gameDateService;
 
     //키 + 벨류 = DB + 경로
 
@@ -75,6 +79,17 @@ public class DugoutController {
             Map.entry("HANWHA", "한화"),
             Map.entry("한화", "한화")
     );
+
+    private static final Map<String, String> teamLogoMap = Map.ofEntries(
+            Map.entry("SSG", "ssg"), Map.entry("LG", "lg"),
+            Map.entry("DOOSAN", "doosan"), Map.entry("두산", "doosan"),
+            Map.entry("KIA", "kia"), Map.entry("KT", "kt"),
+            Map.entry("롯데", "lotte"), Map.entry("삼성", "samsung"),
+            Map.entry("한화", "hanwha"), Map.entry("NC", "nc"),
+            Map.entry("키움", "kiwoom")
+    );
+
+
 
 
     //더그 아웃 입장
@@ -221,5 +236,33 @@ public class DugoutController {
 
         return "teams/playerView";
     }
+
+    @GetMapping("/gamedate")
+    public String test(@RequestParam(required = false) String date, Model model) {
+        // ① 모든 날짜 리스트 가져옴
+        List<String> availableDates = gameDateService.getAvailableDates();
+
+        // ② 오늘 날짜 계산 ("08.02" 같은 형식으로)
+        String today = LocalDate.now().format(DateTimeFormatter.ofPattern("MM.dd"));
+
+        // ③ 오늘 날짜가 DB에 있으면 그것을 사용
+        String selectedDate = (date != null) ? date :
+                (availableDates.contains(today) ? today :
+                        gameDateService.getLatestAvailableDate());
+
+        System.out.println("선택된 날짜 : " + selectedDate);
+
+        // ④ 해당 날짜의 경기 목록 조회
+        List<GameDateDTO> games = gameDateService.getGamesByDate(selectedDate);
+
+        // ⑤ 모델에 전달
+        model.addAttribute("selectedDate", selectedDate);
+        model.addAttribute("availableDates", availableDates);
+        model.addAttribute("games", games);
+
+        model.addAttribute("teamLogoMap", teamLogoMap);
+        return "scheduleView";
+    }
+
 
 }

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${team} + ' 구장 날씨 예보'">구단 날씨</title>
+    <link rel="stylesheet" href="/weatherView.css">
+    <link rel="icon" type="image/png" href="/dugout.png" />
+</head>
+<body>
+
+<section class="weather-detail">
+    <h1 th:text="${team} + ' 구장 7일간 날씨 예보'">두산 구장 날씨 예보</h1>
+
+    <table>
+        <thead>
+        <tr>
+            <th>날짜</th>
+            <th>오전</th>
+            <th>오후</th>
+            <th>최저기온</th>
+            <th>최고기온</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="day : ${weatherList}">
+            <td th:text="${day.date}"></td>
+            <td th:text="${day.weatherAm}"></td>
+            <td th:text="${day.weatherPm}"></td>
+            <td th:text="${day.minTemp} + '℃'"></td>
+            <td th:text="${day.maxTemp} + '℃'"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div style="margin-top: 20px;">
+        <a href="/weather">← 다른 구단 보기</a>
+    </div>
+</section>
+
+</body>
+</html>

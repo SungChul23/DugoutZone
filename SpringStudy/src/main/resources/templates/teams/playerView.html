@@ -52,7 +52,7 @@
     <h2 th:text="${position} + ' 명단'">선수 명단</h2>
     <div class="player-list">
         <div th:each="player : ${players}" class="player-card">
-            <img th:src="${player.imageUrl}" alt="선수 사진" class="player-img" />
+            <!!img th:src="${player.imageUrl}" alt="선수 사진" class="player-img" />
             <div class="player-info">
                 <h3 th:text="${player.nameKr}">선수명</h3>
                 <p>등번호: <span th:text="${player.uniformNumber}"></span></p>

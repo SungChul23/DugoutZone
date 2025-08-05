@@ -4,7 +4,7 @@
     <meta charset="UTF-8"/>
     <title>KBO 경기 일정</title>
     <link rel="stylesheet" href="/schedule.css"/>
-
+    <link rel="icon" type="image/png" href="/dugout.png"/>
     <!-- Swiper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"/>
     <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
@@ -45,23 +45,24 @@
             <div class="time" th:text="${game.time}">18:00</div>
 
             <div class="matchup">
-            <span class="team">
-                <img th:src="'https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/' + ${teamLogoMap[#strings.arraySplit(game.matchup, 'vs')[0]]} + '.png'"
-                     th:alt="${#strings.arraySplit(game.matchup, 'vs')[0]}"
-                     class="team-logo"/>
-                <span th:text="${#strings.arraySplit(game.matchup, 'vs')[0]}"></span>
-            </span>
+        <span class="team">
+            <img th:src="'https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/' + ${teamLogoMap[game.homeTeam]} + '.png'"
+                 th:alt="${game.homeTeam}"
+                 class="team-logo"/>
+            <span th:text="${game.homeTeam}">삼성</span>
+        </span>
 
                 <span class="vs">vs</span>
 
                 <span class="team">
-                <span th:text="${#strings.arraySplit(game.matchup, 'vs')[1]}"></span>
-                <img th:src="'https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/' + ${teamLogoMap[#strings.arraySplit(game.matchup, 'vs')[1]]} + '.png'"
-                     th:alt="${#strings.arraySplit(game.matchup, 'vs')[1]}"
-                     class="team-logo"/>
-            </span>
+            <span th:text="${game.awayTeam}">두산</span>
+            <img th:src="'https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/' + ${teamLogoMap[game.awayTeam]} + '.png'"
+                 th:alt="${game.awayTeam}"
+                 class="team-logo"/>
+        </span>
             </div>
-        </div> <!-- ✅ game-row 닫힘 위치 -->
+        </div>
+
 
         <!-- ✅ 경기 없을 때 메시지: 반복 밖으로 빼야 함 -->
         <p th:if="${games.size() == 0}" style="text-align:center; margin-top: 40px; color: #94a3b8;">

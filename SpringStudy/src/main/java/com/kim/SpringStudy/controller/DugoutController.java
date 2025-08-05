@@ -5,6 +5,7 @@ import com.kim.SpringStudy.domain.KBO;
 import com.kim.SpringStudy.domain.KBOTeam;
 import com.kim.SpringStudy.domain.KBOplayerInfo;
 import com.kim.SpringStudy.dto.GameDateDTO;
+import com.kim.SpringStudy.dto.WeeklyWeatherDTO;
 import com.kim.SpringStudy.repository.KBORepository;
 import com.kim.SpringStudy.repository.KBOTeamRepository;
 import com.kim.SpringStudy.repository.KBOplayerInfoRepository;
@@ -12,6 +13,8 @@ import com.kim.SpringStudy.service.GameDateService;
 import com.kim.SpringStudy.service.KBOService;
 import com.kim.SpringStudy.service.TeamNewsService;
 import com.kim.SpringStudy.dto.NewsDTO;
+import com.kim.SpringStudy.service.WeatherService;
+import com.kim.SpringStudy.util.TeamNameMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -21,6 +24,8 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
+
+import static com.kim.SpringStudy.util.TeamLogoMapper.teamLogoMap;
 
 @Controller
 @RequiredArgsConstructor
@@ -32,63 +37,7 @@ public class DugoutController {
     private final KBORepository kboRepository;
     private final KBOplayerInfoRepository kbOplayerInfoRepository;
     private final GameDateService gameDateService;
-
-    //키 + 벨류 = DB + 경로
-
-    private static final Map<String, String> TEAM_MAP = Map.ofEntries(
-            Map.entry("LG", "lg"),
-            Map.entry("SSG", "ssg"),
-            Map.entry("KIA", "kia"),
-            Map.entry("KT", "kt"),
-            Map.entry("NC", "nc"),
-            Map.entry("DOOSAN", "doosan"),
-            Map.entry("두산", "doosan"),
-
-            Map.entry("LOTTE", "lotte"),
-            Map.entry("롯데", "lotte"),
-
-            Map.entry("SAMSUNG", "samsung"),
-            Map.entry("삼성", "samsung"),
-
-            Map.entry("KIWOOM", "kiwoom"),
-            Map.entry("키움", "kiwoom"),
-
-            Map.entry("HANWHA", "hanwha"),
-            Map.entry("한화", "hanwha")
-    );
-
-
-    private static final Map<String, String> DB_TEAM_NAME_MAP = Map.ofEntries(
-            Map.entry("LG", "LG"),
-            Map.entry("SSG", "SSG"),
-            Map.entry("KIA", "KIA"),
-            Map.entry("KT", "KT"),
-            Map.entry("NC", "NC"),
-            Map.entry("DOOSAN", "두산"),
-            Map.entry("두산", "두산"),
-
-            Map.entry("LOTTE", "롯데"),
-            Map.entry("롯데", "롯데"),
-
-            Map.entry("SAMSUNG", "삼성"),
-            Map.entry("삼성", "삼성"),
-
-            Map.entry("KIWOOM", "키움"),
-            Map.entry("키움", "키움"),
-
-            Map.entry("HANWHA", "한화"),
-            Map.entry("한화", "한화")
-    );
-
-    private static final Map<String, String> teamLogoMap = Map.ofEntries(
-            Map.entry("SSG", "ssg"), Map.entry("LG", "lg"),
-            Map.entry("DOOSAN", "doosan"), Map.entry("두산", "doosan"),
-            Map.entry("KIA", "kia"), Map.entry("KT", "kt"),
-            Map.entry("롯데", "lotte"), Map.entry("삼성", "samsung"),
-            Map.entry("한화", "hanwha"), Map.entry("NC", "nc"),
-            Map.entry("키움", "kiwoom")
-    );
-
+    private final WeatherService weatherService;
 
 
 
@@ -161,7 +110,7 @@ public class DugoutController {
         model.addAttribute("team", team); // Thymeleaf에서 JS로 넘겨줄 값
         return "newsView"; // → templates/newsView.html
     }
-
+    //구단 별 뉴스
     @GetMapping("/news/{team}")
     @ResponseBody
     public List<NewsDTO> getTeamNews(@PathVariable String team,
@@ -188,14 +137,12 @@ public class DugoutController {
     //각 팀 사이트 배너에 객체들
     @GetMapping("/team/{teamName}")
     public String teamPage(@PathVariable String teamName, Model model) {
-        String key = teamName.toUpperCase(); // URL에서 받은 팀 이름 (영어 또는 한글)
-
-        String viewFolder = TEAM_MAP.getOrDefault(key, null);
+        String viewFolder = TeamNameMapper.toViewFolder(teamName);
         if (viewFolder == null) {
             throw new IllegalArgumentException("지원하지 않는 팀명 (viewFolder): " + teamName);
         }
 
-        String dbTeamName = DB_TEAM_NAME_MAP.getOrDefault(key, null);
+        String dbTeamName = TeamNameMapper.toDbTeamName(teamName);
         if (dbTeamName == null) {
             throw new IllegalArgumentException("지원하지 않는 팀명 (DB 조회용): " + teamName);
         }
@@ -209,14 +156,14 @@ public class DugoutController {
         return "teams/" + viewFolder;
     }
 
+    // 구단별 선수진
     @GetMapping("/team/{teamName}/player")
     public String player(@PathVariable String teamName,
                          @RequestParam(defaultValue = "투수") String position,
                          @RequestParam(required = false) String keyword,
                          Model model) {
 
-        String key = teamName.toUpperCase();
-        String dbTeamName = DB_TEAM_NAME_MAP.getOrDefault(key, null);
+        String dbTeamName = TeamNameMapper.toDbTeamName(teamName);
         if (dbTeamName == null) {
             throw new IllegalArgumentException("DB 팀명 매핑 실패: " + teamName);
         }
@@ -236,32 +183,60 @@ public class DugoutController {
 
         return "teams/playerView";
     }
-
+    // KBO 2025시즌 일정
     @GetMapping("/gamedate")
     public String test(@RequestParam(required = false) String date, Model model) {
-        // ① 모든 날짜 리스트 가져옴
+        // 모든 날짜 리스트 가져옴
         List<String> availableDates = gameDateService.getAvailableDates();
 
-        // ② 오늘 날짜 계산 ("08.02" 같은 형식으로)
+        // 오늘 날짜 계산 ("08.02" 같은 형식으로)
         String today = LocalDate.now().format(DateTimeFormatter.ofPattern("MM.dd"));
 
-        // ③ 오늘 날짜가 DB에 있으면 그것을 사용
+        // 오늘 날짜가 DB에 있으면 그것을 사용
         String selectedDate = (date != null) ? date :
                 (availableDates.contains(today) ? today :
                         gameDateService.getLatestAvailableDate());
 
         System.out.println("선택된 날짜 : " + selectedDate);
 
-        // ④ 해당 날짜의 경기 목록 조회
+        // 해당 날짜의 경기 목록 조회
         List<GameDateDTO> games = gameDateService.getGamesByDate(selectedDate);
 
-        // ⑤ 모델에 전달
+        // 모델에 전달
         model.addAttribute("selectedDate", selectedDate);
         model.addAttribute("availableDates", availableDates);
         model.addAttribute("games", games);
 
         model.addAttribute("teamLogoMap", teamLogoMap);
         return "scheduleView";
+    }
+    //구단 별 날씨 보기
+    @GetMapping("/weather")
+    public String showWeatherPage(){
+        return "weatherView";
+    }
+    @GetMapping("/weather/{teamName}")
+    public String showTeamWeather(@PathVariable String teamName, Model model){
+        // 한글 or 영문 → DB/API용 이름 변환
+        String dbTeamName = TeamNameMapper.toDbTeamName(teamName);
+        if(dbTeamName == null){
+            throw  new IllegalArgumentException("지원하지 않은 팀명 :" + teamName);
+        }
+
+        System.out.println("선택한 구단 : " + teamName);
+
+        //날씨 조회
+        List<WeeklyWeatherDTO> weatherList = weatherService.getWeatherForTeam(dbTeamName);
+
+        System.out.println("✅ teamName: " + teamName);
+        System.out.println("✅ dbTeamName: " + dbTeamName);
+        System.out.println("✅ 날씨 개수: " + weatherList.size());
+
+
+        model.addAttribute("team", dbTeamName);
+        model.addAttribute("weatherList", weatherList);
+
+        return "weatherDetail";
     }
 
 

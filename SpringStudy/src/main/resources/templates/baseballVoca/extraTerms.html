@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>기타 특수 용어</title>
+    <link rel="stylesheet" href="/vocaAccordion.css">
+    <link rel="icon" type="image/png" href="/dugout.png"/>
+</head>
+<body>
+
+<section class="section-hero">
+    <h1 class="section-title"> 기타 특수 야구 용어</h1>
+    <p class="section-subtitle">해설이나 뉴스에서 자주 듣는 야구 용어들을 정리했어요</p>
+</section>
+
+
+<section class="accordion-section">
+
+
+    <button class="accordion">야구에서 자주 등장하는 특수 용어</button>
+    <div class="panel">
+        <table>
+            <thead>
+            <tr>
+                <th>용어</th>
+                <th>설명</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><strong>더블헤더</strong></td>
+                <td>하루에 같은 팀이 두 번 연속 경기를 치르는 일정</td>
+            </tr>
+            <tr>
+                <td><strong>리드오프</strong></td>
+                <td>1번 타자. 경기 첫 타석에 나서는 선수로 출루 능력이 중요</td>
+            </tr>
+            <tr>
+                <td><strong>클린업 트리오</strong></td>
+                <td>3, 4, 5번 중심타자 조합. 타점 생산 중심</td>
+            </tr>
+            <tr>
+                <td><strong>마무리 투수</strong></td>
+                <td>경기 마지막 이닝에 등판해 리드를 지키는 투수</td>
+            </tr>
+            <tr>
+                <td><strong>선발 투수</strong></td>
+                <td>경기 시작과 함께 등판하는 첫 투수</td>
+            </tr>
+            <tr>
+                <td><strong>계투</strong></td>
+                <td>중간계투 + 마무리 포함, 선발 이후 등판하는 투수 통칭</td>
+            </tr>
+            <tr>
+                <td><strong>6-4-3 병살</strong></td>
+                <td>숫자 포지션으로 나타낸 병살 처리: 유격수 → 2루수 → 1루수</td>
+            </tr>
+            <tr>
+                <td><strong>노히트 노런</strong></td>
+                <td>상대 타자에게 단 한 개의 안타도, 점수도 허용하지 않음</td>
+            </tr>
+            <tr>
+                <td><strong>퍼펙트 게임</strong></td>
+                <td>한 명의 투수가 단 한 명의 주자도 출루시키지 않고 이긴 경기</td>
+            </tr>
+            <tr>
+                <td><strong>사이클링 히트</strong></td>
+                <td>한 경기에서 1루타, 2루타, 3루타, 홈런을 모두 기록한 것</td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <div class="btn-group">
+        <a href="/voca" class="btn neon-btn">📘 카테고리 이동하기</a>
+        <a href="/dugout" class="btn neon-home-btn">🏠 더그아웃 홈으로</a>
+    </div>
+</section>
+
+<script>
+    const acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            const panel = this.nextElementSibling;
+            panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + "px";
+        });
+    }
+</script>
+
+</body>
+</html>

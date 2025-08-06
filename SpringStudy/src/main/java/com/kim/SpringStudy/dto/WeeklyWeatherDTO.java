@@ -17,4 +17,7 @@ public class WeeklyWeatherDTO {
     private Integer maxTemp; //최대 기온
     private Integer minTemp; //최소 기온
 
+    private Integer rainProbAm; //오전 강수
+    private Integer rainProbPm; // 오후 강수
+
 }

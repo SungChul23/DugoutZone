@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>투수 기록 용어</title>
+    <link rel="stylesheet" href="/vocaAccordion.css">
+    <link rel="icon" type="image/png" href="/dugout.png" />
+</head>
+<body>
+
+<section class="section-hero">
+    <h1 class="section-title"> 투수 기록 용어 정리</h1>
+    <p class="section-subtitle">투수의 성적을 보여주는 다양한 지표를 알아보세요</p>
+</section>
+
+
+<section class="accordion-section">
+
+    <!-- 정통적인 투수 기록 -->
+    <button class="accordion">정통적인 투수 기록</button>
+    <div class="panel">
+        <table>
+            <thead>
+            <tr><th>약어</th><th>한글명</th><th>설명</th></tr>
+            </thead>
+            <tbody>
+            <tr><td><strong>W</strong></td><td>승</td><td>팀이 승리하고, 해당 투수가 승리 조건 충족 시 부여</td></tr>
+            <tr><td><strong>L</strong></td><td>패</td><td>팀이 패배하고, 해당 투수가 결정적인 실점을 했을 경우</td></tr>
+            <tr><td><strong>SV</strong></td><td>세이브</td><td>마무리 투수가 리드를 지키고 경기를 끝낼 경우</td></tr>
+            <tr><td><strong>H</strong></td><td>홀드</td><td>중간 투수가 리드를 유지한 채 다음 투수에게 넘길 경우</td></tr>
+            <tr><td><strong>BS</strong></td><td>블론 세이브</td><td>세이브 상황에서 동점을 허용한 경우</td></tr>
+            <tr><td><strong>QS</strong></td><td>퀄리티 스타트</td><td><strong>6이닝 이상, 3자책점 이하</strong>의 선발투수 성적</td></tr>
+            <tr><td><strong>CG</strong></td><td>완투</td><td>한 투수가 전 이닝을 모두 책임짐</td></tr>
+            <tr><td><strong>SHO</strong></td><td>완봉</td><td>완투 + 실점 0점</td></tr>
+            <tr><td><strong>IP</strong></td><td>이닝</td><td>던진 이닝 수 (1이닝 = 3아웃)</td></tr>
+            <tr><td><strong>ER</strong></td><td>자책점</td><td>투수 책임 실점 (수비 실책 제외)</td></tr>
+            <tr><td><strong>ERA</strong></td><td>평균자책점</td><td>(자책점 × 9) ÷ 이닝 — 투수 실력 대표 지표</td></tr>
+            <tr><td><strong>SO / K</strong></td><td>삼진</td><td>타자를 아웃시킨 수 (헛스윙 or 루킹)</td></tr>
+            <tr><td><strong>BB</strong></td><td>볼넷</td><td>스트라이크 존 벗어난 공 4개로 타자 출루</td></tr>
+            <tr><td><strong>HBP</strong></td><td>사구</td><td>몸에 맞는 공 (자동 출루)</td></tr>
+            <tr><td><strong>NP</strong></td><td>투구 수</td><td>총 던진 공의 수</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 심화 투수 지표 -->
+    <button class="accordion">심화 투수 지표</button>
+    <div class="panel">
+        <table>
+            <thead>
+            <tr><th>약어</th><th>한글명</th><th>설명</th></tr>
+            </thead>
+            <tbody>
+            <tr><td><strong>WHIP</strong></td><td>이닝당 주자 허용</td><td>(볼넷 + 피안타) ÷ 이닝 — 주자 억제 능력</td></tr>
+            <tr><td><strong>K/9</strong></td><td>9이닝당 삼진</td><td>(삼진 × 9) ÷ 이닝 — 탈삼진 능력</td></tr>
+            <tr><td><strong>BB/9</strong></td><td>9이닝당 볼넷</td><td>(볼넷 × 9) ÷ 이닝 — 제구 능력</td></tr>
+            <tr><td><strong>K/BB</strong></td><td>삼진:볼넷 비율</td><td>높은 비율일수록 제구 + 탈삼진 우수</td></tr>
+            <tr><td><strong>FIP</strong></td><td>수비 무관 ERA</td><td>삼진, 볼넷, 홈런만 고려해 투수 능력을 평가</td></tr>
+            <tr><td><strong>xFIP</strong></td><td>조정 FIP</td><td>FIP에서 홈런 비율을 리그 평균으로 보정</td></tr>
+            <tr><td><strong>ERA+</strong></td><td>리그 대비 ERA</td><td>리그 평균 ERA와 비교 (100 이상이면 평균 이상)</td></tr>
+            <tr><td><strong>LOB%</strong></td><td>잔루율</td><td>주자를 홈에 들여보내지 않고 막은 비율</td></tr>
+            <tr><td><strong>GB%</strong></td><td>땅볼 비율</td><td>땅볼 타구 비율 — 타구 유형 중 수비 유리</td></tr>
+            <tr><td><strong>FB%</strong></td><td>뜬공 비율</td><td>뜬공 비율 — 피홈런 위험과 직결됨</td></tr>
+            <tr><td><strong>HR/9</strong></td><td>9이닝당 피홈런</td><td>투수의 장타 억제 능력 평가 지표</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<script>
+    const acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            const panel = this.nextElementSibling;
+            panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + "px";
+        });
+    }
+</script>
+<div class="btn-group">
+    <a href="/voca" class="btn neon-btn">📘 카테고리 이동하기</a>
+    <a href="/dugout" class="btn neon-home-btn">🏠 더그아웃 홈으로</a>
+</div>
+
+
+</body>
+</html>

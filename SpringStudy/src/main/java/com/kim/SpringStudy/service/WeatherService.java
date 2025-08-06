@@ -6,10 +6,12 @@ import com.kim.SpringStudy.dto.WeeklyWeatherDTO;
 import com.kim.SpringStudy.util.RegionCodeMapper;
 import com.kim.SpringStudy.util.WeatherTimeUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.*;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
@@ -20,11 +22,10 @@ import java.util.*;
 @RequiredArgsConstructor
 public class WeatherService {
 
-    // ✅ 디코딩하지 않은 원문 키 그대로
-    private final String serviceKey = "/s+rQLB5rUo9hpfs50PP6YRptMJnyTKYVX0RDCBAogExOCk6K4SRoi+eDwvlFKJiaHJ5kNLA6Mf4Fl6dTzzZHA==";
-    String encodedKey = URLEncoder.encode(serviceKey, StandardCharsets.UTF_8);
-    private final RestTemplate restTemplate = new RestTemplate();
     private final ObjectMapper objectMapper = new ObjectMapper();
+
+    // 인증키 (디코딩된 키)
+    private final String rawServiceKey = "ygDZXhJPFrHyakEPJLCrFMaRy9IN6cDU38RWPzBumZaoEhyqBlw5GF5rR9Fe3fk+CYWap4XQ/zt3g14Eb7RXcg==";
 
     public List<WeeklyWeatherDTO> getWeatherForTeam(String teamName) {
         String regId = RegionCodeMapper.REGION_CODE_MAP.getOrDefault(teamName.toUpperCase(), null);
@@ -58,31 +59,62 @@ public class WeatherService {
             dto.setWeatherPm(landItem.path("wf" + i + "Pm").asText(null));
             dto.setMinTemp(tempItem.path("taMin" + i).asInt());
             dto.setMaxTemp(tempItem.path("taMax" + i).asInt());
+
+            // 🌧️ 강수 확률
+            if (i <= 7) {
+                dto.setRainProbAm(landItem.path("rnSt" + i + "Am").asInt());
+                dto.setRainProbPm(landItem.path("rnSt" + i + "Pm").asInt());
+            } else {
+                // 8~10일 후는 오전/오후 구분 없이 하나의 값 제공
+                int rain = landItem.path("rnSt" + i).asInt();
+                dto.setRainProbAm(rain);
+                dto.setRainProbPm(rain);
+            }
             result.add(dto);
         }
+
         return result;
     }
 
     private JsonNode callApi(String type, String regId, String tmFc) {
         try {
-            String url = "https://apis.data.go.kr/1360000/MidFcstInfoService/" + type +
-                    "?serviceKey=" + encodedKey  +
+            String encodedKey = URLEncoder.encode(rawServiceKey, StandardCharsets.UTF_8);
+            String urlStr = "https://apis.data.go.kr/1360000/MidFcstInfoService/" + type +
+                    "?serviceKey=" + encodedKey +
                     "&regId=" + regId +
                     "&tmFc=" + tmFc +
                     "&dataType=JSON";
 
-            System.out.println("🔍 최종 URL: " + url);
+            System.out.println("🔍 최종 URL: " + urlStr);
 
-            HttpHeaders headers = new HttpHeaders();
-            headers.set("User-Agent", "Mozilla/5.0");
-            headers.set("Accept", "application/json");
+            URL url = new URL(urlStr);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setRequestProperty("User-Agent", "Mozilla/5.0");
 
-            HttpEntity<?> entity = new HttpEntity<>(headers);
-            ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+            int responseCode = conn.getResponseCode();
+            System.out.println("✅ 응답 코드: " + responseCode);
 
-            System.out.println("📄 Raw Response:\n" + response.getBody());
+            BufferedReader rd = new BufferedReader(new InputStreamReader(
+                    (responseCode >= 200 && responseCode <= 300) ? conn.getInputStream() : conn.getErrorStream()
+            ));
 
-            return objectMapper.readTree(response.getBody());
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = rd.readLine()) != null) sb.append(line);
+            rd.close();
+            conn.disconnect();
+
+            String body = sb.toString();
+            System.out.println("📄 응답 본문:\n" + body);
+
+            // XML 에러 응답 체크
+            if (body.contains("<OpenAPI_ServiceResponse>")) {
+                System.out.println("❗ XML 응답 감지 → 인증 오류일 수 있음");
+                return null;
+            }
+
+            return objectMapper.readTree(body);
         } catch (Exception e) {
             System.out.println("❗ API 호출 예외 발생 (" + type + "): " + e.getMessage());
             return null;
@@ -91,7 +123,7 @@ public class WeatherService {
 
     private String getDateAfter(int dayOffset) {
         LocalDate date = LocalDate.now().plusDays(dayOffset);
-        String dayOfWeek = date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.KOREAN); // ex. 금
+        String dayOfWeek = date.getDayOfWeek().getDisplayName(TextStyle.SHORT, Locale.KOREAN);
         return date.format(java.time.format.DateTimeFormatter.ofPattern("MM.dd")) + "(" + dayOfWeek + ")";
     }
 }

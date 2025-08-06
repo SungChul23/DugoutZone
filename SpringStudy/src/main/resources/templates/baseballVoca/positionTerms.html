@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>포지션 용어</title>
+    <link rel="stylesheet" href="/vocaAccordion.css">
+    <link rel="icon" type="image/png" href="/dugout.png" />
+</head>
+<body>
+<section class="section-hero">
+    <h1 class="section-title"> 포지션 용어 & 숫자 코드</h1>
+    <p class="section-subtitle">숫자로 구분되는 야구 수비 포지션을 함께 알아봐요</p>
+</section>
+
+
+<section class="accordion-section">
+
+
+    <button class="accordion">야구 수비 포지션</button>
+    <div class="panel">
+        <table>
+            <thead>
+            <tr><th>숫자 코드</th><th>영문 약자</th><th>한글명</th><th>설명</th></tr>
+            </thead>
+            <tbody>
+            <tr><td><strong>1</strong></td><td>P</td><td>투수</td><td>타자에게 공을 던지고 수비를 시작하는 중심 포지션</td></tr>
+            <tr><td><strong>2</strong></td><td>C</td><td>포수</td><td>투수의 공을 받고, 도루 저지 등 경기 운영을 맡음</td></tr>
+            <tr><td><strong>3</strong></td><td>1B</td><td>1루수</td><td>1루 수비 담당, 송구를 많이 받음</td></tr>
+            <tr><td><strong>4</strong></td><td>2B</td><td>2루수</td><td>민첩한 움직임으로 내야 수비의 중심 역할</td></tr>
+            <tr><td><strong>5</strong></td><td>3B</td><td>3루수</td><td>강한 타구에 대비하는 핫코너 수비수</td></tr>
+            <tr><td><strong>6</strong></td><td>SS</td><td>유격수</td><td>내야 중간 수비, 커버 범위가 넓고 활동량 많음</td></tr>
+            <tr><td><strong>7</strong></td><td>LF</td><td>좌익수</td><td>좌측 외야 담당, 주자 보살도 자주 수행</td></tr>
+            <tr><td><strong>8</strong></td><td>CF</td><td>중견수</td><td>가장 넓은 외야를 커버, 빠른 판단력 요구</td></tr>
+            <tr><td><strong>9</strong></td><td>RF</td><td>우익수</td><td>우측 외야, 강한 어깨로 3루 보살도 수행</td></tr>
+            <tr><td><strong>DH</strong></td><td>DH</td><td>지명타자</td><td>수비 없이 타격만 하는 타자</td></tr>
+            </tbody>
+        </table>
+
+        <!-- ✅ 포지션 이미지 삽입 -->
+        <div class="position-img-wrapper">
+            <img src="https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/positionNum.png" alt="야구 포지션 이미지">
+        </div>
+    </div>
+
+    <div class="btn-group">
+        <a href="/voca" class="btn neon-btn">📘 카테고리 이동하기</a>
+        <a href="/dugout" class="btn neon-home-btn">🏠 더그아웃 홈으로</a>
+    </div>
+</section>
+
+<script>
+    const acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            const panel = this.nextElementSibling;
+            panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + "px";
+        });
+    }
+</script>
+
+</body>
+</html>

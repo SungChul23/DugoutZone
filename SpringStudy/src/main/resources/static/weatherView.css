@@ -1,51 +1,314 @@
+/* 기본 설정 */
 body {
-    font-family: 'Poppins', sans-serif;
     background-color: #0f172a;
     color: #e2e8f0;
-    padding: 20px;
+    font-family: 'Poppins', sans-serif;
 }
 
-h1 {
+/* 구단 선택 메인 화면 */
+.weather-select {
+    padding: 2rem;
     text-align: center;
-    color: #38bdf8;
+}
+
+.weather-select h1 {
+    font-size: 2rem;
+    color: #00f0ff;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 8px #00f0ff;
 }
 
 .team-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    justify-content: center;
     list-style: none;
     padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
 }
 
-.team-list li a {
+.team-link {
     display: inline-block;
-    padding: 10px 16px;
-    border: 1px solid #38bdf8;
-    border-radius: 8px;
+    background-color: #1f2937;
+    color: #00f0ff;
     text-decoration: none;
-    color: #38bdf8;
-    transition: 0.2s;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    font-weight: bold;
+    border: 1px solid #00f0ff;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.2);
 }
 
-.team-list li a:hover {
-    background-color: #38bdf8;
-    color: #0f172a;
+.team-link:hover {
+    background-color: #0f172a;
+    color: #8b5cf6;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.6);
 }
 
-table {
+/* 날씨 테이블 뷰 */
+.weather-detail {
+    padding: 2rem;
+    color: #e2e8f0;
+}
+
+.weather-detail h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    color: #00f0ff;
+    text-shadow: 0 0 8px #00f0ff;
+}
+
+.weather-table {
     width: 100%;
-    margin-top: 24px;
     border-collapse: collapse;
+    background-color: #1a202c;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
 }
 
-th, td {
-    padding: 12px;
-    border: 1px solid #334155;
+.weather-table th, .weather-table td {
+    border: 1px solid #2d3748;
+    padding: 0.8rem;
     text-align: center;
 }
 
-thead {
-    background-color: #1e293b;
+.weather-table th {
+    background-color: #2d3748;
+    color: #63b3ed;
 }
+
+.weather-table td {
+    background-color: #1a202c;
+    color: #f7fafc;
+}
+
+.weather-table tr:hover td {
+    background-color: #2a2e3a;
+}
+
+/* 다른 구장 보러가기 버튼 */
+.other-teams-nav {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.main-btn {
+    display: inline-block;
+    background-color: #1e293b;
+    color: #00f0ff;
+    padding: 0.8rem 1.6rem;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 2px solid #00f0ff;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.3);
+}
+
+.main-btn:hover {
+    background-color: #0f172a;
+    color: #8b5cf6;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.5);
+}
+body {
+    background-color: #0f172a;
+    color: #e2e8f0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.weather-select {
+    padding: 2rem;
+    text-align: center;
+}
+
+.weather-select h1 {
+    font-size: 2rem;
+    color: #00f0ff;
+    margin-bottom: 2rem;
+    text-shadow: 0 0 8px #00f0ff;
+}
+
+.team-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+
+
+.team-link:hover {
+    background-color: #0f172a;
+    color: #8b5cf6;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 15px rgba(139, 92, 246, 0.6);
+}
+.weather-select {
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+.weather-select h1 {
+    font-size: 2.5rem;
+    color: #00f0ff;
+    margin-bottom: 2.5rem;
+    text-shadow: 0 0 12px #00f0ff;
+    font-weight: 700;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.team-card {
+    display: block;
+    background-color: #1e293b;
+    color: #00f0ff;
+    text-decoration: none;
+    padding: 1.2rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: 1px solid #00f0ff;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+    transition: all 0.3s ease;
+    text-align: center;
+    backdrop-filter: blur(4px);
+}
+
+.team-card:hover {
+    transform: translateY(-4px);
+    background-color: #0f172a;
+    color: #8b5cf6;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+.weather-select {
+    padding: 3rem 1rem;
+    text-align: center;
+}
+
+.weather-select h1 {
+    font-size: 2.5rem;
+    color: #00f0ff;
+    margin-bottom: 2.5rem;
+    text-shadow: 0 0 12px #00f0ff;
+    font-weight: 700;
+}
+
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+.team-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #1e2937;
+    color: #00f0ff;
+    text-decoration: none;
+    padding: 1.2rem;
+    border-radius: 12px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    border: 1px solid #00f0ff;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.15);
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.team-card:hover {
+    transform: translateY(-4px);
+    background-color: #0f172a;
+    color: #8b5cf6;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+}
+
+.team-logo {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+    background-color: #fff;
+    border-radius: 50%;
+    padding: 6px;
+}
+
+/* 홈으로 돌아가기 버튼 */
+.back-home-section {
+    text-align: center;
+    margin: 3rem 0 2rem 0;
+}
+
+.neon-home-btn {
+    background-color: #1e293b;
+    color: #00f0ff;
+    padding: 0.75rem 1.5rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    border: 2px solid #00f0ff;
+    transition: 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+}
+
+.neon-home-btn:hover {
+    color: #8b5cf6;
+    border-color: #8b5cf6;
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+}
+/* 안내 문구 */
+.weather-disclaimer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #94a3b8;
+    margin-top: 2rem;
+    padding: 0 1rem;
+}
+
+/* 하단 푸터 */
+footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #94a3b8;
+    padding-bottom: 2rem;
+    margin-top: 2rem;
+}
+/* 상단 소개 영역 */
+.hero {
+    text-align: center;
+    margin-top: 3rem;
+    margin-bottom: 2rem;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    color: #00f0ff;
+    text-shadow: 0 0 10px #00f0ff;
+    margin-bottom: 0.5rem;
+}
+
+.hero p {
+    color: #a5b4fc;
+    font-size: 1.1rem;
+}
+

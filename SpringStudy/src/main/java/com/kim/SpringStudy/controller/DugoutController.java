@@ -39,8 +39,6 @@ public class DugoutController {
     private final GameDateService gameDateService;
     private final WeatherService weatherService;
 
-
-
     //더그 아웃 입장
     @GetMapping("/dugout")
     public String Dugout() {
@@ -74,6 +72,7 @@ public class DugoutController {
         return "teamRank";
     }
 
+    //팀별 순위 시간선
     @GetMapping("/kbo/rank-timeline")
     @ResponseBody
     public Map<String, Map<String, Integer>> getRankTimeline() {
@@ -110,6 +109,7 @@ public class DugoutController {
         model.addAttribute("team", team); // Thymeleaf에서 JS로 넘겨줄 값
         return "newsView"; // → templates/newsView.html
     }
+
     //구단 별 뉴스
     @GetMapping("/news/{team}")
     @ResponseBody
@@ -183,6 +183,7 @@ public class DugoutController {
 
         return "teams/playerView";
     }
+
     // KBO 2025시즌 일정
     @GetMapping("/gamedate")
     public String test(@RequestParam(required = false) String date, Model model) {
@@ -210,17 +211,19 @@ public class DugoutController {
         model.addAttribute("teamLogoMap", teamLogoMap);
         return "scheduleView";
     }
+
     //구단 별 날씨 보기
     @GetMapping("/weather")
-    public String showWeatherPage(){
+    public String showWeatherPage() {
         return "weatherView";
     }
+
     @GetMapping("/weather/{teamName}")
-    public String showTeamWeather(@PathVariable String teamName, Model model){
+    public String showTeamWeather(@PathVariable String teamName, Model model) {
         // 한글 or 영문 → DB/API용 이름 변환
         String dbTeamName = TeamNameMapper.toDbTeamName(teamName);
-        if(dbTeamName == null){
-            throw  new IllegalArgumentException("지원하지 않은 팀명 :" + teamName);
+        if (dbTeamName == null) {
+            throw new IllegalArgumentException("지원하지 않은 팀명 :" + teamName);
         }
 
         System.out.println("선택한 구단 : " + teamName);
@@ -239,5 +242,34 @@ public class DugoutController {
         return "weatherDetail";
     }
 
+    @GetMapping("/voca")
+    public String showVoca() {
+        return "baseballVoca/voca";
+    }
+
+    @GetMapping("/voca/pitcher")
+    public String showPicther() {
+        return "baseballVoca/pitcherStats";
+    }
+
+    @GetMapping("/voca/batter")
+    public String showBatter() {
+        return "baseballVoca/batterStats";
+    }
+
+    @GetMapping("/voca/game")
+    public String showGame() {
+        return "baseballVoca/gameSituations";
+    }
+
+    @GetMapping("/voca/position")
+    public String showPosition() {
+        return "baseballVoca/positionTerms";
+    }
+
+    @GetMapping("/voca/extra")
+    public String showGam() {
+        return "baseballVoca/extraTerms";
+    }
 
 }

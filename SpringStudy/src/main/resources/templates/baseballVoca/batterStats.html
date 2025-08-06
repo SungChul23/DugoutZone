@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>타자 기록 용어</title>
+    <link rel="stylesheet" href="/vocaAccordion.css">
+    <link rel="icon" type="image/png" href="/dugout.png" />
+</head>
+<body>
+
+<section class="section-hero">
+    <h1 class="section-title">타자 기록 용어 정리</h1>
+    <p class="section-subtitle">타자의 능력을 나타내는 기본 & 심화 기록을 배워보세요</p>
+</section>
+
+
+<section class="accordion-section">
+
+    <!-- 기본 타자 기록 -->
+    <button class="accordion">기본 타자 기록</button>
+    <div class="panel">
+        <table>
+            <thead>
+            <tr><th>약어</th><th>한글명</th><th>설명</th></tr>
+            </thead>
+            <tbody>
+            <tr><td><strong>AVG</strong></td><td>타율</td><td>안타 ÷ 타수 — 0.300 이상이면 우수</td></tr>
+            <tr><td><strong>H</strong></td><td>안타</td><td>타자가 타격으로 1루 이상 진루</td></tr>
+            <tr><td><strong>HR</strong></td><td>홈런</td><td>담장을 넘기는 타구 — 주자 모두 득점</td></tr>
+            <tr><td><strong>RBI</strong></td><td>타점</td><td>타격으로 주자가 홈을 밟은 수</td></tr>
+            <tr><td><strong>R</strong></td><td>득점</td><td>타자가 직접 홈을 밟아 얻은 점수</td></tr>
+            <tr><td><strong>SB</strong></td><td>도루</td><td>투수의 틈을 타 다음 루로 이동</td></tr>
+            <tr><td><strong>BB</strong></td><td>볼넷</td><td>4볼로 1루 출루</td></tr>
+            <tr><td><strong>SO</strong></td><td>삼진</td><td>타자가 스트라이크 아웃 당한 경우</td></tr>
+            <tr><td><strong>GIDP</strong></td><td>병살타</td><td>타구로 인해 2명의 주자가 동시에 아웃</td></tr>
+            <tr><td><strong>OBP</strong></td><td>출루율</td><td>(안타+볼넷+사구) ÷ (타수+볼넷+사구+희생플라이)</td></tr>
+            <tr><td><strong>SLG</strong></td><td>장타율</td><td>총 루타 ÷ 타수 — 파워를 보여주는 지표</td></tr>
+            <tr><td><strong>OPS</strong></td><td>종합 공격력</td><td>출루율 + 장타율 — 공격력 종합 지표</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 심화 타자 지표 -->
+    <button class="accordion">심화 타자 지표</button>
+    <div class="panel">
+        <table>
+            <thead>
+            <tr><th>약어</th><th>한글명</th><th>설명</th></tr>
+            </thead>
+            <tbody>
+            <tr><td><strong>OPS+</strong></td><td>리그 대비 OPS</td><td>OPS를 리그 및 구장 보정한 지표 (100 기준)</td></tr>
+            <tr><td><strong>wOBA</strong></td><td>가중 출루율</td><td>출루마다 다른 가중치를 적용한 정확한 공격 지표</td></tr>
+            <tr><td><strong>wRC+</strong></td><td>가중 득점 창출력</td><td>리그 평균 대비 득점 기여도 (100 기준)</td></tr>
+            <tr><td><strong>ISO</strong></td><td>순수 장타력</td><td>SLG - AVG — 장타력만 분리한 파워 지표</td></tr>
+            <tr><td><strong>BABIP</strong></td><td>인플레이 타구 타율</td><td>홈런/볼넷/삼진 제외 안타율 — 운 영향도 있음</td></tr>
+            <tr><td><strong>BB%</strong></td><td>볼넷 비율</td><td>타석 중 볼넷 비율 — 선구안 지표</td></tr>
+            <tr><td><strong>K%</strong></td><td>삼진 비율</td><td>타석 중 삼진 비율 — 콘택트 능력 지표</td></tr>
+            <tr><td><strong>P/PA</strong></td><td>타석당 투구 수</td><td>끈질긴 타석, 투수 공 소비 능력 지표</td></tr>
+            <tr><td><strong>XBH</strong></td><td>장타 수</td><td>2루타 + 3루타 + 홈런의 합</td></tr>
+            <tr><td><strong>RE24</strong></td><td>기대득점 기여</td><td>타자의 상황별 득점 기여도 — 고급 분석 지표</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>
+
+<script>
+    const acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            const panel = this.nextElementSibling;
+            panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + "px";
+        });
+    }
+</script>
+<div class="btn-group">
+    <a href="/voca" class="btn neon-btn">📘 카테고리 이동하기</a>
+    <a href="/dugout" class="btn neon-home-btn">🏠 더그아웃 홈으로</a>
+</div>
+
+
+</body>
+</html>

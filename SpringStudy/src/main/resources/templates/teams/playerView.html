@@ -49,7 +49,11 @@
 
 
 <section class="section">
-    <h2 th:text="${position} + ' 명단'">선수 명단</h2>
+    <!-- 검색이 아닐 경우에만 포지션 명단 표시 -->
+    <h2 th:if="${keyword == null or keyword.isEmpty()}" th:text="${position} + ' 명단'">선수 명단</h2>
+    <!-- 검색어가 있는 경우에는 '검색 결과'로 표시 -->
+    <h2 th:if="${keyword != null and !keyword.isEmpty()}" th:text="'검색 결과: ' + ${keyword}">검색 결과</h2>
+
     <div class="player-list">
         <div th:each="player : ${players}" class="player-card">
             <!!img th:src="${player.imageUrl}" alt="선수 사진" class="player-img" />
@@ -63,6 +67,7 @@
         </div>
     </div>
 </section>
+
 
 <div class="back-home-section">
     <a href="/dugout" class="btn neon-home-btn">🏠 더그아웃으로 가기</a>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>경기 상황 및 용어</title>
+    <link rel="stylesheet" href="/vocaAccordion.css">
+    <link rel="icon" type="image/png" href="/dugout.png" />
+</head>
+<body>
+<section class="section-hero">
+    <h1 class="section-title"> 경기 상황 & 일반 야구 용어</h1>
+    <p class="section-subtitle">경기 중 자주 등장하는 상황과 플레이 용어들을 정리했어요</p>
+</section>
+
+
+<section class="accordion-section">
+
+
+    <button class="accordion">경기 중 자주 쓰이는 표현</button>
+    <div class="panel">
+        <table>
+            <thead>
+            <tr><th>용어</th><th>설명</th></tr>
+            </thead>
+            <tbody>
+            <tr><td><strong>루킹 삼진</strong></td><td>스트라이크존 공을 휘두르지 않고 바라보다가 삼진</td></tr>
+            <tr><td><strong>헛스윙 삼진</strong></td><td>스트라이크존 공에 방망이를 휘둘렀지만 맞추지 못한 삼진</td></tr>
+            <tr><td><strong>번트</strong></td><td>방망이를 대서 공을 짧게 굴리는 기술, 희생전술로 자주 사용</td></tr>
+            <tr><td><strong>희생 플라이</strong></td><td>외야로 공을 띄워 주자가 태그업 후 홈을 밟게 유도</td></tr>
+            <tr><td><strong>사구</strong></td><td>투수가 던진 공이 타자의 몸에 맞은 경우 — 자동 출루</td></tr>
+            <tr><td><strong>내야안타</strong></td><td>내야에 떨어진 공을 타자가 빠르게 달려 1루 세이프</td></tr>
+            <tr><td><strong>외야안타</strong></td><td>외야에 공을 날려 안타가 된 경우</td></tr>
+            <tr><td><strong>주루사</strong></td><td>주자가 진루 시도 중 아웃</td></tr>
+            <tr><td><strong>견제사</strong></td><td>투수가 주자를 견제하다가 아웃시킴</td></tr>
+            <tr><td><strong>병살</strong></td><td>한 타구로 두 명의 주자가 아웃되는 플레이 (GIDP)</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="btn-group">
+        <a href="/voca" class="btn neon-btn">📘 카테고리 이동하기</a>
+        <a href="/dugout" class="btn neon-home-btn">🏠 더그아웃 홈으로</a>
+    </div>
+</section>
+
+<script>
+    const acc = document.getElementsByClassName("accordion");
+    for (let i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function () {
+            this.classList.toggle("active");
+            const panel = this.nextElementSibling;
+            panel.style.maxHeight = panel.style.maxHeight ? null : panel.scrollHeight + "px";
+        });
+    }
+</script>
+
+</body>
+</html>

@@ -9,33 +9,52 @@
 <body>
 
 <section class="weather-detail">
-    <h1 th:text="${team} + ' 구장 7일간 날씨 예보'">두산 구장 날씨 예보</h1>
+    <h1 th:text="${team} + ' 구장 6일간 날씨 예보'">LG 구장 6일간 날씨 예보</h1>
 
-    <table>
+    <table class="weather-table">
         <thead>
         <tr>
-            <th>날짜</th>
-            <th>오전</th>
-            <th>오후</th>
-            <th>최저기온</th>
-            <th>최고기온</th>
+            <th>항목</th>
+            <th th:each="w : ${weatherList}" th:text="${w.date}">8월 5일</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="day : ${weatherList}">
-            <td th:text="${day.date}"></td>
-            <td th:text="${day.weatherAm}"></td>
-            <td th:text="${day.weatherPm}"></td>
-            <td th:text="${day.minTemp} + '℃'"></td>
-            <td th:text="${day.maxTemp} + '℃'"></td>
+        <tr>
+            <td>요일</td>
+            <td th:each="w : ${weatherList}" th:text="${w.day + '일차'}">1일차</td>
+        </tr>
+        <tr>
+            <td>최고기온</td>
+            <td th:each="w : ${weatherList}" th:text="${w.maxTemp + '℃'}">33℃</td>
+        </tr>
+        <tr>
+            <td>최저기온</td>
+            <td th:each="w : ${weatherList}" th:text="${w.minTemp + '℃'}">25℃</td>
+        </tr>
+        <tr>
+            <td>오전 날씨</td>
+            <td th:each="w : ${weatherList}" th:text="${w.weatherAm}">맑음</td>
+        </tr>
+        <tr>
+            <td>오전 강수확률</td>
+            <td th:each="w : ${weatherList}" th:text="${w.rainProbAm + '%'}">10%</td>
+        </tr>
+        <tr>
+            <td>오후 날씨</td>
+            <td th:each="w : ${weatherList}" th:text="${w.weatherPm}">흐림</td>
+        </tr>
+        <tr>
+            <td>오후 강수확률</td>
+            <td th:each="w : ${weatherList}" th:text="${w.rainProbPm + '%'}">20%</td>
         </tr>
         </tbody>
     </table>
-
-    <div style="margin-top: 20px;">
-        <a href="/weather">← 다른 구단 보기</a>
-    </div>
 </section>
+<div class="other-teams-nav">
+    <a href="/weather" class="main-btn">🏟️ 다른 구장 보러가기</a>
+</div>
+
+
 
 </body>
 </html>

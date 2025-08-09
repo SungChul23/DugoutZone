@@ -19,7 +19,7 @@
     <div class="team-hero-content">
         <div class="team-hero-info">
             <h1 th:text="${teamName.toUpperCase()} + ' 선수단'">SSG 선수단</h1>
-            <p class="team-slogan">NO LIMITS AMAZING LANDERS</p>
+            <p class="team-slogan" th:text="${teamSlogan}">TEAM SLOGAN<</p>
         </div>
         <div class="team-hero-logo">
             <img th:src="@{'https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/' + ${teamName.toLowerCase()} + '.png'}"

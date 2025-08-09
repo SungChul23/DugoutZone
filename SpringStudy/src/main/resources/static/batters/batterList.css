@@ -1,0 +1,46 @@
+/* 필터바 */
+.filter-row{ display:flex; gap:12px; align-items:end; flex-wrap:wrap; }
+.filter-item{ display:flex; flex-direction:column; gap:6px; min-width:140px; }
+.filter-item.grow{ flex:1; }
+.filter-bar select, .filter-bar input{
+    background:#121a33; color:#e2e8f0; border:1px solid #2a3555; border-radius:10px; padding:8px 10px;
+}
+.search-button{ background:transparent; border:1px solid var(--team-color); color:var(--text); }
+.search-button:hover{ box-shadow:0 0 12px var(--team-color); }
+
+/* 뷰 네비 */
+.view-nav{ display:flex; align-items:center; justify-content:center; gap:12px; margin:8px 0 14px; }
+.nav-btn{ background:#121a33; border:1px solid #2a3555; color:#e2e8f0; padding:6px 10px; border-radius:10px; cursor:pointer; }
+.dots .dot{ width:10px; height:10px; border-radius:50%; display:inline-block; background:#1f2a47; }
+.dots .dot.active{ background:var(--team-color); box-shadow:0 0 10px var(--team-color); }
+
+/* 테이블 */
+.table-wrap{ margin-top:10px; }
+.table-scroll{ overflow:auto; border:1px solid #1e2a44; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.35); }
+.stats-table{ width:100%; border-collapse:collapse; min-width:1100px; }
+.stats-table thead th{ background:#0f1830; position:relative; }
+.stats-table th, .stats-table td{ padding:10px 12px; border-bottom:1px solid #1b2440; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.stats-table tbody tr:hover{ background:#0f1833; }
+
+/* sticky 3컬럼 */
+.sticky{ position:sticky; left:0; background:#0f1830; z-index:2; }
+.sticky-col:nth-child(1){ left:0; }
+.sticky-col:nth-child(2){ left:70px; }  /* 순위 셀 너비에 맞춰 조정 */
+.sticky-col:nth-child(3){ left:220px; } /* 이름 셀 너비에 맞춰 조정 */
+.stats-table thead th.sticky:nth-child(2){ left:70px; }
+.stats-table thead th.sticky:nth-child(3){ left:220px; }
+
+.sort-caret{ margin-left:6px; opacity:.8; }
+
+/* 툴팁 */
+.th-tip{ position:relative; cursor:help; border-bottom:1px dotted var(--team-color-2); }
+.tip-box{
+    position:absolute; left:0; bottom:120%;
+    opacity:0; pointer-events:none; transform:translateY(4px);
+    background:#0b1020; color:#e2e8f0; border:1px solid #2a3555; border-radius:10px;
+    padding:8px 10px; font-size:12px; width:max-content; max-width:280px;
+    box-shadow:0 10px 30px rgba(0,0,0,.45); transition:all .12s ease;
+}
+.th-tip:hover .tip-box{ opacity:1; transform:translateY(0); }
+
+.legend{ margin:12px 4px; color:#94a3b8; font-size:13px; }

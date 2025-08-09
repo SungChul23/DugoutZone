@@ -1,0 +1,127 @@
+:root{
+    --bg:#0f172a;
+    --text:#e2e8f0;
+    --muted:#94a3b8;
+
+    /* 팀 공통 변수(팀별로 오버라이드) */
+    --team-color:#00f0ff;
+    --team-color-2:#8b5cf6;
+    --team-grad: linear-gradient(135deg, var(--team-color), var(--team-color-2));
+    --team-logo:none;
+    --logo-opacity:0.15;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', 'Noto Sans KR', sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+/* ===== 팀별 변수 오버라이드 ===== */
+body[data-team="ssg"]{ --team-color:#B40000; --team-color-2:#C8102E; --team-grad:linear-gradient(135deg,#B40000,#C8102E);
+    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/ssg.png"); }
+body[data-team="lg"]{ --team-color:#C60C30; --team-color-2:#0A0A0A;
+    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/lg.png"); }
+body[data-team="hanwha"]{ --team-color:#FF6A00; --team-color-2:#111;
+    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/hanwha.png"); }
+body[data-team="lotte"]{ --team-color:#002F6C; --team-color-2:#C41E3A;
+    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/lotte.png"); }
+body[data-team="kia"]{ --team-color:#C3042C; --team-color-2:#111;
+    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/kia.png"); }
+body[data-team="kt"]{ --team-color:#000; --team-color-2:#D6002F;
+    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/kt.png"); }
+body[data-team="samsung"]{ --team-color:#0F4CFF; --team-color-2:#1F8FFF;
+    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/samsung.png"); }
+body[data-team="nc"]{ --team-color:#002B5B; --team-color-2:#0077B6;
+    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/nc.png"); }
+body[data-team="doosan"]{ --team-color:#0A122A; --team-color-2:#DA1212;
+    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/doosan.png"); }
+body[data-team="kiwoom"]{ --team-color:#6C1D45; --team-color-2:#9B1B30;
+    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/kiwoom.png"); }
+
+/* ===== 배너 ===== */
+.team-hero {
+    padding: 60px 30px;
+    border-radius: 0 0 30px 30px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    position: relative;
+    background: var(--team-grad);
+    overflow:hidden;
+}
+.team-hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image: var(--team-logo);
+    background-repeat:no-repeat;
+    background-position: right 6% center;
+    background-size: min(34vw, 360px);
+    opacity: var(--logo-opacity);
+    pointer-events:none;
+}
+.team-hero-content {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+.team-hero-info h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+}
+.slogan.team-slogan {
+    font-size: 1.5rem;
+    font-style: italic;
+    font-weight: 600;
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255,255,255,0.8);
+    margin-top: 10px;
+    animation: sloganFade 1.4s ease-in-out forwards;
+    opacity: 0;
+}
+@keyframes sloganFade {
+    from { transform: translateY(10px); opacity: 0; }
+    to   { transform: translateY(0); opacity: 1; }
+}
+.team-hero-logo { width:200px; height:120px; }
+
+/* 공통 섹션/버튼 */
+.section { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+.btn { padding: 12px 20px; border-radius: 10px; font-weight: 700; text-decoration: none;
+    color: var(--text); background: transparent; border:1px solid var(--team-color); transition:.2s; }
+.btn:hover { transform: translateY(-1px); box-shadow:0 0 12px var(--team-color); }
+.back-home-section { text-align:center; margin: 40px 0 20px; }
+.neon-home-btn { background-color: var(--team-color); color:#0f172a; box-shadow:0 0 12px rgba(0,240,255,.4); }
+.neon-home-btn:hover { background-color: var(--team-color-2); color:#fff; box-shadow:0 0 18px rgba(139,92,246,.6); }
+footer { text-align:center; padding: 40px 0; font-size:.9rem; color: var(--muted); }
+
+
+.th-tip {
+    position: relative;
+    cursor: pointer;
+}
+
+.tip-box {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    bottom: 100%; /* 위쪽 표시 */
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.8);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    font-size: 12px;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    z-index: 10;
+    margin-bottom: 5px;
+}
+

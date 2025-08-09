@@ -1,6 +1,7 @@
 package com.kim.SpringStudy.controller;
 
 
+import com.kim.SpringStudy.domain.BatterStats;
 import com.kim.SpringStudy.domain.KBO;
 import com.kim.SpringStudy.domain.KBOTeam;
 import com.kim.SpringStudy.domain.KBOplayerInfo;
@@ -9,12 +10,10 @@ import com.kim.SpringStudy.dto.WeeklyWeatherDTO;
 import com.kim.SpringStudy.repository.KBORepository;
 import com.kim.SpringStudy.repository.KBOTeamRepository;
 import com.kim.SpringStudy.repository.KBOplayerInfoRepository;
-import com.kim.SpringStudy.service.GameDateService;
-import com.kim.SpringStudy.service.KBOService;
-import com.kim.SpringStudy.service.TeamNewsService;
+import com.kim.SpringStudy.service.*;
 import com.kim.SpringStudy.dto.NewsDTO;
-import com.kim.SpringStudy.service.WeatherService;
 import com.kim.SpringStudy.util.TeamNameMapper;
+import com.kim.SpringStudy.util.TeamSloganUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
@@ -38,6 +37,7 @@ public class DugoutController {
     private final KBOplayerInfoRepository kbOplayerInfoRepository;
     private final GameDateService gameDateService;
     private final WeatherService weatherService;
+    private final BatterService batterService;
 
     //더그 아웃 입장
     @GetMapping("/dugout")
@@ -170,6 +170,7 @@ public class DugoutController {
 
         List<KBOplayerInfo> result;
 
+
         if (keyword != null && !keyword.isBlank()) {
             result = kbOplayerInfoRepository.findByTeamAndNameKrContaining(dbTeamName, keyword);
         } else {
@@ -180,6 +181,7 @@ public class DugoutController {
         model.addAttribute("teamName", teamName); // ← URL용 원본
         model.addAttribute("position", position);
         model.addAttribute("keyword", keyword);
+        model.addAttribute("teamSlogan", TeamSloganUtil.getSlogan(teamName));// 팀슬로건
 
         return "teams/playerView";
     }
@@ -270,6 +272,44 @@ public class DugoutController {
     @GetMapping("/voca/extra")
     public String showGam() {
         return "baseballVoca/extraTerms";
+    }
+
+    //각 팀 마다 타자 기록 보여주기
+    //team 이름으로 경로 찾고 타율을 기본값으로. 내림차순으로 기본값으로. "" -> 전체 표시
+    @GetMapping("/team/{team}/batter")
+    public String teamBatters(@PathVariable String team,
+                              @RequestParam(defaultValue = "1") int view,
+                              @RequestParam(defaultValue = "avg") String sort,   // 기본: 타율
+                              @RequestParam(defaultValue = "desc") String order, // 기본: 내림차순
+                              @RequestParam(defaultValue = "") String q,
+                              Model model){
+
+        //css 전달용 (팀마다 전용 css)
+        String teamCode = TeamNameMapper.toViewFolder(team);
+
+        String dbTeamName = TeamNameMapper.toDbTeamName(team);
+
+        String teamName = dbTeamName;
+
+        //슬로건 (유틸이 내부에서 대문자 키로 처리)
+
+
+        //db 팀 조회
+        List<BatterStats> rows = batterService.listByTeam(dbTeamName,q,sort,order);
+        // 뷰 전송
+        model.addAttribute("teamCode", teamCode);     // CSS/테마용: <body data-team="${teamCode}">
+        model.addAttribute("teamName", teamName);     // 페이지 타이틀/배너용
+        model.addAttribute("teamSlogan", TeamSloganUtil.getSlogan(team));// 팀슬로건 // 배너 슬로건
+
+        model.addAttribute("batters", rows);
+
+        // 상단 폼 유지값
+        model.addAttribute("view", view);
+        model.addAttribute("sort", sort);
+        model.addAttribute("order", order);
+        model.addAttribute("q", q);
+
+        return "teams/batterList";
     }
 
 }

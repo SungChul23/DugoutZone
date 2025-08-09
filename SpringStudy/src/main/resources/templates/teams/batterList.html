@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title th:text="${teamName} + ' 타자 기록'">타자 기록</title>
+
+    <link rel="stylesheet" href="/batters/base-batterlist.css"/>
+    <link rel="stylesheet" href="/batters/batterList.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet"/>
+    <link rel="icon" type="image/png" href="/dugout.png"/>
+</head>
+
+<body class="stats-body" th:attr="data-team=${teamCode}">
+<!-- 팀 배너 -->
+<section class="team-hero">
+    <div class="team-hero-content">
+        <div class="team-hero-info">
+            <h1 th:text="${teamName} + ' 타자 기록'">SSG 타자 기록</h1>
+            <p class="slogan team-slogan" th:text="${teamSlogan}">NO LIMITS AMAZING LANDERS</p>
+        </div>
+        <div class="team-hero-logo" aria-hidden="true"></div>
+    </div>
+</section>
+
+<!-- 상단: 정렬/검색 -->
+<section class="section">
+    <form method="get" class="search-form filter-bar">
+        <input type="hidden" name="view" th:value="${view}"/>
+        <div class="filter-row">
+            <div class="filter-item">
+                <label>정렬</label>
+                <select name="sort" th:value="${sort}">
+                    <option value="ops">OPS</option>
+                    <option value="avg">AVG</option>
+                    <option value="obp">OBP</option>
+                    <option value="slg">SLG</option>
+                    <option value="hr">HR</option>
+                    <option value="rbi">RBI</option>
+                    <option value="r">R</option>
+                    <option value="h">H</option>
+                    <option value="bb">BB</option>
+                    <option value="so">SO</option>
+                    <option value="ibb">IBB</option>
+                    <option value="mh">MH</option>
+                    <option value="risp">RISP</option>
+                    <option value="nameKr">이름</option>
+                </select>
+            </div>
+            <div class="filter-item">
+                <label>순서</label>
+                <select name="order" th:value="${order}">
+                    <option value="desc">내림차순</option>
+                    <option value="asc">오름차순</option>
+                </select>
+            </div>
+            <div class="filter-item grow">
+                <label>검색</label>
+                <input class="search-input" type="text" name="q" placeholder="선수명" th:value="${q}"/>
+            </div>
+            <button class="btn search-button">적용</button>
+        </div>
+    </form>
+</section>
+
+<!-- 뷰 네비 + 테이블 -->
+<section class="table-wrap section">
+    <div class="view-nav">
+        <button class="nav-btn" id="prevView" aria-label="이전 뷰">←</button>
+        <div class="dots">
+            <span class="dot" data-view="1"></span>
+            <span class="dot" data-view="2"></span>
+        </div>
+        <button class="nav-btn" id="nextView" aria-label="다음 뷰">→</button>
+    </div>
+
+    <div class="table-scroll">
+        <table class="stats-table" id="statsTable">
+            <thead>
+            <tr>
+                <!-- sticky 2개 -->
+                <th class="sticky stat-header" data-stat="rank">순위</th>
+                <th class="sticky stat-header" data-stat="nameKr">선수명</th>
+                <!-- 뷰 1 -->
+                <th class="stat-header group-1 th-tip" data-stat="avg">AVG <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-1 th-tip" data-stat="g">G <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-1 th-tip" data-stat="pa">PA <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-1 th-tip" data-stat="ab">AB <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-1 th-tip" data-stat="r">R <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-1 th-tip" data-stat="h">H <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-1 th-tip" data-stat="2B">2B <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-1 th-tip" data-stat="3B">3B <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-1 th-tip" data-stat="hr">HR <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-1 th-tip" data-stat="tb">TB <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-1 th-tip" data-stat="rbi">RBI <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-1 th-tip" data-stat="sac">SAC <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-1 th-tip" data-stat="sf">SF <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <!-- 뷰 2 -->
+                <th class="stat-header group-2 th-tip" data-stat="bb">BB <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-2 th-tip" data-stat="ibb">IBB <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-2 th-tip" data-stat="hbp">HBP <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-2 th-tip" data-stat="so">SO <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-2 th-tip" data-stat="gdp">GDP <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-2 th-tip" data-stat="slg">SLG <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-2 th-tip" data-stat="obp">OBP <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-2 th-tip" data-stat="ops">OPS <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-2 th-tip" data-stat="mh">MH <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-2 th-tip" data-stat="risp">RISP <span class="tip-box"></span><span class="sort-caret"></span></th>
+                <th class="stat-header group-2 th-tip" data-stat="ph-Ba">PH-BA <span class="tip-box"></span><span class="sort-caret"></span></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="b, stat : ${batters}">
+                <!-- sticky -->
+                <td class="sticky-col" data-stat="rank" th:text="${stat.index + 1}" th:attr="data-value=${stat.index + 1}">1</td>
+                <td class="sticky-col" data-stat="nameKr" th:text="${b.player.nameKr}" th:attr="data-value=${b.player.nameKr}">홍길동</td>
+                <!-- 뷰 1 -->
+                <td class="group-1" data-stat="avg" th:attr="data-value=${b.avg}" th:text="${#numbers.formatDecimal(b.avg,1,3)}">.275</td>
+                <td class="group-1" data-stat="g" th:attr="data-value=${b.g}" th:text="${b.g}">100</td>
+                <td class="group-1" data-stat="pa" th:attr="data-value=${b.pa}" th:text="${b.pa}">450</td>
+                <td class="group-1" data-stat="ab" th:attr="data-value=${b.ab}" th:text="${b.ab}">380</td>
+                <td class="group-1" data-stat="r" th:attr="data-value=${b.r}" th:text="${b.r}">60</td>
+                <td class="group-1" data-stat="h" th:attr="data-value=${b.h}" th:text="${b.h}">110</td>
+                <td class="group-1" data-stat="2B" th:attr="data-value=${b.twoB}" th:text="${b.twoB}">20</td>
+                <td class="group-1" data-stat="3B" th:attr="data-value=${b.threeB}" th:text="${b.threeB}">2</td>
+                <td class="group-1" data-stat="hr" th:attr="data-value=${b.hr}" th:text="${b.hr}">12</td>
+                <td class="group-1" data-stat="tb" th:attr="data-value=${b.tb}" th:text="${b.tb}">160</td>
+                <td class="group-1" data-stat="rbi" th:attr="data-value=${b.rbi}" th:text="${b.rbi}">55</td>
+                <td class="group-1" data-stat="sac" th:attr="data-value=${b.sac}" th:text="${b.sac}">3</td>
+                <td class="group-1" data-stat="sf" th:attr="data-value=${b.sf}" th:text="${b.sf}">4</td>
+                <!-- 뷰 2 -->
+                <td class="group-2" data-stat="bb" th:attr="data-value=${b.bb}" th:text="${b.bb}">40</td>
+                <td class="group-2" data-stat="ibb" th:attr="data-value=${b.ibb}" th:text="${b.ibb}">2</td>
+                <td class="group-2" data-stat="hbp" th:attr="data-value=${b.hbp}" th:text="${b.hbp}">5</td>
+                <td class="group-2" data-stat="so" th:attr="data-value=${b.so}" th:text="${b.so}">70</td>
+                <td class="group-2" data-stat="gdp" th:attr="data-value=${b.gdp}" th:text="${b.gdp}">8</td>
+                <td class="group-2" data-stat="slg" th:attr="data-value=${b.slg}" th:text="${#numbers.formatDecimal(b.slg,1,3)}">.420</td>
+                <td class="group-2" data-stat="obp" th:attr="data-value=${b.obp}" th:text="${#numbers.formatDecimal(b.obp,1,3)}">.345</td>
+                <td class="group-2" data-stat="ops" th:attr="data-value=${b.ops}" th:text="${#numbers.formatDecimal(b.ops,1,3)}">.765</td>
+                <td class="group-2" data-stat="mh" th:attr="data-value=${b.mh}" th:text="${b.mh}">15</td>
+                <td class="group-2" data-stat="risp" th:attr="data-value=${b.risp}" th:text="${#numbers.formatDecimal(b.risp,1,3)}">.310</td>
+                <td class="group-2" data-stat="PH-BA" th:attr="data-value=${b.phBa}" th:text="${#numbers.formatDecimal(b.phBa,1,3)}">.280</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="legend">
+        <span class="legend-item">컬럼명을 클릭하면 정렬됩니다.</span>
+    </div>
+</section>
+
+<div class="back-home-section">
+    <a href="/dugout" class="btn neon-home-btn">🏠 더그아웃으로 가기</a>
+</div>
+
+<script src="/batters/batter-table.js"></script>
+</body>
+</html>

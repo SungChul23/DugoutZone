@@ -3,6 +3,7 @@ package com.kim.SpringStudy.repository;
 import com.kim.SpringStudy.domain.KBOplayerInfo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,11 @@ public interface KBOplayerInfoRepository extends JpaRepository<KBOplayerInfo,Lon
 
     // 이름으로 검색 (포지션 무시)
     List<KBOplayerInfo> findByTeamAndNameKrContaining(String team, String keyword);
-    //타자 , 투수 db넣기 위한 메서드
-    Optional<KBOplayerInfo> findByNameKr(String nameKr);
+
+    // 이름+팀으로 전부 (안전망)
+    List<KBOplayerInfo> findAllByNameKrAndTeam(String nameKr, String team);
+
+    // 배터 포지션 우선 매칭
+    Optional<KBOplayerInfo> findFirstByNameKrAndTeamAndPositionIn(
+            String nameKr, String team, Collection<String> positions);
 }

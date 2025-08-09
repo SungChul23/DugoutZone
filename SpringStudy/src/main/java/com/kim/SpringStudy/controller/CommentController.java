@@ -16,7 +16,6 @@ import java.security.Principal;
 public class CommentController {
 
     private final CommentRepository commentRepository;
-    private final UserRepository userRepository;
 
     @PostMapping("/comment")
     public String addComment(@RequestParam Long parentId,

@@ -13,9 +13,10 @@ public class BatterStatsImportController {
 
     private final BatterStatsImportService batterStatsImportService;
 
-    @PostMapping("/ssg")
-    public String importSSG(@RequestBody String json) throws IOException {
-        batterStatsImportService.importFromJson(json);
-        return "✅ SSG 타자 기록 저장 완료";
+    @PostMapping("/{team}")
+    public String importBatterStats(@PathVariable String team, @RequestBody String json)
+            throws IOException {
+        batterStatsImportService.importFromJson(team, json);
+        return "✅ " + team + " 타자 기록 저장 완료";
     }
 }

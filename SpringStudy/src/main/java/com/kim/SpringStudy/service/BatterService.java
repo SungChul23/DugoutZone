@@ -1,4 +1,3 @@
-// src/main/java/com/kim/SpringStudy/service/BatterService.java
 package com.kim.SpringStudy.service;
 
 import com.kim.SpringStudy.domain.BatterStats;
@@ -7,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -17,10 +17,21 @@ public class BatterService {
 
     public List<BatterStats> listByTeam(String teamCode, String q, String sort, String order) {
         Sort srt = buildSort(sort, order);
+
+        LocalDate latestDate = batterStatsRepository.findLatestDateByTeam(teamCode);
+
         if (q != null && !q.isBlank()) {
-            return batterStatsRepository.findByPlayer_TeamIgnoreCaseAndPlayer_NameKrContaining(teamCode, q.trim(), srt);
+            // 검색 시 최신 날짜만
+            return batterStatsRepository.findByPlayer_TeamIgnoreCaseAndRecordDateAndPlayer_NameKrContaining(
+                    teamCode, latestDate, q.trim(), srt);
         }
-        return batterStatsRepository.findByPlayer_TeamIgnoreCase(teamCode, srt);
+
+        // 기본 조회도 최신 날짜만
+        return batterStatsRepository.findByPlayer_TeamIgnoreCaseAndRecordDate(teamCode, latestDate, srt);
+    }
+
+    public LocalDate getLatestDate(String teamCode) {
+        return batterStatsRepository.findLatestDateByTeam(teamCode);
     }
 
     private Sort buildSort(String sort, String order) {
@@ -29,17 +40,14 @@ public class BatterService {
         return Sort.by(dir, key);
     }
 
-    // 엔티티 필드명 화이트리스트 (네 엔티티 컬럼명에 맞춰 필요 시 수정)
     private String mapSortKey(String sort) {
         if (sort == null || sort.isBlank()) return "ops";
         return switch (sort) {
-            // 메타
             case "nameKr", "team", "uniformNumber" -> sort;
-            // 기본/카운팅
             case "g","pa","ab","r","h","twoB","threeB","hr","tb","rbi","sac","sf","bb","ibb","hbp","so","gdp","mh" -> sort;
-            // 비율/지표
             case "avg","obp","slg","ops","risp","phBa" -> sort;
             default -> "ops";
         };
     }
 }
+

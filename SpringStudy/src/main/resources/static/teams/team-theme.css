@@ -1,0 +1,81 @@
+/* ===== KBO 팀별 색상 & 로고 (gradient 포함) ===== */
+
+/* SSG 랜더스 */
+body[data-team="ssg"] {
+    --team-color: #B40000;
+    --team-color-2: #C8102E;
+    --team-grad: linear-gradient(135deg, #B40000, #C8102E);
+    --team-logo: url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/ssg.png");
+}
+
+/* LG 트윈스 */
+body[data-team="lg"] {
+    --team-color: #C60C30;
+    --team-color-2: #0A0A0A;
+    --team-grad: linear-gradient(135deg, #C60C30, #0A0A0A);
+    --team-logo: url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/lg.png");
+}
+
+/* 한화 이글스 */
+body[data-team="hanwha"] {
+    --team-color: #FF6A00;
+    --team-color-2: #111;
+    --team-grad: linear-gradient(135deg, #FF6A00, #111);
+    --team-logo: url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/hanwha.png");
+}
+
+/* 롯데 자이언츠 */
+body[data-team="lotte"] {
+    --team-color: #002F6C;
+    --team-color-2: #C41E3A;
+    --team-grad: linear-gradient(135deg, #002F6C, #C41E3A);
+    --team-logo: url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/lotte.png");
+}
+
+/* KIA 타이거즈 */
+body[data-team="kia"] {
+    --team-color: #C3042C;
+    --team-color-2: #111;
+    --team-grad: linear-gradient(135deg, #C3042C, #111);
+    --team-logo: url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/kia.png");
+}
+
+/* KT 위즈 */
+body[data-team="kt"] {
+    --team-color: #000;
+    --team-color-2: #D6002F;
+    --team-grad: linear-gradient(135deg, #000, #D6002F);
+    --team-logo: url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/kt.png");
+}
+
+/* 삼성 라이온즈 */
+body[data-team="samsung"] {
+    --team-color: #0F4CFF;
+    --team-color-2: #1F8FFF;
+    --team-grad: linear-gradient(135deg, #0F4CFF, #1F8FFF);
+    --team-logo: url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/samsung.png");
+}
+
+/* NC 다이노스 */
+body[data-team="nc"] {
+    --team-color: #002B5B;
+    --team-color-2: #0077B6;
+    --team-grad: linear-gradient(135deg, #002B5B, #0077B6);
+    --team-logo: url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/nc.png");
+}
+
+/* 두산 베어스 */
+body[data-team="doosan"] {
+    --team-color: #0A122A;
+    --team-color-2: #DA1212;
+    --team-grad: linear-gradient(135deg, #0A122A, #DA1212);
+    --team-logo: url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/doosan.png");
+}
+
+/* 키움 히어로즈 */
+body[data-team="kiwoom"] {
+    --team-color: #6C1D45;
+    --team-color-2: #9B1B30;
+    --team-grad: linear-gradient(135deg, #6C1D45, #9B1B30);
+    --team-logo: url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/kiwoom.png");
+}

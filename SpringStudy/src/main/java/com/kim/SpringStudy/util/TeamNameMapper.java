@@ -46,7 +46,23 @@ public class TeamNameMapper {
             Map.entry("한화", "한화")
     );
     public static String toViewFolder(String input) {
-        return TEAM_MAP.getOrDefault(input.toUpperCase(), null);
+        if (input == null) return null;
+        String key = input.trim().toLowerCase();
+
+        // 소문자 매핑
+        return switch (key) {
+            case "lg" -> "lg";
+            case "ssg" -> "ssg";
+            case "kia" -> "kia";
+            case "kt" -> "kt";
+            case "nc" -> "nc";
+            case "doosan", "두산" -> "doosan";
+            case "lotte", "롯데" -> "lotte";
+            case "samsung", "삼성" -> "samsung";
+            case "kiwoom", "키움" -> "kiwoom";
+            case "hanwha", "한화" -> "hanwha";
+            default -> null;
+        };
     }
     public static String toDbTeamName(String input) {
         return DB_TEAM_NAME_MAP.getOrDefault(input.toUpperCase(), null);

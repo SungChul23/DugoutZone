@@ -301,13 +301,17 @@ public class DugoutController {
         model.addAttribute("teamName", teamName);     // 페이지 타이틀/배너용
         model.addAttribute("teamSlogan", TeamSloganUtil.getSlogan(team));// 팀슬로건 // 배너 슬로건
 
-        model.addAttribute("batters", rows);
 
         // 상단 폼 유지값
         model.addAttribute("view", view);
         model.addAttribute("sort", sort);
         model.addAttribute("order", order);
         model.addAttribute("q", q);
+
+        //최신날짜
+        model.addAttribute("latestDate", batterService.getLatestDate(dbTeamName));
+        model.addAttribute("batters", rows);
+
 
         return "teams/batterList";
     }

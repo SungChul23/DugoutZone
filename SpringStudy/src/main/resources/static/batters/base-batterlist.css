@@ -8,7 +8,7 @@
     --team-color-2:#8b5cf6;
     --team-grad: linear-gradient(135deg, var(--team-color), var(--team-color-2));
     --team-logo:none;
-    --logo-opacity:0.15;
+
 }
 
 body {
@@ -18,27 +18,6 @@ body {
     color: var(--text);
 }
 
-/* ===== 팀별 변수 오버라이드 ===== */
-body[data-team="ssg"]{ --team-color:#B40000; --team-color-2:#C8102E; --team-grad:linear-gradient(135deg,#B40000,#C8102E);
-    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/ssg.png"); }
-body[data-team="lg"]{ --team-color:#C60C30; --team-color-2:#0A0A0A;
-    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/lg.png"); }
-body[data-team="hanwha"]{ --team-color:#FF6A00; --team-color-2:#111;
-    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/hanwha.png"); }
-body[data-team="lotte"]{ --team-color:#002F6C; --team-color-2:#C41E3A;
-    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/lotte.png"); }
-body[data-team="kia"]{ --team-color:#C3042C; --team-color-2:#111;
-    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/kia.png"); }
-body[data-team="kt"]{ --team-color:#000; --team-color-2:#D6002F;
-    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/kt.png"); }
-body[data-team="samsung"]{ --team-color:#0F4CFF; --team-color-2:#1F8FFF;
-    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/samsung.png"); }
-body[data-team="nc"]{ --team-color:#002B5B; --team-color-2:#0077B6;
-    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/nc.png"); }
-body[data-team="doosan"]{ --team-color:#0A122A; --team-color-2:#DA1212;
-    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/doosan.png"); }
-body[data-team="kiwoom"]{ --team-color:#6C1D45; --team-color-2:#9B1B30;
-    --team-logo:url("https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/kiwoom.png"); }
 
 /* ===== 배너 ===== */
 .team-hero {
@@ -55,8 +34,7 @@ body[data-team="kiwoom"]{ --team-color:#6C1D45; --team-color-2:#9B1B30;
     background-image: var(--team-logo);
     background-repeat:no-repeat;
     background-position: right 6% center;
-    background-size: min(34vw, 360px);
-    opacity: var(--logo-opacity);
+    background-size: 200px;
     pointer-events:none;
 }
 .team-hero-content {
@@ -125,3 +103,13 @@ footer { text-align:center; padding: 40px 0; font-size:.9rem; color: var(--muted
     margin-bottom: 5px;
 }
 
+footer {
+    text-align: center;
+    padding: 20px;
+    color: #94a3b8;
+    background-color: #0f172a;
+    font-size: 0.9rem;
+}
+.back-home-section .neon-home-btn {
+    color: white !important;
+}

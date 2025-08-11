@@ -19,4 +19,5 @@ public class BatterStatsImportController {
         batterStatsImportService.importFromJson(team, json);
         return "✅ " + team + " 타자 기록 저장 완료";
     }
+
 }

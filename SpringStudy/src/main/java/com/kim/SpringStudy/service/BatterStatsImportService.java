@@ -88,6 +88,7 @@ public class BatterStatsImportService {
             }
 
             // 6) 신규 저장
+
             BatterStats stat = new BatterStats();
             stat.setPlayer(player);
             stat.setRecordDate(today);
@@ -120,7 +121,7 @@ public class BatterStatsImportService {
 
             batterStatsRepository.save(stat);
         }
-        System.out.println("✅ " + team + " 타자 기록 저장 완료");
+        System.out.println(team + " 타자 기록 저장 완료");
     }
 
     private BigDecimal parseDecimal(String val) {

@@ -38,7 +38,11 @@ public class KBOplayerInfo {
 
     //타자 , 투수에서 선수 이름을 매핑
     // 한 명의 선수가 여러 개의 타자 기록을 가질 수 있음
-    //BatterStats 엔티티 안의 player 필드와 매핑
+
+    //선수 → 기록 조회 기능
     @OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BatterStats> batterStatsList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "player", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<PitcherStats> pitcherStatsList  = new ArrayList<>();
 }

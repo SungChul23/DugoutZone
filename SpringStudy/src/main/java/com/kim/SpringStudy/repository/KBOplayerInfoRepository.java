@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
-public interface KBOplayerInfoRepository extends JpaRepository<KBOplayerInfo,Long> {
+public interface KBOplayerInfoRepository extends JpaRepository<KBOplayerInfo, Long> {
 
 
     // 포지션으로 필터
@@ -22,4 +22,13 @@ public interface KBOplayerInfoRepository extends JpaRepository<KBOplayerInfo,Lon
     // 배터 포지션 우선 매칭
     Optional<KBOplayerInfo> findFirstByNameKrAndTeamAndPositionIn(
             String nameKr, String team, Collection<String> positions);
+
+    // 이름과 팀으로 단일 선수 검색
+    KBOplayerInfo findByNameKrAndTeam(String nameKr, String team);
+
+    //동명이인 떄문에 유니폼과 비교하자
+    KBOplayerInfo findByNameKrAndTeamAndUniformNumber(String nameKr, String team, int uniformNumber);
+
+    KBOplayerInfo findByNameKrAndTeamAndBirth(String nameKR, String team, String birth);
+
 }

@@ -7,7 +7,7 @@ public class TeamSloganUtil {
     // 구단 슬로건 매핑
     private static final Map<String, String> SLOGAN_MAP = Map.ofEntries(
             Map.entry("KIA", "압도하라! / V13 ALWAYS KIA TIGERS"),
-            Map.entry("삼성", "WIN OR WOW"),
+            Map.entry("SAMSUNG", "BLUE BLOOD, LIONS PRIDE!"),
             Map.entry("LG", "무적 LG! 끝까지 TWINS! 승리를 향해, 하나의 트윈스!"),
             Map.entry("DOOSAN", "HUSTLE DOOGETHER TEAM DOOSAN 2025"),
             Map.entry("KT", "UP! GREAT KT"),

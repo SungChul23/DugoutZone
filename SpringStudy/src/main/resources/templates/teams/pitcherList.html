@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title th:text="${teamName} + ' 투수 기록'">투수 기록</title>
+    <title th:text="${teamFullName} + ' 투수 기록'">투수 기록</title>
 
     <!-- 공통/투수 전용 CSS -->
     <link rel="stylesheet" href="/pitchers/base-pitcherlist.css"/>
@@ -20,7 +20,7 @@
 <section class="team-hero">
     <div class="team-hero-content">
         <div class="team-hero-info">
-            <h1 th:text="${teamName} + ' 투수 기록'">SSG 투수 기록</h1>
+            <h1 th:text="${teamFullName} + ' 투수 기록'">SSG 투수 기록</h1>
             <p class="slogan team-slogan" th:text="${teamSlogan}">NO LIMITS AMAZING LANDERS</p>
         </div>
         <div class="team-hero-logo" aria-hidden="true"></div>

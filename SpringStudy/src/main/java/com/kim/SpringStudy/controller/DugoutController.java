@@ -249,9 +249,9 @@ public class DugoutController {
         //날씨 조회
         List<WeeklyWeatherDTO> weatherList = weatherService.getWeatherForTeam(dbTeamName);
 
-        System.out.println("✅ teamName: " + teamName);
-        System.out.println("✅ dbTeamName: " + dbTeamName);
-        System.out.println("✅ 날씨 개수: " + weatherList.size());
+        System.out.println(" teamName: " + teamName);
+        System.out.println(" dbTeamName: " + dbTeamName);
+        System.out.println(" 날씨 개수: " + weatherList.size());
 
 
         model.addAttribute("team", dbTeamName);
@@ -307,6 +307,10 @@ public class DugoutController {
 
         String teamName = dbTeamName;
 
+        String viewFolder = TeamNameMapper.toViewFolder(teamName);
+        String teamFullName = kboTeamRepository.findNameByCss(viewFolder).orElse(null);
+        model.addAttribute("teamFullName", teamFullName); //각 구단 한글 풀네임
+
         //슬로건 (유틸이 내부에서 대문자 키로 처리)
 
 
@@ -344,6 +348,11 @@ public class DugoutController {
         String teamCode = TeamNameMapper.toViewFolder(team);
         String dbTeamName = TeamNameMapper.toDbTeamName(team);
         String teamName = dbTeamName;
+
+        //구단 풀네임(한) 전달
+        String viewFolder = TeamNameMapper.toViewFolder(teamName);
+        String teamFullName = kboTeamRepository.findNameByCss(viewFolder).orElse(null);
+        model.addAttribute("teamFullName", teamFullName); //각 구단 한글 풀네임
 
         // 데이터 조회
         List<PitcherStats> rows = pitcherService.listByTeam(dbTeamName, q, sort, order);

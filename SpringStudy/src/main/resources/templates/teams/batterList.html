@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title th:text="${teamName} + ' 타자 기록'">타자 기록</title>
+    <title th:text="${teamFullName} + ' 타자 기록'">타자 기록</title>
 
     <link rel="stylesheet" href="/batters/base-batterlist.css"/>
     <link rel="stylesheet" href="/batters/batterList.css"/>
@@ -19,7 +19,7 @@
 <section class="team-hero">
     <div class="team-hero-content">
         <div class="team-hero-info">
-            <h1 th:text="${teamName} + ' 타자 기록'">SSG 타자 기록</h1>
+            <h1 th:text="${teamFullName} + ' 타자 기록'">SSG 타자 기록</h1>
             <p class="slogan team-slogan" th:text="${teamSlogan}">NO LIMITS AMAZING LANDERS</p>
         </div>
         <div class="team-hero-logo" aria-hidden="true"></div>

@@ -2,13 +2,17 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title th:text="${team} + ' 뉴스'">팀 뉴스</title>
+    <title th:text="${teamFullName} + ' 뉴스'">팀 뉴스</title>
     <link rel="stylesheet" href="/newsView.css">
     <link rel="icon" type="image/png" href="/dugout.png" />
+
+    <!-- 캐시 방지 메타 -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"/>
+    <meta http-equiv="Pragma" content="no-cache"/>
+    <meta http-equiv="Expires" content="0"/>
 </head>
 <body onload="loadNewsFromThymeleaf()">
 
-<!-- ✅ 여기에 구단 버튼들 추가 -->
 <div class="team-buttons">
     <a class="team-btn kbo" href="/news/view/KBO">KBO 리그</a>
     <a class="team-btn ssg" href="/news/view/SSG">SSG</a>
@@ -22,25 +26,32 @@
     <a class="team-btn kt" href="/news/view/KT">KT</a>
     <a class="team-btn samsung" href="/news/view/SAMSUNG">삼성</a>
 </div>
-<h1 th:text="${team} + ' 뉴스 기사'">팀 뉴스</h1>
+
+<h1 th:text="${teamFullName} + ' 뉴스 기사'">팀 뉴스</h1>
 
 <div class="news-cards" id="news-container"></div>
 <div id="pagination" class="pagination"></div>
 
-
-
 <script th:inline="javascript">
     let currentPage = 1;
     const display = 5;
-    const team = /*[[${team}]]*/ 'KBO';
+    const team = /*[[${team}]]*/ 'KBO'; // 컨트롤러에서 꼭 내려줘야 함
 
+    // 중복 제거 함수 (제목+URL 기준)
+    function dedupeNews(list) {
+        const seen = new Set();
+        return list.filter(n => {
+            const key = `${n.url || ''}||${n.title || ''}`.trim();
+            if (seen.has(key)) return false;
+            seen.add(key);
+            return true;
+        });
+    }
 
-
-    // ✅ 페이지네이션 UI 생성 함수
+    // 페이지네이션 UI 생성
     function renderPagination(totalPages) {
         const pagination = document.getElementById('pagination');
         pagination.innerHTML = '';
-
         for (let i = 1; i <= totalPages; i++) {
             const btn = document.createElement('span');
             btn.classList.add('page-btn');
@@ -54,41 +65,55 @@
         }
     }
 
-    // ✅ 뉴스 불러오는 함수 (뉴스 + 페이지 버튼 생성 포함)
-    function loadNews(page = 1) {
+    // 뉴스 불러오기
+    async function loadNews(page = 1) {
         const container = document.getElementById('news-container');
         if (page === 1) container.innerHTML = '<p>로딩 중...</p>';
 
-        fetch(`/news/${team}?page=${page}&display=${display}`)
-            .then(res => res.json())
-            .then(newsList => {
-                if (newsList.length === 0 && page === 1) {
-                    container.innerHTML = '<p>뉴스가 없습니다.</p>';
-                    return;
-                }
+        // 캐시 무효화를 위해 타임스탬프 파라미터 추가
+        const url = `/news/${encodeURIComponent(team)}?page=${page}&display=${display}&_=${Date.now()}`;
 
-                if (page === 1) container.innerHTML = '';
+        try {
+            const res = await fetch(url, {
+                cache: 'no-store',
+                headers: { 'Cache-Control': 'no-cache' }
+            });
+            const rawList = await res.json();
 
-                container.innerHTML = newsList.map(news => `
-                    <div class="news-card">
-                        <h3><a href="${news.url}" target="_blank">${news.title}</a></h3>
-                        <p>${news.summary || ''}</p>
-                        <div class="date">${news.pubDate}</div>
-                    </div>
-                `).join('');
+            // 중복 제거
+            const newsList = dedupeNews(rawList);
 
-                renderPagination(5); // ← 여기서 페이지 번호 갱신
-            }).catch(() => {
+            if (newsList.length === 0 && page === 1) {
+                container.innerHTML = '<p>뉴스가 없습니다.</p>';
+                renderPagination(1);
+                return;
+            }
+
+            if (page === 1) container.innerHTML = '';
+
+            container.innerHTML = newsList.map(news => `
+                <div class="news-card">
+                    <h3><a href="${news.url}" target="_blank" rel="noopener">${news.title}</a></h3>
+                    <p>${news.summary ? news.summary : ''}</p>
+                    <div class="date">${news.pubDate ? news.pubDate : ''}</div>
+                </div>
+            `).join('');
+
+            renderPagination(5); // 총 페이지 수를 서버 응답 기반으로 수정 가능
+        } catch (e) {
             container.innerHTML = '<p>뉴스를 불러오는 중 오류 발생</p>';
-        });
+        }
     }
 
-    // ✅ 처음 로드 시 실행
+    // bfcache 복귀 시에도 재로드
+    window.addEventListener('pageshow', (ev) => {
+        if (ev.persisted) loadNews(currentPage);
+    });
+
     function loadNewsFromThymeleaf() {
         loadNews(1);
     }
 </script>
-
 
 <div class="back-btn">
     <a href="/dugout" class="btn">🏠 더그아웃으로 가기</a>
@@ -99,5 +124,3 @@
 </footer>
 </body>
 </html>
-
-

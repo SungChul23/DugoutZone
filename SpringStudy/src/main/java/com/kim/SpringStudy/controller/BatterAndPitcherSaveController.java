@@ -22,7 +22,7 @@ public class BatterAndPitcherSaveController {
     public String importBatterStats(@PathVariable String team, @RequestBody String json)
             throws IOException {
         batterStatsImportService.importFromJson(team, json);
-        return "✅ " + team + " 타자 기록 저장 완료";
+        return team  + "-> 타자 기록 저장 완료";
     }
 
     @PostMapping("/pitcher/{team}")
@@ -30,7 +30,7 @@ public class BatterAndPitcherSaveController {
                                      @RequestBody List<Map<String, Object>> rows)
             throws IOException {
         pitcherStatsImportService.importPitcherStats(team,rows);
-        return "✅ " + team + " 투수 기록 저장 완료";
+        return team  + "-> 투수 기록 저장 완료";
     }
 
 }

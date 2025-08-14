@@ -1,0 +1,47 @@
+:root{
+    /* 팀 CSS에 변수가 있으면 그 값 사용, 없으면 폴백 */
+    --team-color:#00f0ff;
+    --team-color-2:#8b5cf6;
+}
+
+/* Quick Links (카드형) */
+.quicklinks { --brand: var(--team-color); --brand2: var(--team-color-2); }
+.quicklinks h2{ text-align:center; margin:0 0 6px; font-size:1.4rem; font-weight:800; }
+.quicklinks-sub{ text-align:center; margin:0 0 18px; color:var(--muted, #94a3b8); font-size:.95rem; }
+
+.section.quicklinks{ max-width:1200px; margin:32px auto; padding:0 20px; }
+.quicklinks-grid{ list-style:none; padding:0; margin:0; display:grid; gap:14px; grid-template-columns:repeat(auto-fit, minmax(240px,1fr)); }
+
+.quicklink{
+    display:flex; align-items:center; gap:12px; padding:14px;
+    background:linear-gradient(180deg,rgba(255,255,255,.03),rgba(255,255,255,.01));
+    border:1px solid rgba(148,163,184,.18); border-radius:16px; text-decoration:none; color:inherit;
+    transition:transform .12s ease, box-shadow .2s ease, border-color .2s ease, background .2s;
+}
+.quicklink:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 28px rgba(0,0,0,.35), 0 0 0 1px rgba(0,240,255,.15) inset;
+    border-color:rgba(0,240,255,.35);
+    background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.02));
+}
+.quicklink:focus-visible{ outline:none; box-shadow:0 0 0 2px var(--team-color); }
+
+.icon-badge{
+    width:44px; height:44px; border-radius:12px; display:grid; place-items:center; flex:0 0 auto;
+    background:linear-gradient(135deg,var(--brand),var(--brand2)); color:#0b1220; box-shadow:0 4px 16px rgba(0,0,0,.25);
+}
+.icon-badge svg{ stroke:#0b1220; }
+
+.ql-text{ flex:1 1 auto; min-width:0; }
+.ql-title{ font-weight:700; line-height:1.2; }
+.ql-desc{ font-size:.85rem; color:var(--muted, #94a3b8); margin-top:2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.ql-chevron, .ql-external{ margin-left:auto; opacity:.65; font-size:1.1rem; }
+
+.quicklinks-cta{ text-align:center; margin-top:18px; }
+.quicklinks-cta .neon-home-btn{
+    display:inline-flex; align-items:center; gap:8px; background:var(--team-color); color:#0f172a; border:none;
+    box-shadow:0 0 16px rgba(0,240,255,.25);
+}
+.quicklinks-cta .neon-home-btn:hover{
+    background:var(--team-color-2); color:#fff; box-shadow:0 0 20px rgba(139,92,246,.35);
+}

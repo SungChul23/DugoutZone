@@ -19,6 +19,6 @@ public class KBOTeam {
     private String ticketUrl;
     private String homeCity;
     private String cssClass;
-
+    private String homePageUrl;
 
 }

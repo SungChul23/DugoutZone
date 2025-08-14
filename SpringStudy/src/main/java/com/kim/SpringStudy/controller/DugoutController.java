@@ -104,8 +104,17 @@ public class DugoutController {
     //HTML View 페이지를 보여주는 컨트롤러
     @GetMapping("/news/view/{team}")
     public String viewTeamNews(@PathVariable String team, Model model) {
+        String teamFullName;
+        String viewFolder = TeamNameMapper.toViewFolder(team);
+        if ("KBO".equalsIgnoreCase(team)) {
+            teamFullName = "KBO 리그"; // 기본 페이지 풀네임 지정 NULL 방지
+        } else {
+            teamFullName = kboTeamRepository.findNameByCss(viewFolder)
+                    .orElse(team); // 못 찾으면 team 코드 그대로
+        }
         model.addAttribute("team", team); // Thymeleaf에서 JS로 넘겨줄 값
-        return "newsView"; // → templates/newsView.html
+        model.addAttribute("teamFullName", teamFullName); //각 구단 한글 풀네임
+        return "newsView";
     }
 
     //구단 별 뉴스
@@ -150,7 +159,16 @@ public class DugoutController {
             throw new IllegalStateException("기록이 존재하지 않습니다: " + teamName);
         }
 
-        model.addAttribute("record", record.get());
+        String ticketUrl = kboTeamRepository.findTicketUrlByCss(viewFolder).orElse(null);
+        String homePageUrl = kboTeamRepository.findHomePageUrlByCss(viewFolder).orElse(null);
+        String teamFullName = kboTeamRepository.findNameByCss(viewFolder).orElse(null);
+
+        model.addAttribute("record", record.get()); // 배너에 각 팀 성적 전달
+        model.addAttribute("teamName", viewFolder); //url전달
+        model.addAttribute("ticketUrl", ticketUrl); //티켓예매링크 전달
+        model.addAttribute("homePageUrl", homePageUrl); //공식 홈피 전달
+        model.addAttribute("teamFullName", teamFullName); //각 구단 한글 풀네임
+
         return "teams/" + viewFolder;
     }
 

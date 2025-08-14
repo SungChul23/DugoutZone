@@ -6,6 +6,7 @@
     <title>KT 위즈 - 팀 페이지</title>
     <link rel="stylesheet" href="/teams/team-base.css" />
     <link rel="stylesheet" href="/teams/kt.css" />
+    <link rel="stylesheet" href="/ui/quicklinks.css" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
     <link rel="icon" type="image/png" href="/dugout.png" />
 </head>
@@ -33,18 +34,148 @@
     </div>
 </section>
 
-<section class="section">
-    <h2 style="text-align:center;">KT 관련 바로가기</h2>
-    <div class="btn-group">
-        <a href="/news/view/KT" class="btn">팀 뉴스</a>
-        <a href="/kbo/teamRank" class="btn">2025 순위 보기</a>
-        <a href="/team/kt/player" class="btn">선수단 보기</a>
-        <a href="/team/kt/batter" class="btn">타자 기록 보기</a>
-        <a href="/weather/kt" class="btn">홈구장 날씨 예보</a>
-        <a href="https://www.ticketlink.co.kr/sports/137/62" target="_blank" class="btn">티켓 예매</a>
-        <a href="https://www.ktwiz.co.kr/" target="_blank" class="btn">공식 홈페이지</a>
-    </div>
-</section>
+<nav class="section quicklinks" aria-labelledby="quick-links-title">
+    <h2 id="quick-links-title" th:text="${teamFullName} + ' 관련 바로가기'">삼성 라이온즈 관련 바로가기</h2>
+    <p class="quicklinks-sub">가장 자주 찾는 기능을 한 곳에 모았어요.</p>
+
+    <ul class="quicklinks-grid">
+        <li>
+            <a class="quicklink" th:href="@{/news/view/{team}(team=${teamName})}">
+                <span class="icon-badge" aria-hidden="true">
+                    <!-- newspaper -->
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor"/>
+                        <path d="M7 8h8M7 11h10M7 14h6" stroke="currentColor" stroke-linecap="round"/>
+                    </svg>
+                </span>
+                <div class="ql-text">
+                    <div class="ql-title">팀 뉴스</div>
+                    <div class="ql-desc">최근 기사 · 하이라이트</div>
+                </div>
+                <span class="ql-chevron" aria-hidden="true">›</span>
+            </a>
+        </li>
+
+        <li>
+            <a class="quicklink" href="/kbo/teamRank">
+                <span class="icon-badge" aria-hidden="true">
+                    <!-- trophy -->
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <path d="M8 21h8M10 17h4M12 17V7M6 5h12v3a6 6 0 1 1-12 0V5Z" stroke="currentColor" stroke-linecap="round"/>
+                    </svg>
+                </span>
+                <div class="ql-text">
+                    <div class="ql-title">2025 순위 보기</div>
+                    <div class="ql-desc">리그 스탠딩</div>
+                </div>
+                <span class="ql-chevron" aria-hidden="true">›</span>
+            </a>
+        </li>
+
+        <li>
+            <a class="quicklink" th:href="@{/team/{team}/player(team=${teamName})}">
+                <span class="icon-badge" aria-hidden="true">
+                    <!-- users -->
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <circle cx="8" cy="8" r="3" stroke="currentColor"/>
+                        <path d="M2 20c0-3.3 2.7-6 6-6" stroke="currentColor"/>
+                        <circle cx="17" cy="11" r="3" stroke="currentColor"/>
+                        <path d="M11 20c0-3.3 2.7-6 6-6" stroke="currentColor"/>
+                    </svg>
+                </span>
+                <div class="ql-text">
+                    <div class="ql-title">선수단 보기</div>
+                    <div class="ql-desc">프로필 · 포지션/등번호</div>
+                </div>
+                <span class="ql-chevron" aria-hidden="true">›</span>
+            </a>
+        </li>
+
+        <li>
+            <a class="quicklink" th:href="@{/team/{team}/batter(team=${teamName})}">
+                <span class="icon-badge" aria-hidden="true">
+                    <!-- bar chart -->
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <rect x="3" y="11" width="3" height="10" rx="1" stroke="currentColor"/>
+                        <rect x="10" y="7" width="3" height="14" rx="1" stroke="currentColor"/>
+                        <rect x="17" y="4" width="3" height="17" rx="1" stroke="currentColor"/>
+                    </svg>
+                </span>
+                <div class="ql-text">
+                    <div class="ql-title">타자 기록 보기</div>
+                    <div class="ql-desc">리더보드 · 세부지표</div>
+                </div>
+                <span class="ql-chevron" aria-hidden="true">›</span>
+            </a>
+        </li>
+
+        <li>
+            <a class="quicklink" th:href="@{/team/{team}/pitcher(team=${teamName})}">
+                <span class="icon-badge" aria-hidden="true">
+                    <!-- activity -->
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <path d="M3 12h4l3 7 4-14 3 7h4" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </span>
+                <div class="ql-text">
+                    <div class="ql-title">투수 기록 보기</div>
+                    <div class="ql-desc">ERA · WHIP · 누적지표</div>
+                </div>
+                <span class="ql-chevron" aria-hidden="true">›</span>
+            </a>
+        </li>
+
+        <li>
+            <a class="quicklink" th:href="@{/weather/{team}(team=${teamName})}">
+                <span class="icon-badge" aria-hidden="true">
+                    <!-- cloud-sun -->
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <path d="M6 17h10a4 4 0 0 0 0-8 5 5 0 0 0-9-1" stroke="currentColor" stroke-linecap="round"/>
+                    </svg>
+                </span>
+                <div class="ql-text">
+                    <div class="ql-title">홈구장 날씨 예보</div>
+                    <div class="ql-desc">강수 · 기온</div>
+                </div>
+                <span class="ql-chevron" aria-hidden="true">›</span>
+            </a>
+        </li>
+
+        <!-- 티켓 예매 (ticketUrl 없으면 항목 숨김) -->
+        <li th:if="${ticketUrl}">
+            <a class="quicklink" th:href="${ticketUrl}" target="_blank" rel="noopener">
+                <span class="icon-badge" aria-hidden="true">
+                    <!-- ticket icon -->
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <path d="M4 7h16v4a2 2 0 1 0 0 2v4H4v-4a2 2 0 1 0 0-2V7Z" stroke="currentColor"/>
+                    </svg>
+                </span>
+                <div class="ql-text">
+                    <div class="ql-title">티켓 예매</div>
+                    <div class="ql-desc">공식 예매처 이동</div>
+                </div>
+                <span class="ql-external" aria-hidden="true">↗</span>
+            </a>
+        </li>
+
+        <li th:if="${homePageUrl}">
+            <a class="quicklink" th:href="${homePageUrl}" target="_blank" rel="noopener">
+                <span class="icon-badge" aria-hidden="true">
+                    <!-- globe -->
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                        <circle cx="12" cy="12" r="9" stroke="currentColor"/>
+                        <path d="M3 12h18M12 3c3 4 3 14 0 18M12 3c-3 4-3 14 0 18" stroke="currentColor"/>
+                    </svg>
+                </span>
+                <div class="ql-text">
+                    <div class="ql-title">공식 홈페이지</div>
+                    <div class="ql-desc">새 창으로 열기</div>
+                </div>
+                <span class="ql-external" aria-hidden="true">↗</span>
+            </a>
+        </li>
+    </ul>
+</nav>
 <div class="back-home-section">
     <a href="/dugout" class="btn neon-home-btn">🏠 더그아웃으로 가기</a>
 </div>

@@ -1,92 +1,119 @@
+/* =========================
+   최신 공통 테이블 스타일
+   (투수 방식으로 통일)
+   ========================= */
+
 /* 필터바 */
-.filter-row{ display:flex; gap:12px; align-items:end; flex-wrap:wrap; }
-.filter-item{ display:flex; flex-direction:column; gap:6px; min-width:140px; }
-.filter-item.grow{ flex:1; }
-.filter-bar select, .filter-bar input{
-    background:#121a33; color:#e2e8f0; border:1px solid #2a3555; border-radius:10px; padding:8px 10px;
+.filter-row {
+    display: flex;
+    gap: 12px;
+    align-items: end;
+    flex-wrap: wrap;
 }
-.search-button{ background:transparent; border:1px solid var(--team-color); color:var(--text); }
-.search-button:hover{ box-shadow:0 0 12px var(--team-color); }
+
+.filter-item {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 140px;
+}
+
+.filter-item.grow {
+    flex: 1;
+}
+
+.filter-bar select, .filter-bar input {
+    background: #121a33;
+    color: #e2e8f0;
+    border: 1px solid #2a3555;
+    border-radius: 10px;
+    padding: 8px 10px;
+}
+
+.search-button {
+    background: transparent;
+    border: 1px solid var(--team-color);
+    color: var(--text);
+}
+
+.search-button:hover {
+    box-shadow: 0 0 12px var(--team-color);
+}
 
 /* 뷰 네비 */
-.view-nav{ display:flex; align-items:center; justify-content:center; gap:12px; margin:8px 0 14px; }
-.nav-btn{ background:#121a33; border:1px solid #2a3555; color:#e2e8f0; padding:6px 10px; border-radius:10px; cursor:pointer; }
-.dots .dot{ width:10px; height:10px; border-radius:50%; display:inline-block; background:#1f2a47; }
-.dots .dot.active{ background:var(--team-color); box-shadow:0 0 10px var(--team-color); }
-
-/* 테이블 */
-.table-wrap{ margin-top:10px; }
-.table-scroll{ overflow:auto; border:1px solid #1e2a44; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.35); }
-.stats-table{ width:100%; border-collapse:collapse; min-width:1100px; }
-.stats-table thead th{ background:#0f1830; position:relative; }
-.stats-table th, .stats-table td{ padding:10px 12px; border-bottom:1px solid #1b2440; white-space:nowrap; font-variant-numeric:tabular-nums; }
-.stats-table tbody tr:hover{ background:#0f1833; }
-
-/* sticky 3컬럼 */
-.sticky{ position:sticky; left:0; background:#0f1830; z-index:2; }
-.sticky-col:nth-child(1){ left:0; }
-.sticky-col:nth-child(2){ left:70px; }  /* 순위 셀 너비에 맞춰 조정 */
-.sticky-col:nth-child(3){ left:220px; } /* 이름 셀 너비에 맞춰 조정 */
-.stats-table thead th.sticky:nth-child(2){ left:70px; }
-.stats-table thead th.sticky:nth-child(3){ left:220px; }
-
-.sort-caret{ margin-left:6px; opacity:.8; }
-
-/* 툴팁 */
-.th-tip{ position:relative; cursor:help; border-bottom:1px dotted var(--team-color-2); }
-.tip-box{
-    position:absolute; left:0; bottom:120%;
-    opacity:0; pointer-events:none; transform:translateY(4px);
-    background:#0b1020; color:#e2e8f0; border:1px solid #2a3555; border-radius:10px;
-    padding:8px 10px; font-size:12px; width:max-content; max-width:280px;
-    box-shadow:0 10px 30px rgba(0,0,0,.45); transition:all .12s ease;
-}
-.th-tip:hover .tip-box{ opacity:1; transform:translateY(0); }
-
-.legend{ margin:12px 4px; color:#94a3b8; font-size:13px; }
-
-.record-date {
-    margin-top: 5px;
-    font-size: 0.9rem;
-    color: #aaa;
-}
-#statsTable {
-    border-collapse: collapse;
-    width: 100%;
+.view-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 8px 0 14px;
 }
 
-#statsTable th, #statsTable td {
-    border: 1px solid #ccc;
-    padding: 6px;
-    text-align: center;
-    white-space: nowrap;
+.nav-btn {
+    background: #121a33;
+    border: 1px solid #2a3555;
+    color: #e2e8f0;
+    padding: 6px 10px;
+    border-radius: 10px;
+    cursor: pointer;
 }
 
-.fixed-col {
-    position: sticky;
-    left: 0;
-    background: #1e293b; /* 네온 다크 테마 예시 */
-    z-index: 2;
+.dots .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    background: #1f2a47;
 }
 
-.tip-box {
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.2s ease;
-    font-size: 0.8rem;
-    color: #94a3b8;
+.dots .dot.active {
+    background: var(--team-color);
+    box-shadow: 0 0 10px var(--team-color);
 }
 
-.dot.active {
-    background: #00f0ff;
+/* 폭 변수(고정 2열) */
+:root {
+    --rank-col-w: 72px; /* 순위 열 너비 */
+    --name-col-w: 180px; /* 선수명 열 너비 */
 }
-/* 스크롤 컨테이너 */
+
+/* 컨테이너/테이블 */
+.table-wrap {
+    margin-top: 10px;
+}
+
 .table-scroll {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    border: 1px solid #1e2a44;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
 }
 
-/* 고정 컬럼 */
+#statsTable {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 1100px;
+}
+
+#statsTable thead th {
+    background: #0f1830;
+    position: relative;
+}
+
+#statsTable th, #statsTable td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #1b2440;
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+    text-align: center;
+}
+
+#statsTable tbody tr:hover {
+    background: #0f1833;
+}
+
+/* 고정 2열(투수 방식) */
 #statsTable .fixed-col {
     position: sticky;
     left: 0;
@@ -94,12 +121,29 @@
     backdrop-filter: blur(6px);
     z-index: 2;
 }
+
+/* 두 번째 고정열은 '첫 고정열의 바로 다음 형제'에 left 적용 */
 #statsTable .fixed-col + .fixed-col {
-    left: 72px; /* 순위 칸 너비만큼 맞춰줘 */
+    left: var(--rank-col-w);
     z-index: 2;
 }
-#statsTable th.fixed-col, #statsTable td.fixed-col {
-    min-width: 72px;
+
+/* 폭 고정: 순위 / 선수명 */
+#statsTable th.fixed-col:first-child,
+#statsTable td.fixed-col.rank-cell {
+    min-width: var(--rank-col-w);
+    width: var(--rank-col-w);
+}
+
+#statsTable th.fixed-col + th.fixed-col,
+#statsTable td.fixed-col + td.fixed-col {
+    min-width: var(--name-col-w);
+    width: var(--name-col-w);
+}
+
+/* 헤더 고정열 배경 살짝 구분 */
+#statsTable thead th.fixed-col {
+    background: #0f1830;
 }
 
 /* 헤더 인터랙션 */
@@ -107,6 +151,7 @@
     user-select: none;
     position: relative;
 }
+
 .stat-header:hover {
     text-decoration: underline;
 }
@@ -114,7 +159,10 @@
 /* 툴팁 */
 .th-tip {
     position: relative;
+    cursor: help;
+    border-bottom: 1px dotted var(--team-color-2);
 }
+
 .th-tip .tip-box {
     position: absolute;
     bottom: 100%;
@@ -122,7 +170,7 @@
     transform: translateY(-6px);
     background: #0b1220;
     color: #e2e8f0;
-    border: 1px solid rgba(0,240,255,.3);
+    border: 1px solid rgba(0, 240, 255, .3);
     padding: 8px 10px;
     font-size: 12px;
     border-radius: 10px;
@@ -134,15 +182,35 @@
     z-index: 10;
 }
 
+.th-tip:hover .tip-box {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* 레전드/날짜 */
+.legend {
+    margin: 12px 4px;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.record-date {
+    margin-top: 5px;
+    font-size: .9rem;
+    color: #aaa;
+}
+
 /* 뷰 점 표시 */
 .dots .dot {
     display: inline-block;
-    width: 8px; height: 8px;
+    width: 8px;
+    height: 8px;
     border-radius: 999px;
     background: #334155;
     margin: 0 4px;
     transition: transform .2s ease, background .2s ease;
 }
+
 .dots .dot.active {
     background: #00f0ff;
     transform: scale(1.2);
@@ -150,16 +218,29 @@
 
 /* 모바일 최적화 */
 @media (max-width: 768px) {
-    .stats-body { font-size: 14px; }
-    #statsTable th, #statsTable td { padding: 8px 10px; }
-    #statsTable .fixed-col { min-width: 56px; }
-    .team-hero .team-hero-content { flex-direction: column; align-items: flex-start; }
+    .stats-body {
+        font-size: 14px;
+    }
+
+    #statsTable th, #statsTable td {
+        padding: 8px 10px;
+    }
+
+    #statsTable th.fixed-col:first-child,
+    #statsTable td.fixed-col.rank-cell {
+        min-width: 56px;
+        width: 56px;
+    }
+
+    #statsTable th.fixed-col + th.fixed-col,
+    #statsTable td.fixed-col + td.fixed-col {
+        min-width: 150px;
+        width: 150px;
+    }
 }
 
-/* 순위 칼럼 폭 줄이기 */
+/* 순위 칼럼(텍스트) */
 .rank-cell {
-    width: 40px;        /* 기존보다 좁게 */
-    min-width: 40px;    /* 화면 줄여도 유지 */
-    text-align: center; /* 가운데 정렬 */
-    padding: 4px 0;     /* 세로 여백 줄이기 */
+    text-align: center;
+    padding: 4px 0;
 }

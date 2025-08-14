@@ -34,9 +34,13 @@ public class PitcherStats {
     private Integer l;        // 패 (Losses)
     private Integer sv;       // 세이브 (Saves)
     private Integer hld;      // 홀드 (Holds)
+
+    @Column(precision = 38,scale = 3) //decimal(38,3)
     private BigDecimal wpct;  // 승률 (Winning Percentage)
+
     @Column(length = 16)
     private String ip;        // 이닝 pitched (Innings Pitched) - 소수점 형태 유지
+
     private Integer h;        // 피안타 (Hits allowed)
     private Integer hr;       // 피홈런 (Home Runs allowed)
     private Integer bb;       // 볼넷 (Base on Balls)
@@ -53,11 +57,16 @@ public class PitcherStats {
     private Integer bsv;      // 블론 세이브 (Blown Saves)
     private Integer tbf;      // 상대 타자 수 (Total Batters Faced)
     private Integer np;       // 투구 수 (Number of Pitches)
+
+    @Column(precision = 38,scale = 3) //decimal(38,3)
     private BigDecimal avg;   // 피안타율 (Batting Average Against)
+
     @Column(name = "two_b")
     private Integer twoB;     // 2루타 허용 (Doubles allowed)
+
     @Column(name = "three_b")
     private Integer threeB;   // 3루타 허용 (Triples allowed)
+
     private Integer sac;      // 희생번트 허용 (Sacrifice Bunts)
     private Integer sf;       // 희생플라이 허용 (Sacrifice Flies)
     private Integer ibb;      // 고의사구 (Intentional Base on Balls)

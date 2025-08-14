@@ -35,6 +35,8 @@ public class KBOplayerInfo {
 
     private String imageUrl;  // S3 이미지 URL
 
+    private String kboPlayerId; // 크로 사이트 각선수별 id 수집 (동명이인 방지)
+
 
     //타자 , 투수에서 선수 이름을 매핑
     // 한 명의 선수가 여러 개의 타자 기록을 가질 수 있음

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title th:text="${teamName} + ' 투수 기록'">투수 기록</title>
+
+    <!-- 공통/투수 전용 CSS -->
+    <link rel="stylesheet" href="/pitchers/base-pitcherlist.css"/>
+    <link rel="stylesheet" href="/pitchers/pitcherList.css"/>
+    <!-- 팀별 테마 CSS (각 팀 색/로고 오버라이드) -->
+    <link rel="stylesheet" href="/teams/team-theme.css"/>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet"/>
+    <link rel="icon" type="image/png" href="/dugout.png"/>
+</head>
+
+<body class="stats-body" th:attr="data-team=${teamCode}">
+<!-- 팀 배너 -->
+<section class="team-hero">
+    <div class="team-hero-content">
+        <div class="team-hero-info">
+            <h1 th:text="${teamName} + ' 투수 기록'">SSG 투수 기록</h1>
+            <p class="slogan team-slogan" th:text="${teamSlogan}">NO LIMITS AMAZING LANDERS</p>
+        </div>
+        <div class="team-hero-logo" aria-hidden="true"></div>
+    </div>
+</section>
+
+<!-- 상단: 정렬/검색 -->
+<section class="section">
+    <form method="get" class="search-form filter-bar">
+        <input type="hidden" name="view" th:value="${view}"/>
+        <div class="filter-row">
+            <div class="filter-item">
+                <label>정렬</label>
+                <select name="sort" th:value="${sort}">
+                    <!-- 핵심 지표 -->
+                    <option value="era">ERA</option>
+                    <option value="whip">WHIP</option>
+                    <option value="wpct">승률</option>
+                    <option value="ip">IP</option>
+
+                    <!-- 누적 카운팅 -->
+                    <option value="w">W</option>
+                    <option value="l">L</option>
+                    <option value="sv">SV</option>
+                    <option value="hld">HLD</option>
+                    <option value="so">SO</option>
+                    <option value="bb">BB</option>
+                    <option value="h">H</option>
+                    <option value="hr">HR</option>
+                    <option value="r">R</option>
+                    <option value="er">ER</option>
+
+                    <!-- 세부 기록 -->
+                    <option value="cg">CG</option>
+                    <option value="sho">SHO</option>
+                    <option value="qs">QS</option>
+                    <option value="bsv">BSV</option>
+                    <option value="tbf">TBF</option>
+                    <option value="np">NP</option>
+
+                    <!-- 상대타율/장타 허용 -->
+                    <option value="avg">피안타율</option>
+                    <option value="twoB">2B 허용</option>
+                    <option value="threeB">3B 허용</option>
+                    <option value="sac">SAC 허용</option>
+                    <option value="sf">SF 허용</option>
+                    <option value="ibb">IBB</option>
+                    <option value="wp">WP</option>
+                    <option value="bk">BK</option>
+
+                    <!-- 이름 정렬이 필요하면 사용 -->
+                    <option value="nameKr">이름</option>
+                </select>
+            </div>
+
+            <div class="filter-item">
+                <label>순서</label>
+                <!-- ERA/WHIP/AVG 등은 오름차순이 일반적이라 기본 asc -->
+                <select name="order" th:value="${order}">
+                    <option value="asc">오름차순</option>
+                    <option value="desc">내림차순</option>
+                </select>
+            </div>
+
+            <div class="filter-item grow">
+                <label>검색</label>
+                <input class="search-input" type="text" name="q" placeholder="선수명" th:value="${q}"/>
+            </div>
+
+            <button class="btn search-button">검 색</button>
+        </div>
+    </form>
+</section>
+
+<!-- 뷰 네비 + 테이블 -->
+<section class="table-wrap section">
+    <div class="view-nav">
+        <button class="nav-btn" id="prevView" aria-label="이전 뷰">←</button>
+        <div class="dots">
+            <span class="dot" data-view="1"></span>
+            <span class="dot" data-view="2"></span>
+        </div>
+        <button class="nav-btn" id="nextView" aria-label="다음 뷰">→</button>
+    </div>
+
+    <div class="table-scroll">
+        <table id="statsTable">
+            <thead>
+            <tr>
+                <!-- 고정 -->
+                <th class="fixed-col">순위</th>
+                <th class="fixed-col">선수명</th>
+
+                <!-- 그룹 1 (이미지 1 순서) -->
+                <th class="group-1 th-tip stat-header" data-stat="ERA"  data-sort="era"><div class="tip-box"></div>ERA</th>
+                <th class="group-1 th-tip stat-header" data-stat="G"    data-sort="g"><div class="tip-box"></div>G</th>
+                <th class="group-1 th-tip stat-header" data-stat="W"    data-sort="w"><div class="tip-box"></div>W</th>
+                <th class="group-1 th-tip stat-header" data-stat="L"    data-sort="l"><div class="tip-box"></div>L</th>
+                <th class="group-1 th-tip stat-header" data-stat="SV"   data-sort="sv"><div class="tip-box"></div>SV</th>
+                <th class="group-1 th-tip stat-header" data-stat="HLD"  data-sort="hld"><div class="tip-box"></div>HLD</th>
+                <th class="group-1 th-tip stat-header" data-stat="WPCT" data-sort="wpct"><div class="tip-box"></div>WPCT</th>
+                <th class="group-1 th-tip stat-header" data-stat="IP"   data-sort="ip"><div class="tip-box"></div>IP</th>
+                <th class="group-1 th-tip stat-header" data-stat="H"    data-sort="h"><div class="tip-box"></div>H</th>
+                <th class="group-1 th-tip stat-header" data-stat="HR"   data-sort="hr"><div class="tip-box"></div>HR</th>
+                <th class="group-1 th-tip stat-header" data-stat="BB"   data-sort="bb"><div class="tip-box"></div>BB</th>
+                <th class="group-1 th-tip stat-header" data-stat="HBP"  data-sort="hbp"><div class="tip-box"></div>HBP</th>
+                <th class="group-1 th-tip stat-header" data-stat="SO"   data-sort="so"><div class="tip-box"></div>SO</th>
+                <th class="group-1 th-tip stat-header" data-stat="R"    data-sort="r"><div class="tip-box"></div>R</th>
+                <th class="group-1 th-tip stat-header" data-stat="ER"   data-sort="er"><div class="tip-box"></div>ER</th>
+                <th class="group-1 th-tip stat-header" data-stat="WHIP" data-sort="whip"><div class="tip-box"></div>WHIP</th>
+
+                <!-- 그룹 2 (이미지 2 순서) -->
+                <th class="group-2 th-tip stat-header" data-stat="CG"   data-sort="cg"><div class="tip-box"></div>CG</th>
+                <th class="group-2 th-tip stat-header" data-stat="SHO"  data-sort="sho"><div class="tip-box"></div>SHO</th>
+                <th class="group-2 th-tip stat-header" data-stat="QS"   data-sort="qs"><div class="tip-box"></div>QS</th>
+                <th class="group-2 th-tip stat-header" data-stat="BSV"  data-sort="bsv"><div class="tip-box"></div>BSV</th>
+                <th class="group-2 th-tip stat-header" data-stat="TBF"  data-sort="tbf"><div class="tip-box"></div>TBF</th>
+                <th class="group-2 th-tip stat-header" data-stat="NP"   data-sort="np"><div class="tip-box"></div>NP</th>
+                <th class="group-2 th-tip stat-header" data-stat="AVG"  data-sort="avg"><div class="tip-box"></div>AVG</th>
+                <th class="group-2 th-tip stat-header" data-stat="2B"   data-sort="twoB"><div class="tip-box"></div>2B</th>
+                <th class="group-2 th-tip stat-header" data-stat="3B"   data-sort="threeB"><div class="tip-box"></div>3B</th>
+                <th class="group-2 th-tip stat-header" data-stat="SAC"  data-sort="sac"><div class="tip-box"></div>SAC</th>
+                <th class="group-2 th-tip stat-header" data-stat="SF"   data-sort="sf"><div class="tip-box"></div>SF</th>
+                <th class="group-2 th-tip stat-header" data-stat="IBB"  data-sort="ibb"><div class="tip-box"></div>IBB</th>
+                <th class="group-2 th-tip stat-header" data-stat="WP"   data-sort="wp"><div class="tip-box"></div>WP</th>
+                <th class="group-2 th-tip stat-header" data-stat="BK"   data-sort="bk"><div class="tip-box"></div>BK</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="stat, i : ${pitchers}">
+                <!-- 고정 -->
+                <td class="fixed-col fixed-col--rank" th:text="${i.index + 1}">1</td>
+                <td class="fixed-col fixed-col--name" th:text="${stat.player.nameKr}"></td>
+
+                <!-- 그룹 1 -->
+                <td class="group-1" data-stat="ERA"  th:attr="data-value=${stat.era}"  th:text="${stat.era}"></td>
+                <td class="group-1" data-stat="G"    th:attr="data-value=${stat.g}"    th:text="${stat.g}"></td>
+                <td class="group-1" data-stat="W"    th:attr="data-value=${stat.w}"    th:text="${stat.w}"></td>
+                <td class="group-1" data-stat="L"    th:attr="data-value=${stat.l}"    th:text="${stat.l}"></td>
+                <td class="group-1" data-stat="SV"   th:attr="data-value=${stat.sv}"   th:text="${stat.sv}"></td>
+                <td class="group-1" data-stat="HLD"  th:attr="data-value=${stat.hld}"  th:text="${stat.hld}"></td>
+                <td class="group-1" data-stat="WPCT" th:attr="data-value=${stat.wpct}" th:text="${stat.wpct}"></td>
+                <td class="group-1" data-stat="IP"   th:attr="data-value=${stat.ip}"   th:text="${stat.ip}"></td>
+                <td class="group-1" data-stat="H"    th:attr="data-value=${stat.h}"    th:text="${stat.h}"></td>
+                <td class="group-1" data-stat="HR"   th:attr="data-value=${stat.hr}"   th:text="${stat.hr}"></td>
+                <td class="group-1" data-stat="BB"   th:attr="data-value=${stat.bb}"   th:text="${stat.bb}"></td>
+                <td class="group-1" data-stat="HBP"  th:attr="data-value=${stat.hbp}"  th:text="${stat.hbp}"></td>
+                <td class="group-1" data-stat="SO"   th:attr="data-value=${stat.so}"   th:text="${stat.so}"></td>
+                <td class="group-1" data-stat="R"    th:attr="data-value=${stat.r}"    th:text="${stat.r}"></td>
+                <td class="group-1" data-stat="ER"   th:attr="data-value=${stat.er}"   th:text="${stat.er}"></td>
+                <td class="group-1" data-stat="WHIP" th:attr="data-value=${stat.whip}" th:text="${stat.whip}"></td>
+
+                <!-- 그룹 2 -->
+                <td class="group-2" data-stat="CG"   th:attr="data-value=${stat.cg}"     th:text="${stat.cg}"></td>
+                <td class="group-2" data-stat="SHO"  th:attr="data-value=${stat.sho}"    th:text="${stat.sho}"></td>
+                <td class="group-2" data-stat="QS"   th:attr="data-value=${stat.qs}"     th:text="${stat.qs}"></td>
+                <td class="group-2" data-stat="BSV"  th:attr="data-value=${stat.bsv}"    th:text="${stat.bsv}"></td>
+                <td class="group-2" data-stat="TBF"  th:attr="data-value=${stat.tbf}"    th:text="${stat.tbf}"></td>
+                <td class="group-2" data-stat="NP"   th:attr="data-value=${stat.np}"     th:text="${stat.np}"></td>
+                <td class="group-2" data-stat="AVG"  th:attr="data-value=${stat.avg}"    th:text="${stat.avg}"></td>
+                <td class="group-2" data-stat="2B"   th:attr="data-value=${stat.twoB}"   th:text="${stat.twoB}"></td>
+                <td class="group-2" data-stat="3B"   th:attr="data-value=${stat.threeB}" th:text="${stat.threeB}"></td>
+                <td class="group-2" data-stat="SAC"  th:attr="data-value=${stat.sac}"    th:text="${stat.sac}"></td>
+                <td class="group-2" data-stat="SF"   th:attr="data-value=${stat.sf}"     th:text="${stat.sf}"></td>
+                <td class="group-2" data-stat="IBB"  th:attr="data-value=${stat.ibb}"    th:text="${stat.ibb}"></td>
+                <td class="group-2" data-stat="WP"   th:attr="data-value=${stat.wp}"     th:text="${stat.wp}"></td>
+                <td class="group-2" data-stat="BK"   th:attr="data-value=${stat.bk}"     th:text="${stat.bk}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+    <div class="legend">
+        <span class="legend-item">컬럼명을 클릭하면 정렬됩니다.</span>
+        <p class="record-date">
+            📅 이 데이터는 <span th:text="${latestDate}">2025-08-11</span> 기준입니다.
+        </p>
+    </div>
+</section>
+
+<div class="back-home-section">
+    <a href="/dugout" class="btn neon-home-btn">🏠 더그아웃으로 가기</a>
+</div>
+
+<footer>
+    © 2025 더그아웃. “당신의 손 안에 있는 야구장, 여기는 더그아웃입니다.”
+</footer>
+
+<!-- JS: 타자용 스크립트 재활용(컬럼 클릭 정렬/그룹 전환/툴팁) -->
+<script src="/pitchers/pitcher-table.js"></script>
+</body>
+</html>

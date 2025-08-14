@@ -26,9 +26,13 @@ public interface KBOplayerInfoRepository extends JpaRepository<KBOplayerInfo, Lo
     // 이름과 팀으로 단일 선수 검색
     KBOplayerInfo findByNameKrAndTeam(String nameKr, String team);
 
-    //동명이인 떄문에 유니폼과 비교하자
-    KBOplayerInfo findByNameKrAndTeamAndUniformNumber(String nameKr, String team, int uniformNumber);
-
     KBOplayerInfo findByNameKrAndTeamAndBirth(String nameKR, String team, String birth);
+
+
+    //동명이인 방지 id까지 같이 수집
+    KBOplayerInfo findByTeamAndKboPlayerId(String team, String kboPlayerId);
+    List<KBOplayerInfo> findAllByTeamAndNameKr(String team, String nameKr);
+
+
 
 }

@@ -1,10 +1,7 @@
 package com.kim.SpringStudy.controller;
 
 
-import com.kim.SpringStudy.domain.BatterStats;
-import com.kim.SpringStudy.domain.KBO;
-import com.kim.SpringStudy.domain.KBOTeam;
-import com.kim.SpringStudy.domain.KBOplayerInfo;
+import com.kim.SpringStudy.domain.*;
 import com.kim.SpringStudy.dto.GameDateDTO;
 import com.kim.SpringStudy.dto.WeeklyWeatherDTO;
 import com.kim.SpringStudy.repository.KBORepository;
@@ -38,6 +35,7 @@ public class DugoutController {
     private final GameDateService gameDateService;
     private final WeatherService weatherService;
     private final BatterService batterService;
+    private final PitcherService pitcherService;
 
     //더그 아웃 입장
     @GetMapping("/dugout")
@@ -282,7 +280,7 @@ public class DugoutController {
                               @RequestParam(defaultValue = "avg") String sort,   // 기본: 타율
                               @RequestParam(defaultValue = "desc") String order, // 기본: 내림차순
                               @RequestParam(defaultValue = "") String q,
-                              Model model){
+                              Model model) {
 
         //css 전달용 (팀마다 전용 css)
         String teamCode = TeamNameMapper.toViewFolder(team);
@@ -295,7 +293,7 @@ public class DugoutController {
 
 
         //db 팀 조회
-        List<BatterStats> rows = batterService.listByTeam(dbTeamName,q,sort,order);
+        List<BatterStats> rows = batterService.listByTeam(dbTeamName, q, sort, order);
         // 뷰 전송
         model.addAttribute("teamCode", teamCode);     // CSS/테마용: <body data-team="${teamCode}">
         model.addAttribute("teamName", teamName);     // 페이지 타이틀/배너용
@@ -314,6 +312,40 @@ public class DugoutController {
 
 
         return "teams/batterList";
+    }
+
+    @GetMapping("/team/{team}/pitcher")
+    public String teamPitcher(@PathVariable String team,
+                              @RequestParam(defaultValue = "1") int view,
+                              @RequestParam(defaultValue = "era") String sort,
+                              @RequestParam(defaultValue = "asc") String order,
+                              @RequestParam(defaultValue = "") String q,
+                              Model model) {
+
+        //css 전달용 (팀마다 전용 css)
+        String teamCode = TeamNameMapper.toViewFolder(team);
+        String dbTeamName = TeamNameMapper.toDbTeamName(team);
+        String teamName = dbTeamName;
+
+        // 데이터 조회
+        List<PitcherStats> rows = pitcherService.listByTeam(dbTeamName, q, sort, order);
+
+        //뷰 바인딩
+        model.addAttribute("teamCode", teamCode);     // CSS/테마용: <body data-team="${teamCode}">
+        model.addAttribute("teamName", teamName);     // 페이지 타이틀/배너용
+        model.addAttribute("teamSlogan", TeamSloganUtil.getSlogan(team));// 팀슬로건
+
+        //배너 아래 검색 폼
+        model.addAttribute("view", view);
+        model.addAttribute("sort", sort);
+        model.addAttribute("order", order);
+
+        //최신날짜
+        model.addAttribute("latestDate", pitcherService.getLatestDate(dbTeamName));
+        model.addAttribute("pitchers", rows);
+
+        return "teams/pitcherList";
+
     }
 
 }

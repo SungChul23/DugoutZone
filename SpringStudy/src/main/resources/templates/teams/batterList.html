@@ -118,8 +118,8 @@
             <tbody>
             <tr th:each="stat, iterStat : ${batters}">
                 <!-- 고정 -->
-                <td class="fixed-col rank-cell" th:text="${iterStat.index + 1}">1</td>
-                <td class="fixed-col" th:text="${stat.player.nameKr}"></td>
+                <td class="fixed-col fixed-col--rank rank-cell" th:text="${iterStat.index + 1}">1</td>
+                <td class="fixed-col fixed-col--name" th:text="${stat.player.nameKr}"></td>
 
                 <!-- 그룹 1 -->
                 <td class="group-1" data-stat="AVG" th:attr="data-value=${stat.avg}" th:text="${stat.avg}"></td>
@@ -151,8 +151,6 @@
             </tr>
             </tbody>
         </table>
-
-
     </div>
 
     <div class="legend">

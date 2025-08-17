@@ -1,0 +1,170 @@
+body {
+    background: linear-gradient(to bottom right, #0f172a, #1e293b);
+    font-family: 'Poppins', sans-serif;
+    color: #e2e8f0;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* 상단 히어로 */
+.rules-hero {
+    padding: 4rem 1rem 4rem;
+    text-align: center;
+    background: radial-gradient(circle at top, rgba(0, 240, 255, 0.15), transparent);
+}
+.rules-title {
+    font-size: 2.5rem;
+    color: #00f0ff;
+    text-shadow: 0 0 8px #00f0ff, 0 0 16px #00f0ff;
+    margin-bottom: 0.5rem;
+}
+.rules-subtitle {
+    font-size: 1.1rem;
+    color: #94a3b8;
+    margin-bottom: 2rem;
+}
+
+/* 메뉴 카드 */
+.rules-container {
+    padding: 0 2rem 4rem;
+    max-width: 1000px;
+    margin: 3rem auto 0;
+}
+.rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+}
+.rules-card {
+    background-color: rgba(30, 41, 59, 0.9);
+    color: #00f0ff;
+    padding: 1.5rem;
+    text-decoration: none;
+    font-size: 1.1rem;
+    border-radius: 12px;
+    transition: transform 0.2s, background-color 0.2s;
+    box-shadow: 0 0 12px rgba(0, 240, 255, 0.1);
+    backdrop-filter: blur(4px);
+}
+.rules-card:hover {
+    background-color: rgba(51, 65, 85, 0.9);
+    transform: translateY(-4px);
+}
+
+/* 버튼 */
+.back-home-section {
+    margin-top: 3rem;
+    text-align: center;
+}
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.2s, box-shadow 0.2s;
+}
+.neon-home-btn {
+    background-color: #00f0ff;
+    color: #0f172a;
+    box-shadow: 0 0 8px #00f0ff;
+}
+.neon-home-btn:hover {
+    background-color: #38bdf8;
+    box-shadow: 0 0 12px #38bdf8;
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .rules-title { font-size: 2rem; }
+    .rules-subtitle { font-size: 1rem; }
+}
+/* 아코디언 FAQ 스타일 */
+.rules-faq {
+    max-width: 800px;
+    margin: 0 auto;
+    display: grid;
+    gap: 1rem;
+}
+
+.faq {
+    background: rgba(30,41,59,0.9);
+    border-radius: 12px;
+    padding: 0.6rem 1rem;
+    box-shadow: 0 0 12px rgba(0,240,255,0.08);
+    border: 1px solid rgba(0,240,255,0.2);
+}
+
+.faq > summary {
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+    color: #00f0ff;
+    padding: .4rem 0;
+}
+
+.faq[open] {
+    background: rgba(51,65,85,0.9);
+    box-shadow: 0 0 16px rgba(0,240,255,0.15);
+}
+
+.faq-content {
+    margin-top: .5rem;
+    color: #e2e8f0;
+    line-height: 1.6;
+}
+/* ------- 공격 페이지 전용 가독성 보강 ------- */
+
+/* 크럼브 */
+.crumbs {
+    max-width: 800px; margin: 0 auto 1rem; padding: 0 .2rem;
+    color: #94a3b8; font-size: .95rem;
+}
+.crumb { color: #94a3b8; text-decoration: none; }
+.crumb:hover { color: #cbd5e1; }
+.slash { margin: 0 .35rem; }
+.crumb.current { color: #e2e8f0; }
+
+/* 인라인 팁 */
+.inline-tips {
+    max-width: 800px; margin: 0 auto 1rem; padding: .6rem .8rem;
+    background: rgba(148,163,184,0.08);
+    border: 1px dashed rgba(0,240,255,0.25);
+    border-radius: 10px;
+}
+.badge {
+    display: inline-block; padding: .1rem .5rem; border-radius: 999px;
+    background: #00f0ff; color: #0f172a; font-weight: 700; font-size: .75rem;
+    margin-right: .35rem;
+}
+.badge.warn { background: #f59e0b; color: #0f172a; }
+
+/* 리스트(가독성) */
+.factlist { margin: .4rem 0 .6rem 1.1rem; line-height: 1.65; }
+
+/* 콜아웃 박스 */
+.callout {
+    margin-top: .6rem; padding: .7rem .8rem; border-radius: 10px;
+    background: rgba(148,163,184,0.08); border: 1px solid rgba(0,240,255,0.18);
+}
+.callout.warn { border-color: rgba(245,158,11,0.6); box-shadow: 0 0 10px rgba(245,158,11,0.12) inset; }
+.callout.kbo  { border-color: rgba(0,240,255,0.6); box-shadow: 0 0 10px rgba(0,240,255,0.12) inset; }
+
+/* details 공통(이미 quickstart에서 썼다면 생략 가능) */
+.rules-faq { max-width: 800px; margin: 0 auto; display: grid; gap: 1rem; }
+.faq { background: rgba(30,41,59,0.9); border-radius: 12px; padding: 0.6rem 1rem;
+    box-shadow: 0 0 12px rgba(0,240,255,0.08); border: 1px solid rgba(0,240,255,0.2); }
+.faq > summary { font-size: 1.05rem; font-weight: 700; cursor: pointer; list-style: none;
+    color: #00f0ff; padding: .45rem 0; }
+.faq[open] { background: rgba(51,65,85,0.9); box-shadow: 0 0 16px rgba(0,240,255,0.15); }
+.faq-content { margin-top: .45rem; color: #e2e8f0; line-height: 1.7; }
+.recommend-box {
+    background-color: rgba(255,255,255,0.05);
+    border-left: 4px solid #00f0ff;
+    padding: 1rem;
+    margin: 2rem auto;
+    max-width: 600px;
+    color: #cbd5e1;
+}

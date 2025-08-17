@@ -44,6 +44,8 @@
         <div class="game-row" th:each="game : ${games}">
             <div class="time" th:text="${game.time}">18:00</div>
 
+
+
             <div class="matchup">
         <span class="team">
             <img th:src="'https://myspringstudybucket.s3.ap-northeast-2.amazonaws.com/test/teamLogo/teamLogo/' + ${teamLogoMap[game.homeTeam]} + '.png'"
@@ -60,11 +62,13 @@
                  th:alt="${game.awayTeam}"
                  class="team-logo"/>
         </span>
+                <div class="stadium-info" th:text=" ${game.stadium}"
+                     style="font-size: 0.9rem; color: #94a3b8; margin-top: 4px;">
+                    고척 스카이돔
+                </div>
             </div>
         </div>
-
-
-        <!-- ✅ 경기 없을 때 메시지: 반복 밖으로 빼야 함 -->
+        <!-- 경기 없을 때 메시지: 반복 밖으로 빼야 함 -->
         <p th:if="${games.size() == 0}" style="text-align:center; margin-top: 40px; color: #94a3b8;">
             😢 선택한 날짜에 경기가 없습니다.
         </p>

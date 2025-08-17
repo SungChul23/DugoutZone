@@ -94,3 +94,51 @@ body {
         font-size: 1rem;
     }
 }
+.recommend-box {
+    background-color: rgba(255, 255, 255, 0.04);
+    border-left: 4px solid #00f0ff;
+    padding: 1rem 1.5rem;
+    margin: 2rem auto 2rem;
+    max-width: 720px;
+    color: #cbd5e1;
+    border-radius: 6px;
+}
+.recommend-box h3 {
+    margin: 0 0 0.5rem;
+}
+.recommend-box ul {
+    padding-left: 1.2rem;
+    margin: 0;
+}
+.recommend-box li {
+    margin-bottom: 0.3rem;
+}
+@media (max-width: 768px) {
+    .voca-title {
+        font-size: 2rem;
+    }
+
+    .voca-subtitle {
+        font-size: 1rem;
+        line-height: 1.5;
+        padding: 0 1rem;
+    }
+
+    .voca-card {
+        padding: 1.2rem;
+        font-size: 1rem;
+    }
+
+    .recommend-box {
+        padding: 0.8rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    .recommend-box h3 {
+        font-size: 1.05rem;
+    }
+
+    .recommend-box ul {
+        padding-left: 1rem;
+    }
+}

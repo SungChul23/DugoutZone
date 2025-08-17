@@ -1,0 +1,228 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body.records-body {
+    background-color: #0f172a;
+    color: #e2e8f0;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: center;
+    position: relative;
+}
+
+.records-hero {
+    padding: 15px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.records-hero h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    color: #00f0ff;
+    text-shadow: 0 0 10px #00f0ff;
+}
+
+.records-hero h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #00f0ff;
+    text-shadow: 0 0 10px #00f0ff;
+}
+
+.records-hero p {
+    font-size: 1.2rem;
+    color: #94a3b8;
+    margin-bottom: 40px;
+}
+
+.records-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 15px 35px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #0f172a;
+    background-color: #e2e8f0;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+}
+
+.neon-blue {
+    background-color: #00f0ff;
+    box-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+}
+
+.neon-violet {
+    background-color: #8b5cf6;
+    box-shadow: 0 0 10px #8b5cf6, 0 0 20px #8b5cf6;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(255, 255, 255, 0.6);
+}
+
+footer {
+    margin-top: 80px;
+    padding: 20px;
+    font-size: 0.9rem;
+    color: #64748b;
+}
+
+.team-logos {
+    padding-top: 30px;
+    margin-bottom: 20px;
+    color: #38bdf8;
+    font-size: 1.1rem;
+    z-index: 1;
+}
+
+body::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 200%;
+    height: 200%;
+    background-image: radial-gradient(circle, rgba(0,240,255,0.15) 12%, transparent 60%);
+    background-size: 150px 150px;
+    background-position: center;
+    animation: moveBg 10s linear infinite;
+    z-index: 0;
+}
+
+@keyframes moveBg {
+    0%   { transform: translate(0%, 0%); }
+    50%  { transform: translate(-10%, -10%); }
+    100% { transform: translate(0%, 0%); }
+}
+
+.records-hero, footer, .team-logos {
+    position: relative;
+    z-index: 1;
+}
+.logo-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 30px;
+    padding: 40px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    z-index: 1;
+}
+
+.team-card {
+    background-color: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,240,255,0.2);
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    position: relative;
+}
+
+.team-card:hover {
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 0 15px rgba(0,240,255,0.3);
+}
+
+.team-logo {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin-bottom: 10px;
+    filter: drop-shadow(0 0 6px rgba(0, 240, 255, 0.3));
+}
+
+/* 구단명 */
+.team-name {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #e2e8f0;
+    margin-bottom: 8px;
+}
+
+/* 버튼 영역 */
+.team-buttons {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.4s ease-in-out;
+}
+
+/* 클릭 시 열리는 효과 */
+.team-card.expanded .team-buttons {
+    max-height: 100px;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* 버튼 공통 스타일 */
+.team-buttons .btn {
+    display: inline-block;
+    margin: 6px 8px;
+    padding: 8px 16px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    text-decoration: none;
+    transition: transform 0.15s ease-in-out, filter 0.2s ease-in-out;
+    width: auto;
+}
+
+.team-buttons .btn:hover {
+    transform: scale(1.05);
+    filter: brightness(1.15);
+}
+
+/* 구단별 색상 (더 눈에 띄게 조정) */
+.team-card.ssg .btn       { background-color: #dc143c; }
+.team-card.lg .btn        { background-color: #c2185b; }
+.team-card.doosan .btn    { background-color: #1e3a8a; }
+.team-card.hanwha .btn    { background-color: #f97316; }
+.team-card.kia .btn       { background-color: #f43f5e; }
+.team-card.lotte .btn     { background-color: #e11d48; }
+.team-card.samsung .btn   { background-color: #2563eb; }
+.team-card.nc .btn        { background-color: #334155; }
+.team-card.kt .btn        { background-color: #111827; }
+.team-card.kiwoom .btn    { background-color: #9d174d; }
+
+.back-home-section {
+    margin-top: 40px;
+    text-align: center;
+    position: relative;
+    z-index: 10;  /* ✅ 배경보다 위에 오도록 */
+}
+
+.back-home-section .btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #00f0ff;
+    color: #0f172a;
+    border-radius: 8px;
+    font-weight: bold;
+    text-decoration: none;
+    box-shadow: 0 0 10px #00f0ff, 0 0 20px #00f0ff;
+    position: relative;
+    z-index: 11;  /* ✅ 버튼 자체도 위 */
+}

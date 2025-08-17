@@ -2,6 +2,7 @@ package com.kim.SpringStudy.controller;
 
 
 import com.kim.SpringStudy.domain.*;
+import com.kim.SpringStudy.dto.BatterSearchDTO;
 import com.kim.SpringStudy.dto.GameDateDTO;
 import com.kim.SpringStudy.dto.WeeklyWeatherDTO;
 import com.kim.SpringStudy.repository.KBORepository;
@@ -12,6 +13,7 @@ import com.kim.SpringStudy.dto.NewsDTO;
 import com.kim.SpringStudy.util.TeamNameMapper;
 import com.kim.SpringStudy.util.TeamSloganUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -380,37 +382,71 @@ public class DugoutController {
     public String showRules() {
         return "baseballRules/rules";
     }
+
     @GetMapping("/rules/quickstart")
     public String showQuickstart() {
         return "baseballRules/quickstart";
     }
+
     @GetMapping("/rules/offense")
     public String showOffense() {
         return "baseballRules/offense";
     }
+
     @GetMapping("/rules/defense")
     public String showDefense() {
         return "baseballRules/defense";
     }
+
     @GetMapping("/rules/baserun")
     public String showBaserun() {
         return "baseballRules/baserun";
     }
+
     @GetMapping("/rules/pitching")
     public String showPitching() {
         return "baseballRules/pitching";
     }
+
     @GetMapping("/rules/calls")
     public String showCalls() {
         return "baseballRules/calls";
     }
+
     @GetMapping("/rules/kbo")
     public String showKBO() {
         return "baseballRules/kbo";
     }
+
     @GetMapping("/rules/mis")
     public String showMis() {
         return "baseballRules/mis";
+    }
+    // 10구단 타자 기록실
+
+    @GetMapping("/allrecords")
+    public String showAllRecord() {
+        return "recordroom/allrecords";
+    }
+
+
+
+    @GetMapping("/allrecords/batter")
+    public String searchBatter(@RequestParam(value = "keyword", required = false) String keyword,
+                               Model model) {
+
+        List<BatterSearchDTO> result;
+        //이름이 널이 아니아고 공백이 아니라면
+        if(keyword != null && !keyword.isBlank()){
+            result = batterService.searchBatters(keyword);
+        }else{
+            result = List.of(); //빈리스트 반환
+        }
+
+        model.addAttribute("name", keyword);
+        model.addAttribute("batterList", result);
+
+        return "recordroom/allbatter";
     }
 
 

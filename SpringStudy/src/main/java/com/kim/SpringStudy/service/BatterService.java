@@ -1,6 +1,7 @@
 package com.kim.SpringStudy.service;
 
 import com.kim.SpringStudy.domain.BatterStats;
+import com.kim.SpringStudy.dto.BatterSearchDTO;
 import com.kim.SpringStudy.repository.BatterStatsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -48,6 +49,11 @@ public class BatterService {
             case "avg","obp","slg","ops","risp","phBa" -> sort;
             default -> "ops";
         };
+    }
+
+    //10구단 모든 타자 검색
+    public List<BatterSearchDTO> searchBatters(String keyword){
+        return batterStatsRepository.searchByName(keyword);
     }
 }
 

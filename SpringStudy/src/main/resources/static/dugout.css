@@ -131,7 +131,7 @@ footer {
 
 .marquee-track {
     display: flex;
-    animation: scrollLeft 5s linear infinite;
+    animation: scrollLeft 8s linear infinite;
 }
 
 .marquee-track img {

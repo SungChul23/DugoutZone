@@ -16,7 +16,7 @@ function updateRanks() {
     });
 }
 
-// ===== 컬럼 클릭 시 클라이언트 정렬 =====
+// ===== 컬럼 클릭 시 정렬 =====
 document.querySelectorAll('.stat-header').forEach(header => {
     header.addEventListener('click', () => {
         const stat = header.getAttribute('data-stat');
@@ -44,7 +44,7 @@ document.querySelectorAll('.stat-header').forEach(header => {
     });
 });
 
-// ===== 네온 툴팁 (마우스 위치 기반) =====
+// ===== 네온 툴팁 =====
 let tooltip = document.createElement('div');
 tooltip.className = 'custom-tooltip';
 document.body.appendChild(tooltip);
@@ -65,7 +65,7 @@ document.querySelectorAll('.th-tip').forEach(th => {
     const statKey = th.getAttribute('data-stat');
     const tipText = STAT_DICT[statKey] || '';
 
-    th.removeAttribute('title'); // 기본 브라우저 툴팁 제거
+    th.removeAttribute('title');
 
     th.addEventListener('mouseenter', () => {
         if (tipText) {
@@ -84,7 +84,7 @@ document.querySelectorAll('.th-tip').forEach(th => {
     });
 });
 
-// ===== 그룹 슬라이드 =====
+// ===== 슬라이드 전환 =====
 let currentView = 1;
 const totalViews = 2;
 
@@ -111,7 +111,7 @@ document.querySelectorAll('.dot').forEach(dot => {
     });
 });
 
-// ===== 터치 스와이프 (가로 스크롤 보호) =====
+// ===== 터치 스와이프 전환 =====
 const scrollContainer = document.querySelector('.table-scroll');
 let touchStartX = null;
 let touchStartScrollLeft = null;
@@ -126,7 +126,6 @@ scrollContainer.addEventListener('touchmove', (e) => {
     const dx = e.touches[0].clientX - touchStartX;
     const movedScroll = Math.abs(scrollContainer.scrollLeft - touchStartScrollLeft);
 
-    // 스크롤을 하고 있다면 그룹 전환 안 함
     if (movedScroll > 5) return;
 
     if (Math.abs(dx) > 50 && movedScroll <= 5) {
@@ -144,8 +143,6 @@ scrollContainer.addEventListener('touchend', () => {
     touchStartX = null;
 });
 
-// ===== 초기 실행 =====
+// ===== 초기화 =====
 applyView();
 updateRanks();
-
-

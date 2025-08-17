@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>타자 기록 검색 | DUGOUT</title>
+  <link rel="stylesheet" href="/recordroom/allbatters.css">
+  <link rel="icon" href="/dugout.png">
+  <script defer src="/recordroom/allbatter-table.js"></script>
+</head>
+<body class="records-body">
+
+<section class="records-hero">
+  <h1>타자 기록 검색</h1>
+  <p>🔍 선수 이름으로 최신 시즌 기록을 검색해보세요</p>
+
+  <form th:action="@{/allrecords/batter}" method="get" class="search-form">
+    <input type="text" name="keyword" placeholder="예: 김도영"
+           th:value="${keyword}" required>
+    <button type="submit" class="btn neon-blue">검색</button>
+  </form>
+</section>
+
+<section class="search-results" th:if="${batterList != null}">
+  <div class="slider-controls">
+    <button id="prevView">⏪</button>
+    <span class="dot active" data-view="1"></span>
+    <span class="dot" data-view="2"></span>
+    <button id="nextView">⏩</button>
+  </div>
+
+  <div class="table-scroll">
+    <table class="records-table">
+      <thead>
+      <tr class="group group-1">
+        <th>이름</th>
+        <th>팀</th>
+        <th>AVG</th>
+        <th>G</th>
+        <th>PA</th>
+        <th>AB</th>
+        <th>R</th>
+        <th>H</th>
+        <th>2B</th>
+        <th>3B</th>
+        <th>HR</th>
+        <th>TB</th>
+        <th>RBI</th>
+        <th>SAC</th>
+        <th>SF</th>
+      </tr>
+      <tr class="group group-2" style="display: none;">
+        <th>BB</th>
+        <th>IBB</th>
+        <th>HBP</th>
+        <th>SO</th>
+        <th>GDP</th>
+        <th>SLG</th>
+        <th>OBP</th>
+        <th>OPS</th>
+        <th>MH</th>
+        <th>RISP</th>
+        <th>PH-BA</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="batter : ${batterList}">
+        <!-- 그룹 1 -->
+        <td class="group group-1" th:text="${batter.nameKr}"></td>
+        <td class="group group-1" th:text="${batter.team}"></td>
+        <td class="group group-1" th:text="${batter.avg}"></td>
+        <td class="group group-1" th:text="${batter.g}"></td>
+        <td class="group group-1" th:text="${batter.pa}"></td>
+        <td class="group group-1" th:text="${batter.ab}"></td>
+        <td class="group group-1" th:text="${batter.r}"></td>
+        <td class="group group-1" th:text="${batter.h}"></td>
+        <td class="group group-1" th:text="${batter.twoB}"></td>
+        <td class="group group-1" th:text="${batter.threeB}"></td>
+        <td class="group group-1" th:text="${batter.hr}"></td>
+        <td class="group group-1" th:text="${batter.tb}"></td>
+        <td class="group group-1" th:text="${batter.rbi}"></td>
+        <td class="group group-1" th:text="${batter.sac}"></td>
+        <td class="group group-1" th:text="${batter.sf}"></td>
+
+        <!-- 그룹 2 -->
+        <td class="group group-2" style="display: none;" th:text="${batter.bb}"></td>
+        <td class="group group-2" style="display: none;" th:text="${batter.ibb}"></td>
+        <td class="group group-2" style="display: none;" th:text="${batter.hbp}"></td>
+        <td class="group group-2" style="display: none;" th:text="${batter.so}"></td>
+        <td class="group group-2" style="display: none;" th:text="${batter.gdp}"></td>
+        <td class="group group-2" style="display: none;" th:text="${batter.slg}"></td>
+        <td class="group group-2" style="display: none;" th:text="${batter.obp}"></td>
+        <td class="group group-2" style="display: none;" th:text="${batter.ops}"></td>
+        <td class="group group-2" style="display: none;" th:text="${batter.mh}"></td>
+        <td class="group group-2" style="display: none;" th:text="${batter.risp}"></td>
+        <td class="group group-2" style="display: none;" th:text="${batter.phBa}"></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="back-home-section">
+  <a href="/allrecords" class="btn neon-home-btn">🏠 기록실로</a>
+</div>
+
+<footer>
+  © 2025 더그아웃 | 타자 기록 검색
+</footer>
+
+</body>
+</html>

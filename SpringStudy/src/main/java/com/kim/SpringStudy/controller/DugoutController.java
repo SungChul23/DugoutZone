@@ -2,14 +2,9 @@ package com.kim.SpringStudy.controller;
 
 
 import com.kim.SpringStudy.domain.*;
-import com.kim.SpringStudy.dto.BatterSearchDTO;
-import com.kim.SpringStudy.dto.GameDateDTO;
-import com.kim.SpringStudy.dto.WeeklyWeatherDTO;
-import com.kim.SpringStudy.repository.KBORepository;
-import com.kim.SpringStudy.repository.KBOTeamRepository;
-import com.kim.SpringStudy.repository.KBOplayerInfoRepository;
+import com.kim.SpringStudy.dto.*;
+import com.kim.SpringStudy.repository.*;
 import com.kim.SpringStudy.service.*;
-import com.kim.SpringStudy.dto.NewsDTO;
 import com.kim.SpringStudy.util.TeamNameMapper;
 import com.kim.SpringStudy.util.TeamSloganUtil;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +33,8 @@ public class DugoutController {
     private final WeatherService weatherService;
     private final BatterService batterService;
     private final PitcherService pitcherService;
+    private final BatterStatsRepository batterStatsRepository;
+    private final PitcherStatsRepository pitcherStatsRepository;
 
     //더그 아웃 입장
     @GetMapping("/dugout")
@@ -430,7 +427,7 @@ public class DugoutController {
     }
 
 
-
+    //기록실 기능 - 10구단 타자 검색
     @GetMapping("/allrecords/batter")
     public String searchBatter(@RequestParam(value = "keyword", required = false) String keyword,
                                Model model) {
@@ -442,12 +439,37 @@ public class DugoutController {
         }else{
             result = List.of(); //빈리스트 반환
         }
+        //최신 기록 가져오기
+        LocalDate latestDate = batterStatsRepository.findLatestRecordDate();
 
         model.addAttribute("name", keyword);
         model.addAttribute("batterList", result);
+        model.addAttribute("latestDate", latestDate);
 
         return "recordroom/allbatter";
     }
 
+    //기록실 기능 - 10구단 투수 검색
+    @GetMapping("/allrecords/pitcher")
+    public String searchPitcher(@RequestParam(value = "keyword", required = false) String keyword,
+                               Model model) {
+
+        List<PitcherSearchDTO> result;
+        //이름이 널이 아니아고 공백이 아니라면
+        if(keyword != null && !keyword.isBlank()){
+            result = pitcherService.searchPitchers(keyword);
+        }else{
+            result = List.of(); //빈리스트 반환
+        }
+
+        //최신 기록 가져오기
+        LocalDate latestDate = pitcherStatsRepository.findLatestRecordDate();
+
+        model.addAttribute("name", keyword);
+        model.addAttribute("pitcherList", result);
+        model.addAttribute("latestDate", latestDate);
+
+        return "recordroom/allpitcher";
+    }
 
 }

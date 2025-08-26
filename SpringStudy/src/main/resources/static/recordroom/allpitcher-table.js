@@ -1,20 +1,36 @@
-// ===== 툴팁 설명 데이터 =====
+// ===== 툴팁 설명 데이터 (투수용) =====
 const STAT_DICT = {
-    "AVG": "타율 (H/AB)", "G": "경기수", "PA": "타석", "AB": "타수", "R": "득점", "H": "안타",
-    "2B": "2루타", "3B": "3루타", "HR": "홈런", "TB": "총루타", "RBI": "타점", "SAC": "희생번트", "SF": "희생플라이",
-    "BB": "볼넷", "IBB": "고의4구", "HBP": "사구", "SO": "삼진", "GDP": "병살타",
-    "SLG": "장타율 (TB/AB)", "OBP": "출루율", "OPS": "출루+장타",
-    "MH": "멀티히트(한 경기 2안타+)", "RISP": "득점권 타율", "PH-BA": "대타 타율"
+    "ERA": "평균자책점",
+    "G": "경기수",
+    "W": "승",
+    "L": "패",
+    "SV": "세이브",
+    "HLD": "홀드",
+    "WPCT": "승률",
+    "IP": "이닝",
+    "H": "피안타",
+    "HR": "피홈런",
+    "BB": "볼넷",
+    "HBP": "사구",
+    "SO": "삼진",
+    "R": "실점",
+    "ER": "자책점",
+    "WHIP": "이닝당 출루허용률",
+    "CG": "완투",
+    "SHO": "완봉승",
+    "QS": "퀄리티 스타트",
+    "BSV": "블론 세이브",
+    "TBF": "상대 타자 수",
+    "NP": "투구 수",
+    "AVG": "피안타율",
+    "2B": "2루타 허용",
+    "3B": "3루타 허용",
+    "SAC": "희생번트 허용",
+    "SF": "희생플라이 허용",
+    "IBB": "고의4구",
+    "WP": "폭투",
+    "BK": "보크"
 };
-
-// ===== 순위 다시 매기기 (없으면 무시) =====
-function updateRanks() {
-    const rows = document.querySelectorAll('#statsTable tbody tr');
-    rows.forEach((tr, i) => {
-        const rankCell = tr.querySelector('.rank-cell');
-        if (rankCell) rankCell.textContent = i + 1;
-    });
-}
 
 // ===== 컬럼 클릭 시 정렬 =====
 document.querySelectorAll('.stat-header').forEach(header => {
@@ -28,11 +44,17 @@ document.querySelectorAll('.stat-header').forEach(header => {
         const isAsc = header.classList.toggle('asc');
 
         rows.sort((a, b) => {
-            const aCell = a.querySelector(`[data-stat="${stat}"]`);
-            const bCell = b.querySelector(`[data-stat="${stat}"]`);
+            const aCell = a.querySelector(`td[data-stat="${stat}"]`);
+            const bCell = b.querySelector(`td[data-stat="${stat}"]`);
 
-            const aVal = aCell?.getAttribute('data-value') || '';
-            const bVal = bCell?.getAttribute('data-value') || '';
+            if (!aCell || !bCell) {
+                console.warn('❌ 정렬할 셀을 못 찾음:', stat, aCell, bCell);
+                return 0;
+            }
+
+            const aVal = aCell.getAttribute('data-value') || '';
+            const bVal = bCell.getAttribute('data-value') || '';
+
             const aNum = parseFloat(aVal);
             const bNum = parseFloat(bVal);
 
@@ -42,8 +64,8 @@ document.querySelectorAll('.stat-header').forEach(header => {
             return isAsc ? aVal.localeCompare(bVal, 'ko') : bVal.localeCompare(aVal, 'ko');
         });
 
+
         rows.forEach(r => tbody.appendChild(r));
-        updateRanks();
     });
 });
 
@@ -119,12 +141,12 @@ const scrollContainer = document.querySelector('.table-scroll');
 let touchStartX = null;
 let touchStartScrollLeft = null;
 
-scrollContainer?.addEventListener('touchstart', (e) => {
+scrollContainer.addEventListener('touchstart', (e) => {
     touchStartX = e.touches[0].clientX;
     touchStartScrollLeft = scrollContainer.scrollLeft;
-}, { passive: true });
+}, {passive:true});
 
-scrollContainer?.addEventListener('touchmove', (e) => {
+scrollContainer.addEventListener('touchmove', (e) => {
     if (touchStartX === null) return;
     const dx = e.touches[0].clientX - touchStartX;
     const movedScroll = Math.abs(scrollContainer.scrollLeft - touchStartScrollLeft);
@@ -132,16 +154,19 @@ scrollContainer?.addEventListener('touchmove', (e) => {
     if (movedScroll > 5) return;
 
     if (Math.abs(dx) > 50 && movedScroll <= 5) {
-        currentView = dx < 0 ? (currentView % totalViews) + 1 : (currentView - 1 < 1 ? totalViews : currentView - 1);
+        if (dx < 0) {
+            currentView = (currentView % totalViews) + 1;
+        } else {
+            currentView = (currentView - 1 < 1) ? totalViews : currentView - 1;
+        }
         applyView();
         touchStartX = null;
     }
-}, { passive: true });
+}, {passive:true});
 
-scrollContainer?.addEventListener('touchend', () => {
+scrollContainer.addEventListener('touchend', () => {
     touchStartX = null;
 });
 
 // ===== 초기화 =====
 applyView();
-updateRanks();

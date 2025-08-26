@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>투수 기록 검색 | DUGOUT</title>
+    <link rel="stylesheet" href="/recordroom/allbatters.css">
+    <link rel="icon" href="/dugout.png">
+    <script defer src="/recordroom/allpitcher-table.js"></script>
+</head>
+<body class="records-body">
+
+<section class="records-hero">
+    <h1>투수 기록 검색</h1>
+    <p>🔍 선수 이름으로 최신 시즌 기록을 검색해보세요</p>
+
+    <form th:action="@{/allrecords/pitcher}" method="get" class="search-form">
+        <input type="text" name="keyword" placeholder="예: 김광현"
+               th:value="${keyword}" required>
+        <button type="submit" class="btn neon-blue">검색</button>
+    </form>
+</section>
+
+<div class="legend">
+    <span class="legend-item">컬럼명을 클릭하면 정렬됩니다.</span>
+    <p class="record-date">
+        📅 이 데이터는 <span th:text="${latestDate}">2025-08-11</span> 기준입니다.
+    </p>
+</div>
+
+<section class="search-results" th:if="${pitcherList != null}">
+    <div class="slider-controls">
+        <button id="prevView">⏪</button>
+        <span class="dot active" data-view="1"></span>
+        <span class="dot" data-view="2"></span>
+        <button id="nextView">⏩</button>
+    </div>
+
+    <!-- 생략된 head 및 form 부분은 유지 -->
+
+    <div class="table-scroll">
+        <table class="records-table" id="statsTable">
+            <thead>
+            <tr class="group group-1">
+                <th class="stat-header th-tip" data-stat="nameKr">이름</th>
+                <th class="stat-header th-tip" data-stat="team">팀</th>
+                <th class="stat-header th-tip" data-stat="ERA">ERA</th>
+                <th class="stat-header th-tip" data-stat="G">G</th>
+                <th class="stat-header th-tip" data-stat="W">W</th>
+                <th class="stat-header th-tip" data-stat="L">L</th>
+                <th class="stat-header th-tip" data-stat="SV">SV</th>
+                <th class="stat-header th-tip" data-stat="HLD">HLD</th>
+                <th class="stat-header th-tip" data-stat="WPCT">WPCT</th>
+                <th class="stat-header th-tip" data-stat="IP">IP</th>
+                <th class="stat-header th-tip" data-stat="H">H</th>
+                <th class="stat-header th-tip" data-stat="HR">HR</th>
+                <th class="stat-header th-tip" data-stat="BB">BB</th>
+                <th class="stat-header th-tip" data-stat="HBP">HBP</th>
+                <th class="stat-header th-tip" data-stat="SO">SO</th>
+                <th class="stat-header th-tip" data-stat="R">R</th>
+                <th class="stat-header th-tip" data-stat="ER">ER</th>
+                <th class="stat-header th-tip" data-stat="WHIP">WHIP</th>
+            </tr>
+            <tr class="group group-2" style="display: none;">
+                <th class="stat-header th-tip" data-stat="CG">CG</th>
+                <th class="stat-header th-tip" data-stat="SHO">SHO</th>
+                <th class="stat-header th-tip" data-stat="QS">QS</th>
+                <th class="stat-header th-tip" data-stat="BSV">BSV</th>
+                <th class="stat-header th-tip" data-stat="TBF">TBF</th>
+                <th class="stat-header th-tip" data-stat="NP">NP</th>
+                <th class="stat-header th-tip" data-stat="AVG">AVG</th>
+                <th class="stat-header th-tip" data-stat="2B">2B</th>
+                <th class="stat-header th-tip" data-stat="3B">3B</th>
+                <th class="stat-header th-tip" data-stat="SAC">SAC</th>
+                <th class="stat-header th-tip" data-stat="SF">SF</th>
+                <th class="stat-header th-tip" data-stat="IBB">IBB</th>
+                <th class="stat-header th-tip" data-stat="WP">WP</th>
+                <th class="stat-header th-tip" data-stat="BK">BK</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="pitcher : ${pitcherList}">
+                <!-- 그룹 1 -->
+                <td class="group group-1" th:text="${pitcher.nameKr}" data-stat="nameKr" th:data-value="${pitcher.nameKr}"></td>
+                <td class="group group-1" th:text="${pitcher.team}" data-stat="team" th:data-value="${pitcher.team}"></td>
+                <td class="group group-1" th:text="${pitcher.era}" data-stat="ERA" th:data-value="${pitcher.era}"></td>
+                <td class="group group-1" th:text="${pitcher.g}" data-stat="G" th:data-value="${pitcher.g}"></td>
+                <td class="group group-1" th:text="${pitcher.w}" data-stat="W" th:data-value="${pitcher.w}"></td>
+                <td class="group group-1" th:text="${pitcher.l}" data-stat="L" th:data-value="${pitcher.l}"></td>
+                <td class="group group-1" th:text="${pitcher.sv}" data-stat="SV" th:data-value="${pitcher.sv}"></td>
+                <td class="group group-1" th:text="${pitcher.hld}" data-stat="HLD" th:data-value="${pitcher.hld}"></td>
+                <td class="group group-1" th:text="${pitcher.wpct}" data-stat="WPCT" th:data-value="${pitcher.wpct}"></td>
+                <td class="group group-1" th:text="${pitcher.ip}" data-stat="IP" th:data-value="${pitcher.ip}"></td>
+                <td class="group group-1" th:text="${pitcher.h}" data-stat="H" th:data-value="${pitcher.h}"></td>
+                <td class="group group-1" th:text="${pitcher.hr}" data-stat="HR" th:data-value="${pitcher.hr}"></td>
+                <td class="group group-1" th:text="${pitcher.bb}" data-stat="BB" th:data-value="${pitcher.bb}"></td>
+                <td class="group group-1" th:text="${pitcher.hbp}" data-stat="HBP" th:data-value="${pitcher.hbp}"></td>
+                <td class="group group-1" th:text="${pitcher.so}" data-stat="SO" th:data-value="${pitcher.so}"></td>
+                <td class="group group-1" th:text="${pitcher.r}" data-stat="R" th:data-value="${pitcher.r}"></td>
+                <td class="group group-1" th:text="${pitcher.er}" data-stat="ER" th:data-value="${pitcher.er}"></td>
+                <td class="group group-1" th:text="${pitcher.whip}" data-stat="WHIP" th:data-value="${pitcher.whip}"></td>
+
+                <!-- 그룹 2 -->
+                <td class="group group-2" style="display: none;" th:text="${pitcher.cg}" data-stat="CG" th:data-value="${pitcher.cg}"></td>
+                <td class="group group-2" style="display: none;" th:text="${pitcher.sho}" data-stat="SHO" th:data-value="${pitcher.sho}"></td>
+                <td class="group group-2" style="display: none;" th:text="${pitcher.qs}" data-stat="QS" th:data-value="${pitcher.qs}"></td>
+                <td class="group group-2" style="display: none;" th:text="${pitcher.bsv}" data-stat="BSV" th:data-value="${pitcher.bsv}"></td>
+                <td class="group group-2" style="display: none;" th:text="${pitcher.tbf}" data-stat="TBF" th:data-value="${pitcher.tbf}"></td>
+                <td class="group group-2" style="display: none;" th:text="${pitcher.np}" data-stat="NP" th:data-value="${pitcher.np}"></td>
+                <td class="group group-2" style="display: none;" th:text="${pitcher.avg}" data-stat="AVG" th:data-value="${pitcher.avg}"></td>
+                <td class="group group-2" style="display: none;" th:text="${pitcher.twoB}" data-stat="2B" th:data-value="${pitcher.twoB}"></td>
+                <td class="group group-2" style="display: none;" th:text="${pitcher.threeB}" data-stat="3B" th:data-value="${pitcher.threeB}"></td>
+                <td class="group group-2" style="display: none;" th:text="${pitcher.sac}" data-stat="SAC" th:data-value="${pitcher.sac}"></td>
+                <td class="group group-2" style="display: none;" th:text="${pitcher.sf}" data-stat="SF" th:data-value="${pitcher.sf}"></td>
+                <td class="group group-2" style="display: none;" th:text="${pitcher.ibb}" data-stat="IBB" th:data-value="${pitcher.ibb}"></td>
+                <td class="group group-2" style="display: none;" th:text="${pitcher.wp}" data-stat="WP" th:data-value="${pitcher.wp}"></td>
+                <td class="group group-2" style="display: none;" th:text="${pitcher.bk}" data-stat="BK" th:data-value="${pitcher.bk}"></td>
+            </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+</section>
+
+<div class="back-home-section">
+    <a href="/allrecords" class="btn neon-home-btn">🏠 기록실로</a>
+</div>
+
+<footer>
+    © 2025 더그아웃 | 투수 기록 검색
+</footer>
+
+</body>
+</html>

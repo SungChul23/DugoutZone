@@ -12,13 +12,19 @@
 <section class="records-hero">
   <h1>타자 기록 검색</h1>
   <p>🔍 선수 이름으로 최신 시즌 기록을 검색해보세요</p>
-
   <form th:action="@{/allrecords/batter}" method="get" class="search-form">
     <input type="text" name="keyword" placeholder="예: 김도영"
            th:value="${keyword}" required>
     <button type="submit" class="btn neon-blue">검색</button>
   </form>
 </section>
+
+<div class="legend">
+  <span class="legend-item">컬럼명을 클릭하면 정렬됩니다.</span>
+  <p class="record-date">
+    📅 이 데이터는 <span th:text="${latestDate}">2025-08-11</span> 기준입니다.
+  </p>
+</div>
 
 <section class="search-results" th:if="${batterList != null}">
   <div class="slider-controls">
@@ -29,72 +35,75 @@
   </div>
 
   <div class="table-scroll">
-    <table class="records-table">
+    <table class="records-table" id="statsTable">
       <thead>
       <tr class="group group-1">
         <th>이름</th>
         <th>팀</th>
-        <th>AVG</th>
-        <th>G</th>
-        <th>PA</th>
-        <th>AB</th>
-        <th>R</th>
-        <th>H</th>
-        <th>2B</th>
-        <th>3B</th>
-        <th>HR</th>
-        <th>TB</th>
-        <th>RBI</th>
-        <th>SAC</th>
-        <th>SF</th>
+        <th class="stat-header th-tip" data-stat="AVG">AVG</th>
+        <th class="stat-header th-tip" data-stat="G">G</th>
+        <th class="stat-header th-tip" data-stat="PA">PA</th>
+        <th class="stat-header th-tip" data-stat="AB">AB</th>
+        <th class="stat-header th-tip" data-stat="R">R</th>
+        <th class="stat-header th-tip" data-stat="H">H</th>
+        <th class="stat-header th-tip" data-stat="2B">2B</th>
+        <th class="stat-header th-tip" data-stat="3B">3B</th>
+        <th class="stat-header th-tip" data-stat="HR">HR</th>
+        <th class="stat-header th-tip" data-stat="TB">TB</th>
+        <th class="stat-header th-tip" data-stat="RBI">RBI</th>
+        <th class="stat-header th-tip" data-stat="SAC">SAC</th>
+        <th class="stat-header th-tip" data-stat="SF">SF</th>
       </tr>
       <tr class="group group-2" style="display: none;">
-        <th>BB</th>
-        <th>IBB</th>
-        <th>HBP</th>
-        <th>SO</th>
-        <th>GDP</th>
-        <th>SLG</th>
-        <th>OBP</th>
-        <th>OPS</th>
-        <th>MH</th>
-        <th>RISP</th>
-        <th>PH-BA</th>
+        <th class="stat-header th-tip" data-stat="BB">BB</th>
+        <th class="stat-header th-tip" data-stat="IBB">IBB</th>
+        <th class="stat-header th-tip" data-stat="HBP">HBP</th>
+        <th class="stat-header th-tip" data-stat="SO">SO</th>
+        <th class="stat-header th-tip" data-stat="GDP">GDP</th>
+        <th class="stat-header th-tip" data-stat="SLG">SLG</th>
+        <th class="stat-header th-tip" data-stat="OBP">OBP</th>
+        <th class="stat-header th-tip" data-stat="OPS">OPS</th>
+        <th class="stat-header th-tip" data-stat="MH">MH</th>
+        <th class="stat-header th-tip" data-stat="RISP">RISP</th>
+        <th class="stat-header th-tip" data-stat="PH-BA">PH-BA</th>
       </tr>
       </thead>
+
       <tbody>
       <tr th:each="batter : ${batterList}">
         <!-- 그룹 1 -->
         <td class="group group-1" th:text="${batter.nameKr}"></td>
         <td class="group group-1" th:text="${batter.team}"></td>
-        <td class="group group-1" th:text="${batter.avg}"></td>
-        <td class="group group-1" th:text="${batter.g}"></td>
-        <td class="group group-1" th:text="${batter.pa}"></td>
-        <td class="group group-1" th:text="${batter.ab}"></td>
-        <td class="group group-1" th:text="${batter.r}"></td>
-        <td class="group group-1" th:text="${batter.h}"></td>
-        <td class="group group-1" th:text="${batter.twoB}"></td>
-        <td class="group group-1" th:text="${batter.threeB}"></td>
-        <td class="group group-1" th:text="${batter.hr}"></td>
-        <td class="group group-1" th:text="${batter.tb}"></td>
-        <td class="group group-1" th:text="${batter.rbi}"></td>
-        <td class="group group-1" th:text="${batter.sac}"></td>
-        <td class="group group-1" th:text="${batter.sf}"></td>
+        <td class="group group-1" th:text="${batter.avg}" data-stat="AVG" th:attr="data-value=${batter.avg}"></td>
+        <td class="group group-1" th:text="${batter.g}" data-stat="G" th:attr="data-value=${batter.g}"></td>
+        <td class="group group-1" th:text="${batter.pa}" data-stat="PA" th:attr="data-value=${batter.pa}"></td>
+        <td class="group group-1" th:text="${batter.ab}" data-stat="AB" th:attr="data-value=${batter.ab}"></td>
+        <td class="group group-1" th:text="${batter.r}" data-stat="R" th:attr="data-value=${batter.r}"></td>
+        <td class="group group-1" th:text="${batter.h}" data-stat="H" th:attr="data-value=${batter.h}"></td>
+        <td class="group group-1" th:text="${batter.twoB}" data-stat="2B" th:attr="data-value=${batter.twoB}"></td>
+        <td class="group group-1" th:text="${batter.threeB}" data-stat="3B" th:attr="data-value=${batter.threeB}"></td>
+        <td class="group group-1" th:text="${batter.hr}" data-stat="HR" th:attr="data-value=${batter.hr}"></td>
+        <td class="group group-1" th:text="${batter.tb}" data-stat="TB" th:attr="data-value=${batter.tb}"></td>
+        <td class="group group-1" th:text="${batter.rbi}" data-stat="RBI" th:attr="data-value=${batter.rbi}"></td>
+        <td class="group group-1" th:text="${batter.sac}" data-stat="SAC" th:attr="data-value=${batter.sac}"></td>
+        <td class="group group-1" th:text="${batter.sf}" data-stat="SF" th:attr="data-value=${batter.sf}"></td>
 
         <!-- 그룹 2 -->
-        <td class="group group-2" style="display: none;" th:text="${batter.bb}"></td>
-        <td class="group group-2" style="display: none;" th:text="${batter.ibb}"></td>
-        <td class="group group-2" style="display: none;" th:text="${batter.hbp}"></td>
-        <td class="group group-2" style="display: none;" th:text="${batter.so}"></td>
-        <td class="group group-2" style="display: none;" th:text="${batter.gdp}"></td>
-        <td class="group group-2" style="display: none;" th:text="${batter.slg}"></td>
-        <td class="group group-2" style="display: none;" th:text="${batter.obp}"></td>
-        <td class="group group-2" style="display: none;" th:text="${batter.ops}"></td>
-        <td class="group group-2" style="display: none;" th:text="${batter.mh}"></td>
-        <td class="group group-2" style="display: none;" th:text="${batter.risp}"></td>
-        <td class="group group-2" style="display: none;" th:text="${batter.phBa}"></td>
+        <td class="group group-2" style="display:none;" th:text="${batter.bb}" data-stat="BB" th:attr="data-value=${batter.bb}"></td>
+        <td class="group group-2" style="display:none;" th:text="${batter.ibb}" data-stat="IBB" th:attr="data-value=${batter.ibb}"></td>
+        <td class="group group-2" style="display:none;" th:text="${batter.hbp}" data-stat="HBP" th:attr="data-value=${batter.hbp}"></td>
+        <td class="group group-2" style="display:none;" th:text="${batter.so}" data-stat="SO" th:attr="data-value=${batter.so}"></td>
+        <td class="group group-2" style="display:none;" th:text="${batter.gdp}" data-stat="GDP" th:attr="data-value=${batter.gdp}"></td>
+        <td class="group group-2" style="display:none;" th:text="${batter.slg}" data-stat="SLG" th:attr="data-value=${batter.slg}"></td>
+        <td class="group group-2" style="display:none;" th:text="${batter.obp}" data-stat="OBP" th:attr="data-value=${batter.obp}"></td>
+        <td class="group group-2" style="display:none;" th:text="${batter.ops}" data-stat="OPS" th:attr="data-value=${batter.ops}"></td>
+        <td class="group group-2" style="display:none;" th:text="${batter.mh}" data-stat="MH" th:attr="data-value=${batter.mh}"></td>
+        <td class="group group-2" style="display:none;" th:text="${batter.risp}" data-stat="RISP" th:attr="data-value=${batter.risp}"></td>
+        <td class="group group-2" style="display:none;" th:text="${batter.phBa}" data-stat="PH-BA" th:attr="data-value=${batter.phBa}"></td>
       </tr>
       </tbody>
+
+
     </table>
   </div>
 </section>

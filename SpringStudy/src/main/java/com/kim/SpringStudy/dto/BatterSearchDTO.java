@@ -10,8 +10,10 @@ import java.math.BigDecimal;
 @Getter
 public class BatterSearchDTO {
 
+    //기본 정보
     private String nameKr;
     private String team;
+
     private BigDecimal avg;
     private Integer g;
     private Integer pa;

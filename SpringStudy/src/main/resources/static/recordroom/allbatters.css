@@ -229,10 +229,27 @@ a {
 .table-scroll::-webkit-scrollbar-track {
     background: #1e1f24;
 }
-.footer {
+footer {
     text-align: center;
-    padding: 20px;
-    color: #94a3b8;
-    background-color: #0f172a;
-    font-size: 0.9rem;
+    padding: 20px 0;
+    color: #e2e8f0;
+    font-size: 14px;
+}
+.legend {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #a0aec0;
+    font-size: 14px;
+}
+
+.legend-item {
+    display: inline-block;
+    margin-right: 10px;
+    font-weight: 500;
+}
+
+.record-date span {
+    color: #00f0ff;
+    font-weight: 600;
 }

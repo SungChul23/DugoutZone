@@ -1,6 +1,8 @@
 package com.kim.SpringStudy.service;
 
 import com.kim.SpringStudy.domain.PitcherStats;
+import com.kim.SpringStudy.dto.BatterSearchDTO;
+import com.kim.SpringStudy.dto.PitcherSearchDTO;
 import com.kim.SpringStudy.repository.PitcherStatsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Sort;
@@ -70,5 +72,10 @@ public class PitcherService {
 
             default -> "era";
         };
+    }
+
+    //10구단 모든 투수 검색
+    public List<PitcherSearchDTO> searchPitchers(String keyword){
+        return pitcherStatsRepository.searchByName(keyword);
     }
 }

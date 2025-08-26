@@ -37,5 +37,7 @@ public interface BatterStatsRepository extends JpaRepository<BatterStats, Long> 
             "AND p.nameKr LIKE %:keyword%")
     List<BatterSearchDTO> searchByName(@Param("keyword") String keyword);
 
+    @Query("SELECT MAX(b.recordDate) FROM BatterStats b")
+    LocalDate findLatestRecordDate();
 
 }

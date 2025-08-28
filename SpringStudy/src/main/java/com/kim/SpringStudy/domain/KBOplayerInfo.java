@@ -25,6 +25,8 @@ public class KBOplayerInfo {
 
     private String position;  // 투수 / 포수 / 내야수 / 외야수
 
+    private String positionSub; //1루수 , 2루수 .. 좌익수 등
+
     private int heightCm;
 
     private int weightKg;

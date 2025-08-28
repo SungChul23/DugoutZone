@@ -33,6 +33,11 @@ public interface KBOplayerInfoRepository extends JpaRepository<KBOplayerInfo, Lo
     KBOplayerInfo findByTeamAndKboPlayerId(String team, String kboPlayerId);
     List<KBOplayerInfo> findAllByTeamAndNameKr(String team, String nameKr);
 
+    //포지션 구체화 수집
+    List<KBOplayerInfo> findAllByNameKr(String nameKr);
+
+
+
 
 
 }

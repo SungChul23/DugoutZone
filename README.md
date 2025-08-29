@@ -4,12 +4,12 @@
 
 <p align="center">
   <strong>더그아웃, 그라운드와 가장 가까운 자리에서 야구를 바라보다.</strong><br>
-  티켓 예매부터 팀 뉴스, 세밀한 기록, 룰 설명까지 — <br>
+  티켓 예매부터 팀 뉴스, 세밀한 선수들의 기록, 수상 예측,룰 설명까지 <br>
   <strong>당신의 야구 열정, 이곳에서 완성됩니다.</strong>
 </p>
 
 <p align="center">
-  🔗 <a href="http://dugoutzone.shop/dugout" target="_blank"><strong>👉 dugoutzone.shop/dugout 바로가기</strong></a>
+  🔗 <a href="http://dugoutzone.shop/dugout" target="_blank"><strong>👉 더그아웃존 바로가기</strong></a>
 </p>
 
 ---

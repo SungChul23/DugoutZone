@@ -1,18 +1,36 @@
 <p align="center">
-  <img src="https://dugoutzone.s3.ap-northeast-2.amazonaws.com/dugoutzonelogo.png" alt="Dugoutzone Logo" width="300"/>
+  <img src="https://dugoutzone.s3.ap-northeast-2.amazonaws.com/dugoutzonelogo.png" alt="Dugoutzone Logo" width="320"/>
 </p>
 
 <p align="center">
-  <strong>더그아웃, 그라운드와 가장 가까운 자리에서 야구를 바라보다.</strong><br>
-  티켓 예매부터 팀 뉴스, 세밀한 선수들의 기록, 수상 예측,룰 설명까지 <br>
-  <strong>당신의 야구 열정, 이곳에서 완성됩니다.</strong>
+  <i>경기장의 더그아웃처럼, 가장 가까운 자리에서 야구를 지켜보세요.</i><br>
+  티켓 예매부터 팀 뉴스, 세밀한 선수 기록과 수상 예측, 룰 설명까지—<br>
+  <b>야구 팬을 위한 모든 것, 이곳에서.</b>
 </p>
 
 <p align="center">
   🔗 <a href="http://dugoutzone.shop/dugout" target="_blank"><strong>👉 몸풀러가기 </strong></a>
 </p>
 
+
+## 🏟️ 주요 기능
+
+- 🎟️ **구단별 예매 / 최신 뉴스 / 공식 사이트 연동**
+- 📊 **승률 그래프 & 시즌 변동 추이 시각화** (Chart.js)
+- 👥 **10개 구단 전용 페이지** + 선수단 정보 및 타자/투수 기록
+- 🌦️ **기상청 API 연동** → 홈구장 날씨 예보
+- 📖 **야구 용어 사전** + 룰 FAQ
+- 🧾 **기록실 (타자/투수 모든 기록을 한눈에)** 
+- 🏆 **수상 예측 시스템** (타격왕, 홀드왕, 골든 글러브)
+
 ---
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-SpringBoot-green?logo=spring&logoColor=white"/> 
+  <img src="https://img.shields.io/badge/MySQL-Database-blue?logo=mysql&logoColor=white"/> 
+  <img src="https://img.shields.io/badge/AWS-Cloud-orange?logo=amazonaws&logoColor=white"/>
+  <img src="https://img.shields.io/badge/HTML-CSS--JS-lightgrey?logo=html5&logoColor=white"/>
+</p>
 
 # ⚾ 더그아웃 프로젝트 코딩 일지 (Coding Log)
 

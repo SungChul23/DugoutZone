@@ -320,3 +320,28 @@ a {
     text-align: center;
     margin: 10px 0 28px
 }
+.back-home-section {
+    text-align: center;
+    margin: 40px 0 20px;
+}
+
+.neon-home-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-weight: 700;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    background: linear-gradient(90deg, #00f0ff, #8b5cf6);
+    color: #0f172a;
+    box-shadow: 0 0 18px rgba(0,240,255,0.7), 0 0 28px rgba(139,92,246,0.4);
+    transition: all 0.25s ease-in-out;
+    text-decoration: none;
+}
+
+.neon-home-btn:hover {
+    background: linear-gradient(90deg, #8b5cf6, #00f0ff);
+    color: #ffffff;
+    box-shadow: 0 0 24px rgba(139,92,246,0.8), 0 0 40px rgba(0,240,255,0.6);
+    transform: translateY(-2px);
+}

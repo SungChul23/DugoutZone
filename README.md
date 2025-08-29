@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  🔗 <a href="http://dugoutzone.shop/dugout" target="_blank"><strong>👉 더그아웃존 바로가기</strong></a>
+  🔗 <a href="http://dugoutzone.shop/dugout" target="_blank"><strong>👉 몸풀러가기 </strong></a>
 </p>
 
 ---

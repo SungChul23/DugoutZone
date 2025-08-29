@@ -1,6 +1,8 @@
 <p align="center">
-  <img src="https://dugoutzone.s3.ap-northeast-2.amazonaws.com/dugoutzonelogo.png" alt="Dugoutzone Logo" width="320"/>
+  <img src="https://dugoutzone.s3.ap-northeast-2.amazonaws.com/dugoutzonelogo.png" alt="Dugoutzone Logo" width="280"/>
 </p>
+
+<h2 align="center">⚾ Dugoutzone: 당신의 야구 열정을 완성하는 공간</h2>
 
 <p align="center">
   <i>경기장의 더그아웃처럼, 가장 가까운 자리에서 야구를 지켜보세요.</i><br>
@@ -9,28 +11,31 @@
 </p>
 
 <p align="center">
-  🔗 <a href="http://dugoutzone.shop/dugout" target="_blank"><strong>👉 몸풀러가기 </strong></a>
+  🔗 <a href="http://dugoutzone.shop/dugout" target="_blank"><strong>👉 Dugoutzone 시작하기</strong></a>
 </p>
 
+---
 
 ## 🏟️ 주요 기능
-
 - 🎟️ **구단별 예매 / 최신 뉴스 / 공식 사이트 연동**
 - 📊 **승률 그래프 & 시즌 변동 추이 시각화** (Chart.js)
 - 👥 **10개 구단 전용 페이지** + 선수단 정보 및 타자/투수 기록
 - 🌦️ **기상청 API 연동** → 홈구장 날씨 예보
 - 📖 **야구 용어 사전** + 룰 FAQ
-- 🧾 **기록실 (타자/투수 모든 기록을 한눈에)** 
+- 🧾 **기록실 (타자/투수 모든 기록을 한눈에)**
 - 🏆 **수상 예측 시스템** (타격왕, 홀드왕, 골든 글러브)
 
 ---
 
+## ⚙️ 기술 스택
 <p align="center">
   <img src="https://img.shields.io/badge/Java-SpringBoot-green?logo=spring&logoColor=white"/> 
   <img src="https://img.shields.io/badge/MySQL-Database-blue?logo=mysql&logoColor=white"/> 
   <img src="https://img.shields.io/badge/AWS-Cloud-orange?logo=amazonaws&logoColor=white"/>
   <img src="https://img.shields.io/badge/HTML-CSS--JS-lightgrey?logo=html5&logoColor=white"/>
 </p>
+
+---
 
 # ⚾ 더그아웃 프로젝트 코딩 일지 (Coding Log)
 
@@ -99,15 +104,19 @@
 
 ---
 
-### 🔜 앞으로 해야할 일
-- 투수 수상 예측 기능
-- 25시즌 골든 글러브 예측
-- 컨트롤러, 서비스, 템플릿 등 코드 분할
-- 더그아웃존 프로젝트 전 스프링 스터디 프로젝트 분할
-
-- ### 🖐️ 프로젝트 마감일
-- 25시즌 KBO 야구 종료
+## 🔜 앞으로 해야 할 일
+- 🥎 **투수 수상 예측 기능**
+- 🏆 **25시즌 골든 글러브 예측**
+- ⚙️ 컨트롤러 / 서비스 / 템플릿 **리팩토링**
+- 📦 스프링 스터디 프로젝트와 **분할 관리**
 
 ---
 
-## 🧢 Project by Dugoutzone
+## 🖐️ 프로젝트 마감일
+📌 **25시즌 KBO 종료일**
+
+---
+
+<p align="center">
+  © 2025 Dugoutzone | ⚾ 야구는 기록이다, 기록은 Dugoutzone이다.
+</p>

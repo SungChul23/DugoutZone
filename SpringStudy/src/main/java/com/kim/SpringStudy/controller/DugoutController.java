@@ -486,6 +486,7 @@ public class DugoutController {
         //최신 데이터 표기
         LocalDate latestDate = batterStatsRepository.findLatestRecordDate();
         model.addAttribute("latestDate",latestDate);
+
         return "recordroom/batterAward";
     }
 

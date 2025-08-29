@@ -1,7 +1,9 @@
 package com.kim.SpringStudy.service;
 
 import com.kim.SpringStudy.dto.BatterAwardDTO;
+import com.kim.SpringStudy.dto.PitcherAwardDTO;
 import com.kim.SpringStudy.repository.BatterAwardRepository;
+import com.kim.SpringStudy.repository.PitcherAwardRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import java.util.Map;
 public class KBOAwardService {
 
     private final BatterAwardRepository batterAwardRepository;
+    private final PitcherAwardRepository pitcherAwardRepository;
 
     public Map<String, List<BatterAwardDTO>> getAllAwards() {
         Map<String, List<BatterAwardDTO>> result = new LinkedHashMap<>();
@@ -56,7 +59,34 @@ public class KBOAwardService {
                     (String) row[1],
                     (String) row[2],
                     (String) row[3],
-                    (BigDecimal) row[4]  // BigDecimal 유지
+                    (BigDecimal) row[4]
+            ));
+        }
+        return list;
+    }
+
+    //투수 부분
+    public Map<String, List<PitcherAwardDTO>> getAllPitcherAwards() {
+        Map<String, List<PitcherAwardDTO>> result = new LinkedHashMap<>();
+        result.put("다승왕", convertPitcher(pitcherAwardRepository.getW()));
+        result.put("탈삼진왕", convertPitcher(pitcherAwardRepository.getSO()));
+        result.put("세이브왕", convertPitcher(pitcherAwardRepository.getSV()));
+        result.put("홀드왕", convertPitcher(pitcherAwardRepository.getHLD()));
+        result.put("이닝왕", convertPitcher(pitcherAwardRepository.getIP()));
+        result.put("평균자책점왕", convertPitcher(pitcherAwardRepository.getERA()));
+        result.put("승률왕", convertPitcher(pitcherAwardRepository.getWPCT()));
+        return result;
+    }
+    private List<PitcherAwardDTO> convertPitcher(List<Object[]> rawList) {
+        List<PitcherAwardDTO> list = new ArrayList<>();
+        int rank = 1;
+        for (Object[] row : rawList) {
+            list.add(new PitcherAwardDTO(
+                    rank++,
+                    (String) row[0],
+                    (String) row[1],
+                    (String) row[2],
+                    row[3]  // int, String, BigDecimal 모두 수용
             ));
         }
         return list;

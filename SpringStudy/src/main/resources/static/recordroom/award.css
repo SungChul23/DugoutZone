@@ -1,0 +1,322 @@
+/* ===== Base (네온 다크) ===== */
+:root {
+    --bg: #0b1020;
+    --panel: #121938;
+    --panel-2: #0f1630;
+    --line: #1d2550;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+    --neon: #00f0ff;
+    --violet: #8b5cf6;
+    --accent: linear-gradient(90deg, var(--neon), var(--violet));
+    --radius: 18px;
+    --shadow: 0 10px 30px rgba(0, 0, 0, .4), inset 0 0 0 1px rgba(255, 255, 255, .03);
+}
+
+* {
+    box-sizing: border-box
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    background:
+            radial-gradient(800px 600px at 10% 20%, rgba(0,240,255,0.08), transparent 70%),
+            radial-gradient(800px 600px at 90% 0%, rgba(139,92,246,0.08), transparent 70%),
+            linear-gradient(135deg, #0d1b2a 0%, #1b263b 60%, #0d1b2a 100%);
+    color: #e2e8f0;
+    font-family: ui-sans-serif, system-ui, Segoe UI, Roboto, "Noto Sans KR", sans-serif;
+}
+
+
+
+a {
+    color: inherit;
+    text-decoration: none
+}
+
+/* ===== Header / Legend ===== */
+.award-header {
+    padding: 28px 20px 10px;
+    text-align: center
+}
+
+.award-header h1 {
+    margin: 0;
+    font-size: clamp(22px, 3.2vw, 34px);
+    letter-spacing: .2px;
+    background: var(--accent);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 20px rgba(0, 240, 255, .25);
+}
+
+.legend {
+    display: flex;
+    justify-content: center
+}
+
+.record-date {
+    font-size: 20px;
+    color: var(--muted); /* #94a3b8 같은 밝은 회색 */
+    text-align: center;
+    line-height: 1.6;
+}
+.highlight-date {
+    font-weight: 700;
+    color: var(--neon); /* #00f0ff 네온 블루 */
+}
+.note {
+    color: #cbd5e1;  /* 좀 더 밝은 회색 */
+    font-size: 13px;
+}
+
+/* ===== Grid ===== */
+.award-grid {
+    width: min(1200px, 92vw);
+    margin: 0 auto 40px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 18px;
+}
+
+@media (min-width: 1100px) {
+    .award-card {
+        grid-column: span 6;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 1099px) {
+    .award-card {
+        grid-column: span 6;
+    }
+}
+
+@media (max-width: 699px) {
+    .award-card {
+        grid-column: 1 / -1;
+    }
+}
+
+/* ===== Card ===== */
+.award-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, .02), rgba(255, 255, 255, .0)), var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 18px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition: transform .25s ease, box-shadow .25s ease;
+}
+
+.award-card::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    background: radial-gradient(600px 250px at -5% -10%, rgba(0, 240, 255, .12), transparent 70%),
+    radial-gradient(600px 250px at 105% -10%, rgba(139, 92, 246, .10), transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+.award-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, .45), inset 0 0 0 1px rgba(255, 255, 255, .04);
+}
+
+/* Header line */
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+    padding-bottom: 12px;
+    border-bottom: 1px dashed var(--line);
+}
+
+.award-title {
+    margin: 0;
+    font-size: clamp(18px, 2.4vw, 22px);
+}
+
+.chip {
+    font-size: 12px;
+    color: var(--neon);
+    border: 1px solid rgba(0, 240, 255, .35);
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: rgba(0, 240, 255, .06);
+}
+
+/* ===== Top1 Highlight ===== */
+.top1 {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(0, 240, 255, .08), rgba(139, 92, 246, .08));
+    border: 1px solid rgba(0, 240, 255, .25);
+    border-radius: 14px;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+.rank-badge {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border-radius: 10px;
+    background: var(--accent);
+    color: #061018;
+    font-weight: 800;
+    box-shadow: 0 0 18px rgba(0, 240, 255, .45);
+}
+
+.top1-main {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap
+}
+
+.top1-name {
+    font-weight: 700
+}
+
+.top1-name .sep {
+    opacity: .4;
+    margin: 0 6px
+}
+
+.top1-value {
+    display: flex;
+    align-items: center;
+    gap: 8px
+}
+
+.top1-value .label {
+    color: var(--muted);
+    font-size: 12px
+}
+
+/* ===== Rank list (2~5위) ===== */
+.rank-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.rank-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 10px 8px;
+    border-radius: 12px;
+    background: var(--panel-2);
+    border: 1px solid rgba(255, 255, 255, .04);
+}
+
+.rank-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0
+}
+
+.rank-num {
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, .06);
+    color: #fff;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.rank-name {
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 150px
+}
+
+.rank-meta {
+    color: var(--muted);
+    font-size: 12px
+}
+
+.rank-meta .sep {
+    opacity: .4;
+    margin: 0 6px
+}
+
+.rank-right {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 48%
+}
+
+.bar-wrap {
+    flex: 1;
+    height: 9px;
+    background: rgba(255, 255, 255, .05);
+    border-radius: 999px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .06);
+}
+
+.bar {
+    height: 100%;
+    width: 0%;
+    background: var(--accent);
+    box-shadow: 0 0 14px rgba(0, 240, 255, .35);
+    transition: width .9s cubic-bezier(.2, .7, .2, 1);
+}
+
+.value {
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    opacity: .9
+}
+
+/* ===== Back button / Footer ===== */
+.back-button-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 28px 0
+}
+
+.back-button {
+    display: inline-block;
+    padding: 10px 16px;
+    border-radius: 12px;
+    border: 1px solid var(--line);
+    background: rgba(255, 255, 255, .03);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.back-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .35);
+    border-color: rgba(0, 240, 255, .35)
+}
+
+.award-footer {
+    color: var(--muted);
+    text-align: center;
+    margin: 10px 0 28px
+}

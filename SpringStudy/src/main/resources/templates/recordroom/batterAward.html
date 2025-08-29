@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>DUGOUT | 타자 예측 수상</title>
+    <link rel="stylesheet" href="/recordroom/award.css">
+    <link rel="icon" href="/dugout.png">
+    <script defer src="/recordroom/award.js"></script>
+</head>
+<body class="award-body">
+
+<header class="award-header">
+    <h1> 🏆 25시즌 KBO 타자 예측 수상 TOP 5</h1>
+</header>
+
+<div class="legend">
+    <p class="record-date">
+        📅 이 데이터는
+        <span class="highlight-date" th:text="${latestDate}">2025-08-11</span> 기준입니다. <br>
+         <span class="note">✅[타격왕,출루왕,장타왕]규정 타석(경기수 × 3.1) 이상을 충족해야만 공식 수상 자격이 있습니다.</span>
+    </p>
+</div>
+
+
+<main class="award-grid">
+
+    <!-- 부문별 카드 -->
+    <section th:each="entry : ${awards}"
+             class="award-card"
+             th:with="list=${entry.value}">
+
+        <div class="card-header">
+            <h2 class="award-title" th:text="${entry.key}">타율왕</h2>
+            <span class="chip">TOP 5</span>
+        </div>
+
+
+        <!-- 1위 하이라이트 (리스트가 비어있지 않을 때만) -->
+        <div class="top1"
+             th:if="${list != null and !#lists.isEmpty(list)}">
+            <div class="rank-badge">1</div>
+            <div class="top1-main">
+                <div class="top1-name">
+                    <span th:text="${list[0].nameKr}">홍길동</span>
+                    <span class="sep">·</span>
+                    <span th:text="${list[0].team}">LG</span>
+                    <span class="sep">·</span>
+                    <span th:text="${list[0].positionSub}">내야수</span>
+                </div>
+                <div class="top1-value">
+                    <span class="label">기록</span>
+                    <strong th:text="${list[0].value}">.355</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2~5위 프로그레스 리스트 -->
+        <ol class="rank-list">
+            <li class="rank-row"
+                th:each="p, iter : ${list}"
+                th:if="${iter.index > 0}">
+                <div class="rank-left">
+                    <span class="rank-num" th:text="${iter.index + 1}">2</span>
+                    <span class="rank-name" th:text="${p.nameKr}">김철수</span>
+                    <span class="rank-meta">
+          <span th:text="${p.team}">SSG</span>
+          <span class="sep">·</span>
+          <span th:text="${p.positionSub}">외야수</span>
+        </span>
+                </div>
+                <div class="rank-right">
+                    <div class="bar-wrap">
+                        <div class="bar" th:attr="data-value=${p.value}"></div>
+                    </div>
+                    <span class="value" th:text="${p.value}">.344</span>
+                </div>
+            </li>
+        </ol>
+    </section>
+
+
+</main>
+
+<div class="back-button-wrapper">
+    <a href="/dugout" class="back-button">더그아웃으로 돌아가기</a>
+</div>
+
+<footer class="award-footer">
+    <p>© 2025 KBO 타자부분 수상 예측</p>
+</footer>
+
+</body>
+</html>

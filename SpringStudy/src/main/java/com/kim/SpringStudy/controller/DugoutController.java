@@ -35,6 +35,7 @@ public class DugoutController {
     private final PitcherService pitcherService;
     private final BatterStatsRepository batterStatsRepository;
     private final PitcherStatsRepository pitcherStatsRepository;
+    private final KBOAwardService kboAwardService;
 
     //더그 아웃 입장
     @GetMapping("/dugout")
@@ -471,5 +472,22 @@ public class DugoutController {
 
         return "recordroom/allpitcher";
     }
+    //타자 부분 수상 불러오기
+    @GetMapping("/award/batter")
+    @ResponseBody
+    public Map<String, List<BatterAwardDTO>> getAllHitterAwardsJson() {
+        return kboAwardService.getAllAwards();
+    }
+    @GetMapping("/award/batter/view")
+    public String getAllHitterAwardsPage(Model model) {
+        Map<String, List<BatterAwardDTO>> awards = kboAwardService.getAllAwards();
+        model.addAttribute("awards", awards);
+
+        //최신 데이터 표기
+        LocalDate latestDate = batterStatsRepository.findLatestRecordDate();
+        model.addAttribute("latestDate",latestDate);
+        return "recordroom/batterAward";
+    }
+
 
 }

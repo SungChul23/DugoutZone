@@ -3,11 +3,3 @@
     background: linear-gradient(to right, #B71C1C, #880E4F); /* KIA 느낌의 다크 레드 */
 }
 
-.btn {
-    background-color: #880E4F;
-    color: white;
-}
-
-.btn:hover {
-    background-color: #b40024;
-}

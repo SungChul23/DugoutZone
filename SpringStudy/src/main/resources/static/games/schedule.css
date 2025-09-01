@@ -165,28 +165,38 @@ footer {
     margin-top: 60px;
 }
 
-.back-home-section {
+.back-btn {
     text-align: center;
-    margin: 40px 0 20px;
+    margin: 40px 0 20px 0;
 }
 
-.neon-home-btn {
+.btn {
     display: inline-block;
-    padding: 12px 24px;
-    background-color: #00f0ff;
-    color: #0f172a;
-    border-radius: 8px;
+    padding: 14px 28px;
     font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    border-radius: 999px; /* pill shape */
+    background: linear-gradient(to right, #00f0ff, #8b5cf6);
+    color: #0f172a;
     text-decoration: none;
     transition: all 0.3s ease;
-    box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    backdrop-filter: blur(6px);
+    border: none;
+    text-align: center;
+    /* ✅ 추가 */
+    width: auto;
 }
 
-.neon-home-btn:hover {
-    background-color: #8b5cf6;
+/* 🟣 호버 시 버튼만! */
+.btn:hover {
+    background: linear-gradient(to right, #8b5cf6, #00f0ff);
     color: white;
-    box-shadow: 0 0 18px rgba(139, 92, 246, 0.6);
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
 }
+
 
 .team-logo {
     width: 20px;

@@ -93,21 +93,37 @@ body {
 }
 .back-btn {
     text-align: center;
-    margin-top: 20px;
+    margin: 40px 0 20px 0;
 }
 
-.back-btn .btn {
+.btn {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 6px;
+    padding: 14px 28px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    border-radius: 999px; /* pill shape */
+    background: linear-gradient(to right, #00f0ff, #8b5cf6);
+    color: #0f172a;
     text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    backdrop-filter: blur(6px);
+    border: none;
+    text-align: center;
+    /* ✅ 추가 */
+    width: auto;
 }
 
-.back-btn .btn:hover {
-    background-color: #0056b3;
+/* 🟣 호버 시 버튼만! */
+.btn:hover {
+    background: linear-gradient(to right, #8b5cf6, #00f0ff);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
 }
+
+
 footer {
     text-align: center;
     padding: 20px;

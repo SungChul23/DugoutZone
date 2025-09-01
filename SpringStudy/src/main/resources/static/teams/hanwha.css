@@ -2,12 +2,3 @@
     background: linear-gradient(135deg, #F37321, #000000); /* 주황색 → 검정 그라데이션 */
     color: white;
 }
-
-.btn {
-    background-color: #F37321; /* 주황 */
-    color: white;
-}
-
-.btn:hover {
-    background-color: #c15714; /* 어두운 주황 */
-}

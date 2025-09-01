@@ -3,11 +3,3 @@
     color: white;
 }
 
-.btn {
-    background-color: #005BAC; /* 삼성 파란색 */
-    color: white;
-}
-
-.btn:hover {
-    background-color: #004080; /* 어두운 블루 */
-}

@@ -253,29 +253,39 @@ body {
     padding: 6px;
 }
 
-/* 홈으로 돌아가기 버튼 */
-.back-home-section {
+.back-btn {
     text-align: center;
-    margin: 3rem 0 2rem 0;
+    margin: 40px 0 20px 0;
 }
 
-.neon-home-btn {
-    background-color: #1e293b;
-    color: #00f0ff;
-    padding: 0.75rem 1.5rem;
-    border-radius: 10px;
-    text-decoration: none;
+/* 🟢 버튼 스타일 */
+.btn {
+    display: inline-block;
+    padding: 14px 28px;
     font-weight: 600;
-    border: 2px solid #00f0ff;
-    transition: 0.3s ease;
-    box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    border-radius: 999px; /* pill shape */
+    background: linear-gradient(to right, #00f0ff, #8b5cf6);
+    color: #0f172a;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    backdrop-filter: blur(6px);
+    border: none;
+    text-align: center;
+    /* ✅ 추가 */
+    width: auto;
 }
 
-.neon-home-btn:hover {
-    color: #8b5cf6;
-    border-color: #8b5cf6;
-    box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+/* 🟣 호버 시 버튼만! */
+.btn:hover {
+    background: linear-gradient(to right, #8b5cf6, #00f0ff);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
 }
+
 /* 안내 문구 */
 .weather-disclaimer {
     text-align: center;

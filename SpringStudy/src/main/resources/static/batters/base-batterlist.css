@@ -1,13 +1,13 @@
-:root{
-    --bg:#0f172a;
-    --text:#e2e8f0;
-    --muted:#94a3b8;
+:root {
+    --bg: #0f172a;
+    --text: #e2e8f0;
+    --muted: #94a3b8;
 
     /* 팀 공통 변수(팀별로 오버라이드) */
-    --team-color:#00f0ff;
-    --team-color-2:#8b5cf6;
+    --team-color: #00f0ff;
+    --team-color-2: #8b5cf6;
     --team-grad: linear-gradient(135deg, var(--team-color), var(--team-color-2));
-    --team-logo:none;
+    --team-logo: none;
 
 }
 
@@ -23,20 +23,23 @@ body {
 .team-hero {
     padding: 60px 30px;
     border-radius: 0 0 30px 30px;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     position: relative;
     background: var(--team-grad);
-    overflow:hidden;
+    overflow: hidden;
 }
-.team-hero::before{
-    content:"";
-    position:absolute; inset:0;
+
+.team-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
     background-image: var(--team-logo);
-    background-repeat:no-repeat;
+    background-repeat: no-repeat;
     background-position: right 6% center;
     background-size: 200px;
-    pointer-events:none;
+    pointer-events: none;
 }
+
 .team-hero-content {
     max-width: 1200px;
     margin: auto;
@@ -48,36 +51,66 @@ body {
     position: relative;
     z-index: 1;
 }
+
 .team-hero-info h1 {
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 12px;
 }
+
 .slogan.team-slogan {
     font-size: 1.5rem;
     font-style: italic;
     font-weight: 600;
     color: #ffffff;
-    text-shadow: 0 0 8px rgba(255,255,255,0.8);
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
     margin-top: 10px;
     animation: sloganFade 1.4s ease-in-out forwards;
     opacity: 0;
 }
+
 @keyframes sloganFade {
-    from { transform: translateY(10px); opacity: 0; }
-    to   { transform: translateY(0); opacity: 1; }
+    from {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
-.team-hero-logo { width:200px; height:120px; }
+
+.team-hero-logo {
+    width: 200px;
+    height: 120px;
+}
 
 /* 공통 섹션/버튼 */
-.section { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
-.btn { padding: 12px 20px; border-radius: 10px; font-weight: 700; text-decoration: none;
-    color: var(--text); background: transparent; border:1px solid var(--team-color); transition:.2s; }
-.btn:hover { transform: translateY(-1px); box-shadow:0 0 12px var(--team-color); }
-.back-home-section { text-align:center; margin: 40px 0 20px; }
-.neon-home-btn { background-color: var(--team-color); color:#0f172a; box-shadow:0 0 12px rgba(0,240,255,.4); }
-.neon-home-btn:hover { background-color: var(--team-color-2); color:#fff; box-shadow:0 0 18px rgba(139,92,246,.6); }
-footer { text-align:center; padding: 40px 0; font-size:.9rem; color: var(--muted); }
+.section {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+.btn {
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--text);
+    background: transparent;
+    border: 1px solid var(--team-color);
+    transition: .2s;
+}
+
+
+
+footer {
+    text-align: center;
+    padding: 40px 0;
+    font-size: .9rem;
+    color: var(--muted);
+}
 
 
 .th-tip {
@@ -92,7 +125,7 @@ footer { text-align:center; padding: 40px 0; font-size:.9rem; color: var(--muted
     bottom: 100%; /* 위쪽 표시 */
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
     color: #fff;
     padding: 4px 8px;
     border-radius: 4px;
@@ -110,6 +143,33 @@ footer {
     background-color: #0f172a;
     font-size: 0.9rem;
 }
-.back-home-section .neon-home-btn {
-    color: white !important;
+
+.back-home-section {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.btn.neon-home-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    border-radius: 999px;
+    background: linear-gradient(to right, #00f0ff, #8b5cf6);
+    color: #0f172a;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    backdrop-filter: blur(6px);
+    border: none;
+    text-align: center;
+}
+
+.neon-home-btn:hover  {
+    background: linear-gradient(to right, #8b5cf6, #00f0ff);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
 }

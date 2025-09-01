@@ -4,14 +4,6 @@
     background: linear-gradient(to right, #B40000, #910000); /* SSG 그라데이션 */
 }
 
-.btn {
-    background-color: #C8102E; /* SSG 레드 */
-    color: white;
-}
-
-.btn:hover {
-    background-color: #a0001f; /* hover 시 더 어두운 레드 */
-}
 
 .team-slogan {
     color: #ffffff;

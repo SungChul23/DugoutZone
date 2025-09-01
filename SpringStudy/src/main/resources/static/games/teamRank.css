@@ -1,4 +1,4 @@
-    body {
+body {
     font-family: "Arial", sans-serif;
     background-color: #f9f9f9;
     margin: 0;
@@ -46,21 +46,36 @@ form {
 
 .back-btn {
     text-align: center;
-    margin-top: 20px;
+    margin: 40px 0 20px 0;
 }
 
-.back-btn .btn {
+/* 🟢 버튼 스타일 */
+.btn {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border-radius: 6px;
+    padding: 14px 28px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    border-radius: 999px; /* pill shape */
+    background: linear-gradient(to right, #00f0ff, #8b5cf6);
+    color: #0f172a;
     text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    backdrop-filter: blur(6px);
+    border: none;
+    text-align: center;
+    width: auto;
 }
 
-.back-btn .btn:hover {
-    background-color: #0056b3;
+.btn:hover {
+    background: linear-gradient(to right, #8b5cf6, #00f0ff);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
 }
+
+
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
@@ -68,7 +83,6 @@ body {
     color: #e2e8f0;
     padding: 40px 20px;
 }
-
 
 
 h1 {
@@ -149,6 +163,7 @@ p {
     background-color: #8b5cf6;
     color: white;
 }
+
 .rank-table thead {
     background-color: rgba(0, 240, 255, 0.15);
 }
@@ -161,6 +176,7 @@ p {
     border-bottom: 1px solid rgba(0, 240, 255, 0.3);
     background-color: rgba(14, 23, 41, 0.8); /* 어두운 배경과 대비 */
 }
+
 .rank-graph-wrapper {
     display: flex;
     flex-direction: row;
@@ -180,16 +196,15 @@ p {
 }
 
 
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px; /* 그래프 간 간격 */
+}
 
-    .chart-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 30px; /* 그래프 간 간격 */
-    }
-
-    .chart-container canvas {
-        width: 500px;
-        height: 300px;
-    }
+.chart-container canvas {
+    width: 500px;
+    height: 300px;
+}
 

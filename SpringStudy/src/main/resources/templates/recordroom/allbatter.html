@@ -38,8 +38,8 @@
     <table class="records-table" id="statsTable">
       <thead>
       <tr class="group group-1">
-        <th>이름</th>
-        <th>팀</th>
+        <th class="stat-header th-tip" data-stat="nameKr">이름</th>
+        <th class="stat-header th-tip" data-stat="team">팀</th>
         <th class="stat-header th-tip" data-stat="AVG">AVG</th>
         <th class="stat-header th-tip" data-stat="G">G</th>
         <th class="stat-header th-tip" data-stat="PA">PA</th>
@@ -72,8 +72,8 @@
       <tbody>
       <tr th:each="batter : ${batterList}">
         <!-- 그룹 1 -->
-        <td class="group group-1" th:text="${batter.nameKr}"></td>
-        <td class="group group-1" th:text="${batter.team}"></td>
+        <td class="group group-1" th:text="${batter.nameKr}" data-stat="nameKr" th:data-value="${batter.nameKr}"></td>
+        <td class="group group-1" th:text="${batter.team}" data-stat="team" th:data-value="${batter.team}"></td>
         <td class="group group-1" th:text="${batter.avg}" data-stat="AVG" th:attr="data-value=${batter.avg}"></td>
         <td class="group group-1" th:text="${batter.g}" data-stat="G" th:attr="data-value=${batter.g}"></td>
         <td class="group group-1" th:text="${batter.pa}" data-stat="PA" th:attr="data-value=${batter.pa}"></td>
@@ -109,7 +109,7 @@
 </section>
 
 <div class="back-home-section">
-  <a href="/allrecords" class="btn neon-home-btn">🏠 기록실로</a>
+  <a href="/allrecords" class="btn neon-home-btn"> 기록실로</a>
 </div>
 
 <footer>

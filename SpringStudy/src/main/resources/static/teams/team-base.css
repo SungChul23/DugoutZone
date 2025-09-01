@@ -95,27 +95,44 @@ footer {
         opacity: 1;
     }
 }
-.back-home-section {
+/* 공통 네온 버튼 스타일 */
+.btn {
+    display: inline-block;
+    padding: 14px 28px;
+    font-weight: 600;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    border-radius: 999px;
+    background: linear-gradient(to right, #00f0ff, #8b5cf6);
+    color: #0f172a;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    backdrop-filter: blur(6px);
+    border: none;
     text-align: center;
-    margin: 40px 0 20px;
+}
+
+/* 공통 호버 효과 */
+.btn:hover {
+    background: linear-gradient(to right, #8b5cf6, #00f0ff);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.6);
 }
 
 .neon-home-btn {
-    display: inline-block;
-    padding: 12px 24px;
-    background-color: #00f0ff;
-    color: #0f172a;
-    border-radius: 8px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 12px rgba(0, 240, 255, 0.4);
+    margin-top: 40px;
+    padding: 16px 32px;
+    font-size: 1.1rem;
 }
 
-.neon-home-btn:hover {
-    background-color: #8b5cf6;
-    color: white;
-    box-shadow: 0 0 18px rgba(139, 92, 246, 0.6);
+.back-home-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+    margin-bottom: 20px;
 }
 
 

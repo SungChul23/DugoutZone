@@ -48,6 +48,4 @@ public class ScheduleController {
         model.addAttribute("teamLogoMap", teamLogoMap);
         return "games/scheduleView";
     }
-
-
 }

@@ -53,9 +53,10 @@
 | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="50" height="50" alt="Python"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" width="50" height="50" alt="Pandas"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg" width="50" height="50" alt="Selenium"/> | <img src="https://avatars.githubusercontent.com/u/986760?s=200&v=4" width="50" height="50" alt="Prophet"/> |
 
 ### ☁️ 인프라 및 운영
-| AWS | EC2 | S3 | Lambda |
-|-----|-----|----|--------|
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="50" height="50" alt="AWS"/> | <img src="https://img.icons8.com/color/512/amazon-web-services.png" width="50" height="50" alt="EC2"/> | <img src="https://img.icons8.com/color/512/amazon-s3.png" width="50" height="50" alt="S3"/> | <img src="https://img.icons8.com/color/512/amazon-web-services.png" width="50" height="50" alt="Lambda"/> |
+| AWS | AWS | AWS | AWS |
+|-----|-----|-----|-----|
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="50" height="50" alt="AWS"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="50" height="50" alt="AWS"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="50" height="50" alt="AWS"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="50" height="50" alt="AWS"/> |
+
 
 
 

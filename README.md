@@ -30,13 +30,44 @@
 
 ---
 
-## ⚙️ 기술 스택
+## ⚙️ 사용된 기술 스택
+
+### 🖥️ 백엔드
 <p align="center">
-  <img src="https://img.shields.io/badge/Java-SpringBoot-green?logo=spring&logoColor=white"/> 
-  <img src="https://img.shields.io/badge/MySQL-Database-blue?logo=mysql&logoColor=white"/> 
-  <img src="https://img.shields.io/badge/AWS-Cloud-orange?logo=amazonaws&logoColor=white"/>
-  <img src="https://img.shields.io/badge/HTML-CSS--JS-lightgrey?logo=html5&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Java-SpringBoot-green?logo=spring&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JPA-Hibernate-lightgreen?logo=hibernate&logoColor=white"/>
 </p>
+
+### 🎨 프런트엔드
+<p align="center">
+  <img src="https://img.shields.io/badge/HTML5-Structure-orange?logo=html5&logoColor=white"/>
+  <img src="https://img.shields.io/badge/CSS3-Style-blue?logo=css3&logoColor=white"/>
+  <img src="https://img.shields.io/badge/JavaScript-Interaction-yellow?logo=javascript&logoColor=black"/>
+  <img src="https://img.shields.io/badge/Chart.js-Data--Viz-purple?logo=chartdotjs&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Thymeleaf-Template-green?logo=thymeleaf&logoColor=white"/>
+</p>
+
+### 🗄️ 데이터베이스
+<p align="center">
+  <img src="https://img.shields.io/badge/MySQL-Relational--DB-blue?logo=mysql&logoColor=white"/>
+</p>
+
+### 📊 데이터 수집 및 분석
+<p align="center">
+  <img src="https://img.shields.io/badge/Python-Data--Processing-yellow?logo=python&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Pandas-DataFrame-black?logo=pandas&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Selenium-Web--Crawling-darkgreen?logo=selenium&logoColor=white"/>
+  <img src="https://img.shields.io/badge/Prophet-TimeSeries--Forecasting-darkblue?logo=facebook&logoColor=white"/>
+</p>
+
+### ☁️ 인프라 및 운영
+<p align="center">
+  <img src="https://img.shields.io/badge/AWS-Cloud-orange?logo=amazonaws&logoColor=white"/>
+  <img src="https://img.shields.io/badge/AWS--EC2-Hosting-lightgrey?logo=amazonec2&logoColor=white"/>
+  <img src="https://img.shields.io/badge/AWS--S3-Storage-darkorange?logo=amazons3&logoColor=white"/>
+  <img src="https://img.shields.io/badge/AWS--Lambda-Serverless-yellow?logo=awslambda&logoColor=white"/>
+</p>
+
 
 ---
 

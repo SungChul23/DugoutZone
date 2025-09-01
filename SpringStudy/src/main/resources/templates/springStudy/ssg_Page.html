@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>SSG 선수단 페이지 목록</title>
+    <link rel="stylesheet" href="/springStudy/ssgv2.css" />
+</head>
+<body>
+
+<header>
+    <h2>SSG 랜더스 선수단 - 페이지 목록</h2>
+    <p>2025년 현역 선수</p>
+</header>
+
+<form action="/searchPlayer" method="post" class="search-form" style="text-align: center; margin-top: 30px;">
+    <input name="player" type="text" placeholder="선수명을 입력해 주세요." class="search-input">
+    <button type="submit" class="btn">검색</button>
+</form>
+
+
+<main>
+    <h1>페이지별 선수 목록</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>번호</th>
+            <th>이름</th>
+            <th>포지션</th>
+            <th>입단년도</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="i : ${SSG}">
+            <td th:text="${i.number}">번호</td>
+            <td th:text="${i.player}">이름</td>
+            <td th:text="${i.position}">포지션</td>
+            <td th:text="${i.years}">입단년도</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!-- 페이지네이션 -->
+    <div class="pagination">
+        <ul>
+            <!-- 이전 -->
+            <li th:classappend="${currentPage == 1} ? 'disabled'">
+                <a th:href="${currentPage > 1} ? @{/list/ssg/page/{page}(page=${currentPage - 1})} : '#'"
+                   th:text="'이전'">이전</a>
+            </li>
+
+            <!-- 페이지 번호 -->
+            <li th:each="pageNum : ${#numbers.sequence(1, totalPages)}"
+                th:classappend="${pageNum == currentPage} ? 'active'">
+                <a th:href="@{/list/ssg/page/{page}(page=${pageNum})}" th:text="${pageNum}">1</a>
+            </li>
+
+            <!-- 다음 -->
+            <li th:classappend="${currentPage == totalPages} ? 'disabled'">
+                <a th:href="${currentPage < totalPages} ? @{/list/ssg/page/{page}(page=${currentPage + 1})} : '#'"
+                   th:text="'다음'">다음</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="center">
+        <a href="/static" class="btn">🏠 메인으로</a>
+        <a href="/list/ssg" class="btn">전체 목록</a>
+    </div>
+</main>
+
+<footer>
+    <p>ⓒ 2025 Spring Study Team</p>
+</footer>
+
+</body>
+</html>

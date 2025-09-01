@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="'상품 상세 | ' + ${product.title}">상품 상세</title>
+    <link rel="stylesheet" href="/springStudy/list.css">
+    <link rel="stylesheet" href="/springStudy/product.css">
+</head>
+<body>
+
+<nav class="navbar">
+    <a href="/static" class="logo">🛒 Spring Shop</a>
+    <div class="nav-links">
+        <a href="/list">상품 목록</a>
+        <a href="/write">상품 등록</a>
+    </div>
+</nav>
+
+<div class="page-container">
+    <!-- 댓글 -->
+    <section class="comment-section">
+        <h3 class="comment-title">💬 댓글</h3>
+        <form action="/comment" method="POST" class="comment-form">
+            <label for="comment-content" class="sr-only">댓글 입력</label>
+            <input id="comment-content" type="text" name="content" placeholder="댓글을 입력하세요" required>
+            <input type="hidden" name="parentId" th:value="${product?.id}">
+            <button type="submit" class="btn-submit">전송</button>
+        </form>
+        <ul class="comment-list" th:if="${comments != null}">
+            <li th:each="comment : ${comments}" class="comment-item">
+                <div class="comment-header">
+                    <span class="comment-username" th:text="${comment.username != null ? comment.username : '익명'}">작성자</span>
+                </div>
+                <p class="comment-content" th:text="${comment.content}">댓글 내용</p>
+            </li>
+        </ul>
+        <p class="no-comments" th:if="${#lists.isEmpty(comments)}">아직 댓글이 없습니다. 첫 댓글을 작성해보세요!</p>
+    </section>
+
+    <!-- 상품 상세 -->
+    <div class="product-container">
+        <img th:src="${product.imageUrl}" alt="상품 이미지">
+        <h2 th:text="${product.title}">상품명</h2>
+        <p>가격: <span th:text="${product.price}">0</span> 원</p>
+        <a href="/list" class="btn">← 목록으로</a>
+    </div>
+
+    <!-- 주문하기 폼 -->
+    <div class="order-form">
+        <h3>📦 주문하기</h3>
+        <form action="/order" method="POST">
+            <input type="hidden" name="id" th:value="${product.id}">
+            <input type="hidden" name="title" th:value="${product.title}">
+            <input type="hidden" name="price" th:value="${product.price}">
+            <label for="count">수량</label>
+            <input id="count" name="count" type="number" placeholder="수량" min="1" required>
+            <button type="submit">🛒 주문하기</button>
+        </form>
+    </div>
+</div>
+
+<footer>
+    <p>ⓒ 2025 Spring Study Team</p>
+</footer>
+</body>
+</html>

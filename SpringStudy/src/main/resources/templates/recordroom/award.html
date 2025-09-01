@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>DUGOUT | 수상 예측</title>
+    <link rel="stylesheet" href="/recordroom/award.css" />
+    <link rel="icon" href="/dugout.png" />
+</head>
+<body class="award-body">
+
+<header class="award-header">
+    <h1>🏆 25시즌 KBO 수상 예측</h1>
+    <p class="subtitle">원하는 부문을 선택하세요</p>
+</header>
+
+<div class="legend">
+    <p class="record-date">
+    <span class="note">
+      ✅ 기준: [타자] 규정 타석(경기수 × 3.1) / [투수] 규정 이닝(경기수 × 1.0)
+    </span><br>
+        <span class="note">🥹 도루왕 부문은 추후 추가 예정입니다.</span>
+    </p>
+</div>
+
+<main class="award-grid">
+
+    <!-- 타자 수상 카드 -->
+    <section class="award-card">
+        <div class="card-header">
+            <h2 class="award-title">🥇 타자 수상 예측</h2>
+            <span class="chip">Batter</span>
+        </div>
+        <div class="top1">
+            <div class="top1-main">
+                <div class="top1-name">
+                    타격왕 · 출루율왕 · 장타율왕 · 홈런왕 · 타점왕 · 안타왕 · 득점왕 · 도루왕
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 12px;">
+            <a href="/award/batter/view" class="neon-home-btn" aria-label="타자 수상 예측 바로가기">타자 수상 보러가기</a>
+        </div>
+    </section>
+
+    <!-- 투수 수상 카드 -->
+    <section class="award-card">
+        <div class="card-header">
+            <h2 class="award-title">🥇 투수 수상 예측</h2>
+            <span class="chip">Pitcher</span>
+        </div>
+        <div class="top1">
+            <div class="top1-main">
+                <div class="top1-name">
+                    평균자책점 · 승률 · 다승 · 탈삼진 · 세이브 · 홀드 · 이닝
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 12px;">
+            <a href="/award/pitcher/view" class="neon-home-btn" aria-label="투수 수상 예측 바로가기">투수 수상 보러가기</a>
+        </div>
+    </section>
+
+</main>
+
+<div class="back-home-section">
+    <a href="/dugout" class="neon-home-btn">더그아웃 홈으로</a>
+</div>
+
+<footer class="award-footer">
+    <p>© 2025 KBO 수상 예측</p>
+</footer>
+
+</body>
+</html>

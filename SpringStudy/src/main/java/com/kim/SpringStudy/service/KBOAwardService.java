@@ -20,7 +20,7 @@ public class KBOAwardService {
     private final BatterAwardRepository batterAwardRepository;
     private final PitcherAwardRepository pitcherAwardRepository;
 
-    public Map<String, List<BatterAwardDTO>> getAllAwards() {
+    public Map<String, List<BatterAwardDTO>> getAllBatterAwards() {
         Map<String, List<BatterAwardDTO>> result = new LinkedHashMap<>();
 
         result.put("홈런왕", convertInt(batterAwardRepository.getHR()));

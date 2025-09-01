@@ -473,21 +473,41 @@ public class DugoutController {
         return "recordroom/allpitcher";
     }
     //타자 부분 수상 불러오기
+    //안타왕, 타격왕, 홈런왕, 장타왕, 출루왕, 득점왕, 타점왕 ,도루왕(우선 제외)
     @GetMapping("/award/batter")
     @ResponseBody
     public Map<String, List<BatterAwardDTO>> getAllHitterAwardsJson() {
-        return kboAwardService.getAllAwards();
+        return kboAwardService.getAllBatterAwards();
     }
     @GetMapping("/award/batter/view")
     public String getAllHitterAwardsPage(Model model) {
-        Map<String, List<BatterAwardDTO>> awards = kboAwardService.getAllAwards();
-        model.addAttribute("awards", awards);
+        //서비스에서 쿼리 조회(레포지) 후 결과값을 Map형태로 매핑한 컨트롤러로 토스
+        model.addAttribute("awards", kboAwardService.getAllBatterAwards());
 
         //최신 데이터 표기
         LocalDate latestDate = batterStatsRepository.findLatestRecordDate();
         model.addAttribute("latestDate",latestDate);
 
         return "recordroom/batterAward";
+    }
+
+    // 투수 부분 수상 불러오기
+    // era왕, 승률왕, 다승왕, 탈삼진왕, 세브왕, 홀드왕, 이닝왕
+    @GetMapping("/award/pitcher")
+    @RequestMapping
+    public Map<String, List<PitcherAwardDTO>> getAllPitcherAwardsJson(){
+        return kboAwardService.getAllPitcherAwards();
+    }
+    @GetMapping("/award/pitcher/view")
+    public String getAllPitcherAwardsPage (Model model){
+        //서비스에서 쿼리 조회(레포지) 후 결과값을 Map형태로 매핑한 컨트롤러로 토스
+        model.addAttribute("awards", kboAwardService.getAllPitcherAwards());
+
+        //최신 데이터 표기
+        LocalDate latestDate = pitcherStatsRepository.findLatestRecordDate();
+        model.addAttribute(("latestDate"), latestDate);
+
+        return "recordroom/pitcherAward";
     }
 
 

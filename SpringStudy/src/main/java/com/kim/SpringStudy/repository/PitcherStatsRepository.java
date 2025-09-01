@@ -53,4 +53,5 @@ public interface PitcherStatsRepository extends JpaRepository<PitcherStats, Long
     @Query("SELECT MAX(b.recordDate) FROM PitcherStats b")
     LocalDate findLatestRecordDate();
 
+
 }

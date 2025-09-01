@@ -33,40 +33,30 @@
 ## ⚙️ 사용된 기술 스택
 
 ### 🖥️ 백엔드
-<p align="center">
-  <img src="https://img.shields.io/badge/Java-SpringBoot-green?logo=spring&logoColor=white"/>
-  <img src="https://img.shields.io/badge/JPA-Hibernate-lightgreen?logo=hibernate&logoColor=white"/>
-</p>
+| Java | Spring Boot | Hibernate |
+|------|-------------|-----------|
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="50" height="50" alt="Java"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" width="50" height="50" alt="Spring Boot"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hibernate/hibernate-original.svg" width="50" height="50" alt="Hibernate"/> |
 
 ### 🎨 프런트엔드
-<p align="center">
-  <img src="https://img.shields.io/badge/HTML5-Structure-orange?logo=html5&logoColor=white"/>
-  <img src="https://img.shields.io/badge/CSS3-Style-blue?logo=css3&logoColor=white"/>
-  <img src="https://img.shields.io/badge/JavaScript-Interaction-yellow?logo=javascript&logoColor=black"/>
-  <img src="https://img.shields.io/badge/Chart.js-Data--Viz-purple?logo=chartdotjs&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Thymeleaf-Template-green?logo=thymeleaf&logoColor=white"/>
-</p>
+| HTML5 | CSS3 | JavaScript | Chart.js | Thymeleaf |
+|-------|------|------------|----------|-----------|
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="50" height="50" alt="HTML5"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="50" height="50" alt="CSS3"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="50" height="50" alt="JavaScript"/> | <img src="https://www.chartjs.org/media/logo-title.svg" width="50" height="50" alt="Chart.js"/> | <img src="https://www.thymeleaf.org/images/thymeleaf.png" width="50" height="50" alt="Thymeleaf"/> |
 
 ### 🗄️ 데이터베이스
-<p align="center">
-  <img src="https://img.shields.io/badge/MySQL-Relational--DB-blue?logo=mysql&logoColor=white"/>
-</p>
+| MySQL |
+|-------|
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="50" height="50" alt="MySQL"/> |
 
 ### 📊 데이터 수집 및 분석
-<p align="center">
-  <img src="https://img.shields.io/badge/Python-Data--Processing-yellow?logo=python&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Pandas-DataFrame-black?logo=pandas&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Selenium-Web--Crawling-darkgreen?logo=selenium&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Prophet-TimeSeries--Forecasting-darkblue?logo=facebook&logoColor=white"/>
-</p>
+| Python | Pandas | Selenium | Prophet |
+|--------|--------|----------|---------|
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="50" height="50" alt="Python"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" width="50" height="50" alt="Pandas"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg" width="50" height="50" alt="Selenium"/> | <img src="https://avatars.githubusercontent.com/u/986760?s=200&v=4" width="50" height="50" alt="Prophet"/> |
 
 ### ☁️ 인프라 및 운영
-<p align="center">
-  <img src="https://img.shields.io/badge/AWS-Cloud-orange?logo=amazonaws&logoColor=white"/>
-  <img src="https://img.shields.io/badge/AWS--EC2-Hosting-lightgrey?logo=amazonec2&logoColor=white"/>
-  <img src="https://img.shields.io/badge/AWS--S3-Storage-darkorange?logo=amazons3&logoColor=white"/>
-  <img src="https://img.shields.io/badge/AWS--Lambda-Serverless-yellow?logo=awslambda&logoColor=white"/>
-</p>
+| AWS | EC2 | S3 | Lambda |
+|-----|-----|----|--------|
+| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" width="50" height="50" alt="AWS"/> | <img src="https://img.icons8.com/color/512/amazon-web-services.png" width="50" height="50" alt="EC2"/> | <img src="https://img.icons8.com/color/512/amazon-s3.png" width="50" height="50" alt="S3"/> | <img src="https://img.icons8.com/color/512/amazon-web-services.png" width="50" height="50" alt="Lambda"/> |
+
 
 
 ---

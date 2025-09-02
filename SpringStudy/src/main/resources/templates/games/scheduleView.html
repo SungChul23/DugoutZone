@@ -122,11 +122,11 @@
             slides.forEach(el => {
                 el.addEventListener('click', () => {
                     const date = el.getAttribute('data-date');
-                    window.location.href = `/gamedate?date=${encodeURIComponent(date)}`;
+                    window.location.href = `/schedule?date=${encodeURIComponent(date)}`;
                 });
             });
         });
     </script>
-
+</div>
 </body>
 </html>

@@ -30,7 +30,7 @@ public class AwardController {
     //25시즌 수상 메뉴
     @GetMapping("/award")
     public String showAward(){
-        return "/recordroom/award";
+        return "recordroom/award";
     }
 
     //타자 부분 수상 불러오기

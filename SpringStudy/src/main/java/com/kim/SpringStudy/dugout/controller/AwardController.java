@@ -70,4 +70,10 @@ public class AwardController {
 
         return "recordroom/pitcherAward";
     }
+
+    //골든 글러브
+    @GetMapping("/award/goldenglobe")
+    public String showGoldenGlobe(){
+        return "recordroom/goldenglobe";
+    }
 }

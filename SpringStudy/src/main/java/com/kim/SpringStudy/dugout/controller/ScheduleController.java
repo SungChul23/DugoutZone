@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
@@ -16,13 +17,14 @@ import static com.kim.SpringStudy.dugout.util.TeamLogoMapper.teamLogoMap;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/schedule")
 public class ScheduleController {
 
 
     private final GameDateService gameDateService;
 
     // KBO 2025시즌 일정
-    @GetMapping("/schedule")
+    @GetMapping
     public String test(@RequestParam(required = false) String date, Model model) {
         // 모든 날짜 리스트 가져옴
         List<String> availableDates = gameDateService.getAvailableDates();

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -20,6 +21,7 @@ import java.util.Optional;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/team")
 //각 팀별 사이트에 있어야 하는 객체에 관한 컨트롤러
 public class TeamInfoController {
 
@@ -30,7 +32,7 @@ public class TeamInfoController {
     private final PitcherService pitcherService;
 
     //각 팀 사이트 배너에 객체들
-    @GetMapping("/team/{teamName}")
+    @GetMapping("/{teamName}")
     public String teamPage(@PathVariable String teamName, Model model) {
         String viewFolder = TeamNameMapper.toViewFolder(teamName);
         if (viewFolder == null) {
@@ -61,7 +63,7 @@ public class TeamInfoController {
     }
 
     // 구단별 선수진
-    @GetMapping("/team/{teamName}/player")
+    @GetMapping("/{teamName}/player")
     public String player(@PathVariable String teamName,
                          @RequestParam(defaultValue = "투수") String position,
                          @RequestParam(required = false) String keyword,
@@ -93,7 +95,7 @@ public class TeamInfoController {
 
     //각 팀 마다 타자 기록 보여주기
     //team 이름으로 경로 찾고 타율을 기본값으로. 내림차순으로 기본값으로. "" -> 전체 표시
-    @GetMapping("/team/{team}/batter")
+    @GetMapping("/{team}/batter")
     public String teamBatters(@PathVariable String team,
                               @RequestParam(defaultValue = "1") int view,
                               @RequestParam(defaultValue = "avg") String sort,   // 기본: 타율
@@ -138,7 +140,7 @@ public class TeamInfoController {
     }
 
     //각 팀 마다 투수 기록 보여주기
-    @GetMapping("/team/{team}/pitcher")
+    @GetMapping("/{team}/pitcher")
     public String teamPitcher(@PathVariable String team,
                               @RequestParam(defaultValue = "1") int view,
                               @RequestParam(defaultValue = "era") String sort,
@@ -177,12 +179,4 @@ public class TeamInfoController {
 
     }
 
-    //구단 별 예매 링크
-    @GetMapping("/tickets")
-    public String Tickets(Model model) {
-        List<KBOTeam> result = kboTeamRepository.findAll();
-        model.addAttribute("topTeams", result.subList(0, 5));
-        model.addAttribute("bottomTeams", result.subList(5, 10));
-        return "games/tickets";
-    }
 }

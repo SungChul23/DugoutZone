@@ -2,52 +2,54 @@ package com.kim.SpringStudy.dugout.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
+@RequestMapping("/rules")
 //야구 룰 설명에 관한 컨틀롤러
 public class RuleController {
 
-    @GetMapping("/rules")
+    @GetMapping
     public String showRules() {
         return "baseballRules/rules";
     }
 
-    @GetMapping("/rules/quickstart")
+    @GetMapping("/quickstart")
     public String showQuickstart() {
         return "baseballRules/quickstart";
     }
 
-    @GetMapping("/rules/offense")
+    @GetMapping("/offense")
     public String showOffense() {
         return "baseballRules/offense";
     }
 
-    @GetMapping("/rules/defense")
+    @GetMapping("/defense")
     public String showDefense() {
         return "baseballRules/defense";
     }
 
-    @GetMapping("/rules/baserun")
+    @GetMapping("/baserun")
     public String showBaserun() {
         return "baseballRules/baserun";
     }
 
-    @GetMapping("/rules/pitching")
+    @GetMapping("/pitching")
     public String showPitching() {
         return "baseballRules/pitching";
     }
 
-    @GetMapping("/rules/calls")
+    @GetMapping("/calls")
     public String showCalls() {
         return "baseballRules/calls";
     }
 
-    @GetMapping("/rules/kbo")
+    @GetMapping("/kbo")
     public String showKBO() {
         return "baseballRules/kbo";
     }
 
-    @GetMapping("/rules/mis")
+    @GetMapping("/mis")
     public String showMis() {
         return "baseballRules/mis";
     }

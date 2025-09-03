@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
@@ -17,6 +18,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/allrecords")
 //기록실에 관한 컨트롤러
 public class RecordRoomController {
 
@@ -28,13 +30,13 @@ public class RecordRoomController {
     private final PitcherStatsRepository pitcherStatsRepository;
 
     // 10구단 타자 기록실
-    @GetMapping("/allrecords")
+    @GetMapping
     public String showAllRecord() {
         return "recordroom/allrecords";
     }
 
     //기록실 기능 - 10구단 타자 검색
-    @GetMapping("/allrecords/batter")
+    @GetMapping("/batter")
     public String searchBatter(@RequestParam(value = "keyword", required = false) String keyword,
                                Model model) {
 
@@ -56,7 +58,7 @@ public class RecordRoomController {
     }
 
     //기록실 기능 - 10구단 투수 검색
-    @GetMapping("/allrecords/pitcher")
+    @GetMapping("/pitcher")
     public String searchPitcher(@RequestParam(value = "keyword", required = false) String keyword,
                                 Model model) {
 

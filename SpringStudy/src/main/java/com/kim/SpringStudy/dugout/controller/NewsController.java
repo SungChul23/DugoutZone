@@ -7,15 +7,13 @@ import com.kim.SpringStudy.dugout.util.TeamNameMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+@RequestMapping("/news")
 //각 팀 뉴스에 관한 컨트롤러
 public class NewsController {
 
@@ -24,7 +22,7 @@ public class NewsController {
 
 
     //HTML View 페이지를 보여주는 컨트롤러
-    @GetMapping("/news/view/{team}")
+    @GetMapping("/view/{team}")
     public String viewTeamNews(@PathVariable String team, Model model) {
         String teamFullName;
         String viewFolder = TeamNameMapper.toViewFolder(team);
@@ -40,7 +38,7 @@ public class NewsController {
     }
 
     //구단 별 뉴스
-    @GetMapping("/news/{team}")
+    @GetMapping("/{team}")
     @ResponseBody
     public List<NewsDTO> getTeamNews(@PathVariable String team,
                                      @RequestParam(defaultValue = "1") int page,

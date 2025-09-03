@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>골든 글러브 예측 | DUGOUT</title>
+    <link rel="stylesheet" href="/recordroom/goldenglove.css" />
+    <link rel="icon" href="/dugout.png" />
+</head>
+<body class="golden-body">
+
+<!-- 🎇 배경 파티클 -->
+<div id="particles-js"></div>
+
+<!-- 🏆 헤드라인 -->
+<section class="golden-hero">
+    <h2>2025 KBO 골든 글러브 예측</h2>
+    <p>데이터 기반 분석으로 뽑은 영광의 후보들.</p>
+</section>
+
+<!-- ⚾ 야구장 필드 위 배치 -->
+<div class="field-container">
+    <div class="baseball-field">
+
+        <!-- 🧤 투수 -->
+        <th:block th:each="player : ${goldenGlovePitchers}">
+            <div class="position pitcher-pos">
+                <div class="player-card">
+                    <h4 class="player-name" th:text="${player.name}"></h4>
+                    <p class="player-score">예측 점수: <span th:text="${player.goldenScore}"></span></p>
+                </div>
+            </div>
+        </th:block>
+
+        <!-- 🧤 포수 -->
+        <th:block th:each="player : ${goldenGloveCatchers}">
+            <div class="position catcher-pos">
+                <div class="player-card">
+                    <h4 class="player-name" th:text="${player.name}"></h4>
+                    <p class="player-score">예측 점수: <span th:text="${player.goldenScore}"></span></p>
+                </div>
+            </div>
+        </th:block>
+
+        <!-- 🧤 내야수 (1루~유격수) -->
+        <th:block th:each="player : ${goldenGloveInfielders}">
+            <div th:classappend="
+                    ${player.positionSub == '1루수' ? ' first-base-pos' : ''} +
+                    ${player.positionSub == '2루수' ? ' second-base-pos' : ''} +
+                    ${player.positionSub == '3루수' ? ' third-base-pos' : ''} +
+                    ${player.positionSub == '유격수' ? ' shortstop-pos' : ''}"
+                 class="position">
+                <div class="player-card">
+                    <h4 class="player-name" th:text="${player.name}"></h4>
+                    <p class="player-score">예측 점수: <span th:text="${player.goldenScore}"></span></p>
+                </div>
+            </div>
+        </th:block>
+
+        <!-- 🧤 외야수 (좌/중/우) -->
+        <th:block th:each="player, stat : ${goldenGloveOutfielders}">
+            <div th:classappend="${stat.index == 0} ? 'left-field-pos' : (${stat.index == 1} ? 'center-field-pos' : 'right-field-pos')"
+                 class="position">
+                <div class="player-card">
+                    <h4 class="player-name" th:text="${player.name}"></h4>
+                    <p class="player-score">예측 점수: <span th:text="${player.goldenScore}"></span></p>
+                </div>
+            </div>
+        </th:block>
+
+        <!-- 🧤 지명타자 (주석 처리) -->
+        <!--
+        <th:block th:if="${goldenGloveDH}">
+            <div class="position dh-pos">
+                <div class="player-card">
+                    <h4 class="player-name" th:text="${goldenGloveDH.name}"></h4>
+                    <p class="player-score">예측 점수: <span th:text="${goldenGloveDH.goldenScore}"></span></p>
+                </div>
+            </div>
+        </th:block>
+        -->
+
+    </div>
+</div>
+
+<!-- 🏠 홈으로 버튼 -->
+<div class="fixed-button-wrapper">
+    <a href="/dugout" class="neon-home-btn">더그아웃으로 가기</a>
+</div>
+
+<!-- 🎆 배경 파티클 JS -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<script src="/recordroom/goldenglove.js"></script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+/* 기본 스타일 */
+body.golden-body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at center, rgba(255, 215, 0, 0.1) 0%, #0f172a 70%);
+    color: #e2e8f0;
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+}
+
+#particles-js {
+    position: fixed;
+    width: 100%; height: 100%; top: 0; left: 0;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.golden-hero {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 80px 20px 20px;
+}
+.golden-hero h2 {
+    font-size: 3rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #ffd700, #8b5cf6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: fadeInUp 1s ease-out;
+}
+.golden-hero p {
+    color: #f8f8f8;
+    font-weight: 500;
+    text-shadow: 1px 1px 2px #000000aa;
+    line-height: 1.6;
+    font-size: 1.2rem;
+}
+
+/* 야구장 필드 라인 */
+.field-container {
+    position: relative;
+    width: 100%;
+    max-width: 1000px;
+    height: 600px; /* 고정 크기로 설정 */
+    margin: 0 auto;
+}
+.baseball-field {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background: transparent;
+}
+
+/* 라인 애니메이션 */
+.field-line {
+    position: absolute;
+    width: 2px;
+    height: 100px;
+    background: #00f0ff; /* 단색 네온블루 */
+    box-shadow: 0 0 8px #00f0ff, 0 0 15px #00f0ff; /* 네온 광택 */
+    animation: growLine 1s ease forwards;
+    transform-origin: top;
+    z-index: 1;
+}
+@keyframes growLine {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+}
+
+/* 포지션 카드 */
+.position {
+    position: absolute;
+    top: 120px;
+    left: 420px;
+}
+
+
+.player-card {
+    background: rgba(15, 23, 42, 0.8);   /* 어두운 배경 */
+    color: #00f0ff;                      /* 네온 블루 글씨 */
+    border: 1px solid #00f0ff;
+    box-shadow: 0 0 12px #00f0ff;
+    backdrop-filter: blur(10px);
+}
+
+
+.player-card:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+}
+
+.player-name {
+    margin: 0;
+    font-weight: bold;
+    font-size: 1rem;
+    background: linear-gradient(45deg, #ffd700, #ff8c00);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.player-score {
+    margin: 5px 0 0;
+    font-size: 0.8rem;
+    color: #e2e8f0;
+}
+
+/* 포지션 배치 (오른쪽으로 약간 이동) */
+.pitcher-pos     { top: 45%; left: 58%; transform: translate(-50%, -50%); }
+.catcher-pos     { top: 60%; left: 58%; transform: translate(-50%, -50%); }
+.first-base-pos  { top: 52%; left: 70%; transform: translate(-50%, -50%); }
+.second-base-pos { top: 38%; left: 64%; transform: translate(-50%, -50%); }
+.third-base-pos  { top: 52%; left: 46%; transform: translate(-50%, -50%); }
+.shortstop-pos   { top: 38%; left: 52%; transform: translate(-50%, -50%); }
+.left-field-pos  { top: 25%; left: 45%; transform: translate(-50%, -50%); }
+.center-field-pos{ top: 15%; left: 58%; transform: translate(-50%, -50%); }
+.right-field-pos { top: 25%; left: 71%; transform: translate(-50%, -50%); }
+dh-pos           { top: 72%; left: 58%; transform: translate(-50%, -50%); }
+
+/* 버튼 */
+.fixed-button-wrapper {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 100;
+}
+
+.neon-home-btn {
+    display: inline-block;
+    padding: 14px 28px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: #0f172a;
+    background: linear-gradient(135deg, #00f0ff, #8b5cf6);
+    border-radius: 12px;
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+}
+
+.neon-home-btn:hover {
+    transform: scale(1.05);
+    background: linear-gradient(135deg, #facc15, #f472b6);
+    box-shadow: 0 0 20px rgba(250, 202, 21, 0.8);
+}
+
+@keyframes fadeInUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to   { transform: translateY(0);   opacity: 1; }
+}
+@keyframes glowLine {
+    from {
+        opacity: 0.4;
+        transform: scaleX(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scaleX(1);
+    }
+}

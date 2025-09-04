@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.print.attribute.Attribute;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -75,22 +76,47 @@ public class AwardController {
     @GetMapping("/goldenglove")
     public String showGoldenGlobe(Model model) {
 
+        //**투수**
+        //투수 부분 유력후보 1 and 그 외 후보5
+        List<GoldenGlovePlayerDTO> pitcherList = goldenGolveService.topPitchers();
+        model.addAttribute("goldenGlovePitchers", pitcherList.get(0));
+        model.addAttribute("pitcherCandidates", pitcherList);
 
-        model.addAttribute("goldenGlovePitchers",
-                goldenGolveService.topPitchers());
-        model.addAttribute("goldenGloveCatchers",
-                goldenGolveService.topCatchers());
-        model.addAttribute("goldenGloveOutfielders",  //외야수
-                goldenGolveService.topOutfielders());
+        //**포수**
+        //포수 부분 유력후보 1 and 그 외 후보5
+        List<GoldenGlovePlayerDTO> cathcerList = goldenGolveService.topCatchers();
+        model.addAttribute("goldenGloveCatchers", cathcerList.get(0));
+        model.addAttribute("catcherCandidates", cathcerList);
 
-        List<GoldenGlovePlayerDTO> infielders = new ArrayList<>();
-        addIfNotNull(infielders, goldenGolveService.topByPositionSub("1루수"));
-        addIfNotNull(infielders, goldenGolveService.topByPositionSub("2루수"));
-        addIfNotNull(infielders, goldenGolveService.topByPositionSub("3루수"));
-        addIfNotNull(infielders, goldenGolveService.topByPositionSub("유격수"));
-        //addIfNotNull(infielders, goldenGolveService.topByPositionSub("지명타자"));
-        model.addAttribute("goldenGloveInfielders", infielders);
+        //**외야수**
+        //와야수 부분 유력후보 3 and 그 외 후보 5
+        List<GoldenGlovePlayerDTO> outfielderList = goldenGolveService.topOutfielders();
+        model.addAttribute("goldenGloveOutfielders", outfielderList);
+        model.addAttribute("outfielderCandidates",
+                goldenGolveService.outfielderCandidates());
 
+        //**내야수**
+        //내야수(1,2,3루수 , 유격수) 유력후보 1
+        List<GoldenGlovePlayerDTO> infielderList = new ArrayList<>();
+        addIfNotNull(infielderList, goldenGolveService.topByPositionSub("1루수"));
+        addIfNotNull(infielderList, goldenGolveService.topByPositionSub("2루수"));
+        addIfNotNull(infielderList, goldenGolveService.topByPositionSub("3루수"));
+        addIfNotNull(infielderList, goldenGolveService.topByPositionSub("유격수"));
+        // addIfNotNull(infielders, goldenGolveService.topByPositionSub("지명타자"));
+        model.addAttribute("goldenGloveInfielders", infielderList);
+
+        //내야수(1,2,3루수 , 유격수) 후보 top 5
+        Map<String, List<GoldenGlovePlayerDTO>> infieldCandidates = new HashMap<>();
+        infieldCandidates.put("1루수", goldenGolveService.candidatesByPositionSub("1루수"));
+        infieldCandidates.put("2루수", goldenGolveService.candidatesByPositionSub("2루수"));
+        infieldCandidates.put("3루수", goldenGolveService.candidatesByPositionSub("3루수"));
+        infieldCandidates.put("유격수", goldenGolveService.candidatesByPositionSub("유격수"));
+        // infieldCandidates.put("지명타자", goldenGolveService.candidatesByPositionSub("지명타자"));
+        model.addAttribute("infieldCandidates", infieldCandidates);
+
+        //최신날짜 공지
+        LocalDate latestDate = batterStatsRepository.findLatestRecordDate();
+        model.addAttribute("latestDate", latestDate);
 
         return "recordroom/goldenglove";
     }

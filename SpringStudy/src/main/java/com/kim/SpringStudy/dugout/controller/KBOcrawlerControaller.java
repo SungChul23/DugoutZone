@@ -1,4 +1,4 @@
-package com.kim.SpringStudy.practice.controller;
+package com.kim.SpringStudy.dugout.controller;
 
 import com.kim.SpringStudy.dugout.dto.PlayerPositionDTO;
 import com.kim.SpringStudy.dugout.service.BatterStatsImportService;
@@ -37,7 +37,7 @@ public class KBOcrawlerControaller {
         return team  + "-> 투수 기록 저장 완료";
     }
 
-    //선수 포지션 구체화 import
+    //선수 포지션 구체화 import -> 골든 글러브 세부 포지션을 위함
     @PostMapping("/position-sub")
     public ResponseEntity<String> importPositionSub(@RequestBody PlayerPositionDTO dto) {
         return playerPositionService.updatePositionSub(dto);

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>DUGOUT 챗봇</title>
+    <link rel="stylesheet" href="/chatbot/chatbotResult.css" />
+</head>
+<body>
+<div class="chatbot-container">
+    <h2 class="chatbot-title"> 더그아웃이 말해주는 챗봇</h2>
+
+    <!-- 💬 채팅 영역 -->
+    <div class="chat-window" id="chatWindow"></div>
+
+    <!-- ⌨️ 입력창 -->
+    <div class="chat-input">
+        <input type="text" id="chatInput" placeholder="예: 01년 투수" />
+        <button onclick="sendChat()">전송</button>
+    </div>
+</div>
+
+<script>
+    async function sendChat() {
+        const input = document.getElementById("chatInput");
+        const text = input.value.trim();
+        if (!text) return;
+
+        appendUserMessage(text);
+        input.value = "";
+
+        try {
+            const response = await fetch(`/chatbot/query?text=` + encodeURIComponent(text));
+            const data = await response.json();
+            appendBotMessage(data.summary, data.results);
+        } catch (e) {
+            appendBotMessage("서버 오류가 발생했어요.");
+        }
+    }
+
+    function appendUserMessage(text) {
+        const chat = document.getElementById("chatWindow");
+        const div = document.createElement("div");
+        div.className = "chat-bubble user";
+        div.innerText = text;
+        chat.appendChild(div);
+    }
+
+    function appendBotMessage(summary, results = []) {
+        const chat = document.getElementById("chatWindow");
+
+        const summaryDiv = document.createElement("div");
+        summaryDiv.className = "chat-bubble bot";
+        summaryDiv.innerText = summary;
+        chat.appendChild(summaryDiv);
+
+        if (results.length > 0) {
+            const cardWrap = document.createElement("div");
+            cardWrap.className = "chat-cards";
+
+            results.forEach(p => {
+                const card = document.createElement("div");
+                card.className = "chat-card";
+                card.innerHTML = `
+            <div class="player-name">${p.nameKr}</div>
+            <div class="player-info">팀: ${p.team} | 포지션: ${p.position}</div>
+            <div class="player-birth">생년월일: ${p.birth}</div>
+          `;
+                cardWrap.appendChild(card);
+            });
+            chat.appendChild(cardWrap);
+        }
+
+        chat.scrollTop = chat.scrollHeight;
+    }
+</script>
+</body>
+</html>

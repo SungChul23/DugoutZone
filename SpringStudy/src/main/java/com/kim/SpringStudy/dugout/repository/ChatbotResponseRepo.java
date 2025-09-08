@@ -10,6 +10,7 @@ import java.util.Map;
 
 public interface ChatbotResponseRepo extends JpaRepository<KBOplayerInfo, Long> {
 
+    //출생년도 조회
     @Query(value = """
             SELECT k.name_kr AS nameKr, k.team, k.position, k.birth, k.image_url AS imageUrl
             FROM kboplayer_info k
@@ -23,5 +24,34 @@ public interface ChatbotResponseRepo extends JpaRepository<KBOplayerInfo, Long> 
                                               @Param("team") String team,
                                               @Param("position") String position);
 
+
+    //조견형 기록 조회 (타자 전용)
+    @Query(value = """
+            SELECT p.name_kr AS nameKr, p.team, p.position,
+                   b.hr, b.avg, b.rbi, b.so, b.h, b.r,
+                   b.obp, b.slg, b.ops, b.gdp
+            FROM kboplayer_info p
+            JOIN batter_stats b 
+              ON p.id = b.player_id
+            WHERE b.record_date = (SELECT MAX(record_date) FROM batter_stats)
+              AND (:team IS NULL OR p.team = :team)
+              AND (
+                  (:statType = 'HR'   AND b.hr   >= :value) OR
+                  (:statType = 'AVG'  AND b.avg  >= :value) OR
+                  (:statType = 'RBI'  AND b.rbi  >= :value) OR
+                  (:statType = 'SO'   AND b.so   >= :value) OR
+                  (:statType = 'H'    AND b.h    >= :value) OR
+                  (:statType = 'R'    AND b.r    >= :value) OR
+                  (:statType = 'OBP'  AND b.obp  >= :value) OR
+                  (:statType = 'SLG'  AND b.slg  >= :value) OR
+                  (:statType = 'OPS'  AND b.ops  >= :value) OR
+                  (:statType = 'GDP'  AND b.gdp  >= :value)
+              )
+            ORDER BY p.team, p.name_kr
+            LIMIT 50
+            """, nativeQuery = true)
+    List<Map<String, Object>> findBatterByCondition(@Param("team") String team,
+                                                    @Param("statType") String statType,
+                                                    @Param("value") double value);
 
 }

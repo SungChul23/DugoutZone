@@ -2,15 +2,17 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>더그아웃 - 야구를 가장 가까이에서</title>
     <link rel="stylesheet" href="dugout.css"/>
+    <link rel="stylesheet" href="/chatbot/chatbotResult.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet"/>
     <link rel="icon" type="image/png" href="/dugout.png"/>
 
 </head>
+
+
 <body>
 
 <div class="team-marquee">
@@ -218,9 +220,131 @@
     </div>
 </div>
 
+<!-- 💬 플로팅 챗봇 버튼 -->
+<div id="chatbot-toggle">💬</div>
+
+<!-- 챗봇 패널 -->
+<div id="chatbot-panel">
+    <div class="chatbot-header">
+        <span> 🤖 더그아웃이 말해주는 챗봇(Beta)</span>
+        <button id="chatbot-close">✖</button>
+    </div>
+    <div class="chatbot-body" id="chatbot-messages">
+        <div class="bot-msg">
+            💡 예시 질문<br>
+            • 2001년생 LG 투수<br>
+            • 홈런 20개 이상 선수<br>
+            • SSG 삼진 20개 이상 선수<br>
+            • 삼성 OPS 0.9 넘는 선수<br>
+            • 병살 10개 이상 롯데 타자
+            (09.09 출생년도 조회, 타자 기록조회 가능)
+        </div>
+    </div>
+    <div class="chatbot-footer">
+        <input type="text" id="chatbot-input" placeholder="기록이 궁금하면 물어봐요!" />
+        <button id="chatbot-send">➤</button>
+    </div>
+</div>
+
+
+
 
 <footer>
     © 2025 더그아웃. “당신의 손 안에 있는 야구장, 여기는 더그아웃입니다.”
 </footer>
 </body>
 </html>
+
+<script>
+    const toggleBtn = document.getElementById("chatbot-toggle");
+    const panel = document.getElementById("chatbot-panel");
+    const closeBtn = document.getElementById("chatbot-close");
+    const sendBtn = document.getElementById("chatbot-send");
+    const input = document.getElementById("chatbot-input");
+    const messages = document.getElementById("chatbot-messages");
+
+    // 열기 / 닫기
+    toggleBtn.onclick = () => panel.style.display = "flex";
+    closeBtn.onclick = () => panel.style.display = "none";
+
+    // 챗봇 말풍선 추가
+    function addBotMessage(text) {
+        const div = document.createElement("div");
+        div.className = "bot-msg";
+        div.innerText = text;
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+    // 사용자 말풍선 추가
+    function addUserMessage(text) {
+        const div = document.createElement("div");
+        div.className = "user-msg";
+        div.innerText = text;
+        messages.appendChild(div);
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+    // 카드 UI 생성
+    function addCards(results, intent) {
+        const wrap = document.createElement("div");
+        wrap.className = "chat-cards";
+
+        results.forEach(p => {
+            const card = document.createElement("div");
+            card.className = "chat-card";
+
+            if (intent === "BORN_YEAR_PLAYER") {
+                card.innerHTML = `
+          <div class="player-name">${p.nameKr}</div>
+          <div class="player-info">팀: ${p.team} | 포지션: ${p.position}</div>
+          <div class="player-birth">생년월일: ${p.birth}</div>
+        `;
+            } else if (intent === "BATTING_CONDITION_PLAYER") {
+                card.innerHTML = `
+          <div class="player-name">${p.nameKr}</div>
+          <div class="player-info">팀: ${p.team} | 포지션: ${p.position}</div>
+          <div class="player-stat">${p.statType}: ${p.statValue}</div>
+        `;
+            } else {
+                card.innerHTML = `<div class="player-name">${p.nameKr}</div>`;
+            }
+
+            wrap.appendChild(card);
+        });
+
+        messages.appendChild(wrap);
+        messages.scrollTop = messages.scrollHeight;
+    }
+
+    // 메시지 전송
+    function sendMessage() {
+        const text = input.value.trim();
+        if (!text) return;
+        input.value = "";
+
+        addUserMessage(text);
+
+        fetch(`/chatbot/query?text=${encodeURIComponent(text)}`)
+            .then(res => res.json())
+            .then(data => {
+                // 서머리 출력
+                if (data.summary) {
+                    addBotMessage(data.summary);
+                }
+                // 카드 출력
+                if (data.results && data.results.length > 0) {
+                    addCards(data.results, data.intent);
+                }
+            })
+            .catch(() => {
+                addBotMessage("⚠ 서버 오류가 발생했어요.");
+            });
+    }
+
+    sendBtn.onclick = sendMessage;
+    input.addEventListener("keypress", e => {
+        if (e.key === "Enter") sendMessage();
+    });
+</script>
+

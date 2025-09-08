@@ -1,6 +1,7 @@
-package com.kim.SpringStudy.dugout.dto;
+package com.kim.SpringStudy.dugout.dto.chatbot;
 
 
+import com.kim.SpringStudy.dugout.dto.chatbot.ChatbotResponseDTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 

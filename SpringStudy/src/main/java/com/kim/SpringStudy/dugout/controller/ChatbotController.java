@@ -1,10 +1,8 @@
 package com.kim.SpringStudy.dugout.controller;
 
-import org.springframework.ui.Model;
-import com.kim.SpringStudy.dugout.dto.ChatbotResponse;
+import com.kim.SpringStudy.dugout.dto.chatbot.ChatbotResponse;
 import com.kim.SpringStudy.dugout.service.ChatbotService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +12,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/chatbot")
+
+//룰-기반 챗봇임
 public class ChatbotController {
 
     private final ChatbotService chatbotService;
@@ -24,7 +24,8 @@ public class ChatbotController {
         return "chatbot/chatbotResult"; // templates/chatbot.html
     }
 
-    // JSON 응답용 (기존 API 유지)
+    // JSON 응답용  -> 뷰 에서 요청
+    // 파람에 들어온 값을 통해 사용자의 의도 (intent)를 파악하자
     @GetMapping("/query")
     @ResponseBody
     public ChatbotResponse handleQuery(@RequestParam String text) {

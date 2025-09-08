@@ -140,13 +140,14 @@ footer {
 
 .marquee-track {
     display: flex;
-    animation: scrollLeft 8s linear infinite;
+    width: max-content;
+    animation: scrollLeft 12s linear infinite;
 }
 @media (max-width: 768px) {
     .marquee-track {
         display: flex;
         width: max-content;
-        animation-duration: 10s; /* 모바일은 더 빠르게 */
+        animation-duration: 8s; /* 모바일은 더 빠르게 */
     }
 }
 

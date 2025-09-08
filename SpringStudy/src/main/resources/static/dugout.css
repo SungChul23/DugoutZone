@@ -142,6 +142,13 @@ footer {
     display: flex;
     animation: scrollLeft 8s linear infinite;
 }
+@media (max-width: 768px) {
+    .marquee-track {
+        display: flex;
+        width: max-content;
+        animation-duration: 10s; /* 모바일은 더 빠르게 */
+    }
+}
 
 .marquee-track img {
     height: 150px;
@@ -211,4 +218,5 @@ footer {
     font-weight: 600;
     margin-bottom: 12px;
 }
+
 

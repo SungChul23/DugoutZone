@@ -11,9 +11,14 @@
 <div class="trophy-silhouette" aria-hidden="true"></div>
 <div class="particles" aria-hidden="true"></div>
 
+
 <header class="golden-hero">
     <h2>2025 KBO 골든 글러브 예측</h2>
     <p>데이터 기반으로 선정한 최고의 선수들</p>
+    <div class="view-toggle">
+        <p class="view-hint">📱 모바일에선 필드가 작게 보여요.<br>답답하면 💻 PC 버전으로 보세요!</p>
+        <button id="toggleViewBtn">💻 PC 버전으로 보기</button>
+    </div>
 </header>
 
 <div class="golden-flex-zone">
@@ -21,14 +26,14 @@
     <div class="golden-info-box">
 
         <div class="gg-info-intro">
-            <h3>📘 골든 글러브 점수란?</h3>
+            <h3>골든 글러브 점수란?</h3>
             <p><strong>더그아웃이</strong> 시즌 동안 각 선수가 기록한 <strong>공격 성과 지표</strong>를 종합해 산정한 점수입니다.</p>
             <p>홈런, 타율, 출루율 등 주요 지표를 바탕으로 <strong>포지션별 최고의 활약을 보인 선수</strong>를 예측합니다.</p>
         </div>
 
 
         <div class="gg-info-rule">
-            <h3>📐 산정 기준</h3>
+            <h3>산정 기준</h3>
             <ul>
                 <li><strong>2025 시즌 기록</strong>을 기준으로 분석합니다.</li>
                 <li><strong>타자와 투수</strong>는 서로 다른 계산 방식을 사용합니다.</li>
@@ -39,8 +44,8 @@
 
         <div class="gg-info-exception">
             <h3>⚠️ 예외 안내</h3>
-            <p>🚫 <strong>지명타자 및 수비 지표</strong>는 현재 반영되지 않으며, 추후 개선 시 도입 예정입니다.</p>
-            <p>🎯 <strong>우승 프리미엄</strong>은 적용되지 않습니다.
+            <p>⏱️ <strong>수비 지표</strong>는 현재 반영되지 않으며, 추후 개선 시 도입 예정입니다.</p>
+            <p>❌ <strong>우승 프리미엄</strong>은 적용되지 않습니다.
                 본 예측은 <strong>팀 성적과 무관하게 개별 선수의 기록만</strong>을 기준으로 평가합니다.</p>
         </div>
 
@@ -159,6 +164,16 @@
                             <span class="score" th:text="${p.goldenGloveScore}">점수</span>
                         </div>
                     </div>
+                    <!--지명타자-->
+                    <div class="pos dh-pos"
+                         th:each="p : ${goldenGloveInfielders}"
+                         th:if="${p.positionSub == '지명타자'}">
+                        <div class="card-face winner">
+                            <h4 class="player-name" th:text="${p.name}">이름</h4>
+                            <span class="team" th:text="${p.team}">팀</span>
+                            <span class="score" th:text="${p.goldenGloveScore}">점수</span>
+                        </div>
+                    </div>
 
                     <!--외야수 (3명) -->
                     <div class="pos outfield-pos" th:if="${goldenGloveOutfielders != null}">
@@ -178,12 +193,11 @@
             <section class="gg-candidate-section">
                 <h3>🏅 포지션별 후보 선수</h3>
 
-                <section class="gg-candidate-section">
-                    <h3>🏅 포지션별 후보 선수</h3>
+                <div class="candidate-grid">
 
-                    <!-- 투수 후보 -->
-                    <div class="candidate-box">
-                        <h4>⚾ 투수</h4>
+                    <!-- 투수 -->
+                    <div class="candidate-card">
+                        <h4>🥎 투수</h4>
                         <table>
                             <thead>
                             <tr>
@@ -194,16 +208,16 @@
                             </thead>
                             <tbody>
                             <tr th:each="p : ${pitcherCandidates}">
-                                <td th:text="${p.name}">이름</td>
-                                <td th:text="${p.team}">팀</td>
-                                <td th:text="${p.goldenGloveScore}">점수</td>
+                                <td th:text="${p.name}"></td>
+                                <td th:text="${p.team}"></td>
+                                <td th:text="${p.goldenGloveScore}"></td>
                             </tr>
                             </tbody>
                         </table>
                     </div>
 
-                    <!-- 내야수: 1루수 ~ 유격수 -->
-                    <div class="candidate-box" th:if="${infieldCandidates['1루수'] != null}">
+                    <!-- 1루수 -->
+                    <div class="candidate-card" th:if="${infieldCandidates['1루수'] != null}">
                         <h4>🥎 1루수</h4>
                         <table>
                             <thead>
@@ -223,7 +237,8 @@
                         </table>
                     </div>
 
-                    <div class="candidate-box" th:if="${infieldCandidates['2루수'] != null}">
+                    <!-- 2루수 -->
+                    <div class="candidate-card" th:if="${infieldCandidates['2루수'] != null}">
                         <h4>🥎 2루수</h4>
                         <table>
                             <thead>
@@ -243,7 +258,8 @@
                         </table>
                     </div>
 
-                    <div class="candidate-box" th:if="${infieldCandidates['3루수'] != null}">
+                    <!-- 3루수 -->
+                    <div class="candidate-card" th:if="${infieldCandidates['3루수'] != null}">
                         <h4>🥎 3루수</h4>
                         <table>
                             <thead>
@@ -263,7 +279,8 @@
                         </table>
                     </div>
 
-                    <div class="candidate-box" th:if="${infieldCandidates['유격수'] != null}">
+                    <!-- 유격수 -->
+                    <div class="candidate-card" th:if="${infieldCandidates['유격수'] != null}">
                         <h4>🥎 유격수</h4>
                         <table>
                             <thead>
@@ -283,9 +300,30 @@
                         </table>
                     </div>
 
+                    <!-- 지명타자 -->
+                    <div class="candidate-card" th:if="${infieldCandidates['지명타자'] != null}">
+                        <h4>🥎 지명타자</h4>
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>이름</th>
+                                <th>팀</th>
+                                <th>점수</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr th:each="p : ${infieldCandidates['지명타자']}">
+                                <td th:text="${p.name}"></td>
+                                <td th:text="${p.team}"></td>
+                                <td th:text="${p.goldenGloveScore}"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
                     <!-- 외야수 -->
-                    <div class="candidate-box">
-                        <h4>🌟 외야수</h4>
+                    <div class="candidate-card">
+                        <h4>🥎 외야수</h4>
                         <table>
                             <thead>
                             <tr>
@@ -305,8 +343,8 @@
                     </div>
 
                     <!-- 포수 -->
-                    <div class="candidate-box">
-                        <h4>🧢 포수</h4>
+                    <div class="candidate-card">
+                        <h4>🥎 포수</h4>
                         <table>
                             <thead>
                             <tr>
@@ -324,16 +362,16 @@
                             </tbody>
                         </table>
                     </div>
-                </section>
+
+                </div> <!-- candidate-grid 끝 -->
             </section>
     </main>
-
 
     <div class="footer-fixed">
         <div class="back-home-section">
             <a href="/dugout" class="neon-home-btn">더그아웃으로 가기</a>
         </div>
-        <div class="award-footer">© 2025 DUGOUT. All rights reserved.</div>
+        <div class="award-footer">© 2025 DUGOUT. 골든 글러브 예측</div>
     </div>
 
 

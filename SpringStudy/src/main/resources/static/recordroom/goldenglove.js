@@ -63,3 +63,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
+document.getElementById("toggleViewBtn").addEventListener("click", function() {
+    document.body.classList.toggle("pc-view");
+    if (document.body.classList.contains("pc-view")) {
+        this.textContent = "📱 모바일 버전으로 보기";
+    } else {
+        this.textContent = "💻 PC 버전으로 보기";
+    }
+});

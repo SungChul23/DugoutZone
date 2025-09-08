@@ -102,7 +102,7 @@ public class AwardController {
         addIfNotNull(infielderList, goldenGolveService.topByPositionSub("2루수"));
         addIfNotNull(infielderList, goldenGolveService.topByPositionSub("3루수"));
         addIfNotNull(infielderList, goldenGolveService.topByPositionSub("유격수"));
-        // addIfNotNull(infielders, goldenGolveService.topByPositionSub("지명타자"));
+        addIfNotNull(infielderList, goldenGolveService.topByPositionSub("지명타자"));
         model.addAttribute("goldenGloveInfielders", infielderList);
 
         //내야수(1,2,3루수 , 유격수) 후보 top 5
@@ -111,7 +111,7 @@ public class AwardController {
         infieldCandidates.put("2루수", goldenGolveService.candidatesByPositionSub("2루수"));
         infieldCandidates.put("3루수", goldenGolveService.candidatesByPositionSub("3루수"));
         infieldCandidates.put("유격수", goldenGolveService.candidatesByPositionSub("유격수"));
-        // infieldCandidates.put("지명타자", goldenGolveService.candidatesByPositionSub("지명타자"));
+        infieldCandidates.put("지명타자", goldenGolveService.candidatesByPositionSub("지명타자"));
         model.addAttribute("infieldCandidates", infieldCandidates);
 
         //최신날짜 공지

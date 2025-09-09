@@ -19,12 +19,4 @@ public class BasicControaller {
         }
         return "index";
     }
-
-    @GetMapping("/mypage")
-    @ResponseBody
-    String apple2() {
-        return "마이페이지 입니다";
-    }
-
-
 }

@@ -11,7 +11,7 @@
 </p>
 
 <p align="center">
-  🔗 <a href="http://dugoutzone.shop/dugout" target="_blank"><strong>👉 Dugoutzone 시작하기</strong></a>
+  🔗 <a href="https://dugoutzone.shop/dugout" target="_blank"><strong>👉 Dugoutzone 시작하기</strong></a>
 </p>
 
 ---

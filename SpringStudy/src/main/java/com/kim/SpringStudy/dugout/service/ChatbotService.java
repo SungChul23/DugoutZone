@@ -5,6 +5,7 @@ import com.kim.SpringStudy.dugout.dto.chatbot.ChatbotResponse;
 import com.kim.SpringStudy.dugout.dto.chatbot.ChatbotResponseDTO;
 import com.kim.SpringStudy.dugout.dto.chatbot.StatsPlayerDTO;
 import com.kim.SpringStudy.dugout.repository.ChatbotResponseRepo;
+import com.kim.SpringStudy.dugout.util.ChatbotTeamNameMapper;
 import com.kim.SpringStudy.dugout.util.YearResolver;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,7 +23,7 @@ public class ChatbotService {
     private final ChatbotResponseRepo playerRepository;
 
     private static final List<String> POSITIONS = List.of("투수", "포수", "내야수", "외야수");
-    private static final List<String> TEAMS = List.of("LG", "SSG", "KIA", "KT", "삼성", "NC", "두산", "키움", "롯데", "한화");
+
 
     // 메인 엔트리
     public ChatbotResponse process(String text) {
@@ -48,7 +49,7 @@ public class ChatbotService {
 
         String year = String.valueOf(yearOpt.get());
         String position = POSITIONS.stream().filter(text::contains).findFirst().orElse(null);
-        String team = TEAMS.stream().filter(text::contains).findFirst().orElse(null);
+        String team = ChatbotTeamNameMapper.resolve(text); //팀 매핑 적용
 
         List<Map<String, Object>> rows = playerRepository.findBornPlayers(year, team, position);
 
@@ -89,7 +90,7 @@ public class ChatbotService {
 
     // 2) 조건형 기록 조회 (타자 전용)
     private ChatbotResponse processCondition(String text) {
-        String team = extractTeam(text);
+        String team = ChatbotTeamNameMapper.resolve(text);
         String statType = extractStatType(text);   // 홈런, 타율, OPS …
         double value = extractConditionValue(text);
 
@@ -125,10 +126,6 @@ public class ChatbotService {
 
     private boolean containsStatCondition(String text) {
         return text.contains("이상") || text.contains("이하") || text.contains("넘는");
-    }
-
-    private String extractTeam(String text) {
-        return TEAMS.stream().filter(text::contains).findFirst().orElse(null);
     }
 
     private String extractStatType(String text) {

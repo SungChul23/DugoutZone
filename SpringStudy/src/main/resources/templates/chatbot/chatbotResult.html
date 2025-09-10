@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>DUGOUT 챗봇</title>
-    <link rel="stylesheet" href="/chatbot/chatbotResult.css" />
-    <link rel="icon" type="image/png" href="/dugout.png" />
+    <link rel="stylesheet" href="/chatbot/chatbotResult.css"/>
+    <link rel="icon" type="image/png" href="/dugout.png"/>
 </head>
 <body>
 <div class="chatbot-container">
@@ -15,7 +15,7 @@
 
     <!-- ⌨️ 입력창 -->
     <div class="chat-input">
-        <input type="text" id="chatInput" placeholder="예: 2001년생 LG 투수, 홈런 20개 이상" />
+        <input type="text" id="chatInput" placeholder="예: 2001년생 LG 투수, 홈런 20개 이상"/>
         <button onclick="sendChat()">전송</button>
     </div>
 </div>
@@ -32,6 +32,7 @@
         try {
             const response = await fetch(`/chatbot/query?text=` + encodeURIComponent(text));
             const data = await response.json();
+            console.log("DEBUG intent:", data.intent); // 🔎 디버깅 로그
             appendBotMessage(data.summary, data.results, data.intent);
         } catch (e) {
             appendBotMessage("⚠ 서버 오류가 발생했어요.");
@@ -44,6 +45,7 @@
         div.className = "chat-bubble user";
         div.innerText = text;
         chat.appendChild(div);
+        chat.scrollTop = chat.scrollHeight;
     }
 
     function appendBotMessage(summary, results = [], intent = "") {
@@ -55,7 +57,7 @@
         summaryDiv.innerText = summary;
         chat.appendChild(summaryDiv);
 
-        // 결과 카드 (출생년도 / 기록 조건 구분)
+        // 결과 카드
         if (results.length > 0) {
             const cardWrap = document.createElement("div");
             cardWrap.className = "chat-cards";
@@ -71,8 +73,8 @@
                         <div class="player-info">팀: ${p.team} | 포지션: ${p.position}</div>
                         <div class="player-birth">생년월일: ${p.birth}</div>
                     `;
-                } else if (intent === "BATTING_CONDITION_PLAYER") {
-                    // 타자 기록 조건형 답변
+                } else if (intent === "BATTING_CONDITION_PLAYER" || intent === "PITCHER_CONDITION_PLAYER") {
+                    // 타자/투수 기록 조건 공통 처리
                     card.innerHTML = `
                         <div class="player-name">${p.nameKr}</div>
                         <div class="player-info">팀: ${p.team} | 포지션: ${p.position}</div>
@@ -80,7 +82,10 @@
                     `;
                 } else {
                     // 기타 fallback
-                    card.innerHTML = `<div class="player-name">${p.nameKr}</div>`;
+                    card.innerHTML = `
+                        <div class="player-name">${p.nameKr}</div>
+                        <div class="player-info">팀: ${p.team} | 포지션: ${p.position}</div>
+                    `;
                 }
 
                 cardWrap.appendChild(card);

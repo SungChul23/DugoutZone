@@ -11,6 +11,6 @@ public class StatsPlayerDTO implements ChatbotResponseDTO {
     private String nameKr; //이름
     private String team; //팀
     private String position; //포지션
-    private String statType; // 지표 이름 (HR, AVG …)
-    private String statValue; // 값 (20, 0.345 …)
+    private String statType; // 지표 이름 (HR, AVG …) , 투수도 마찬가지
+    private String statValue; // 값 (20, 0.345 …) / 투수도 마찬가지
 }

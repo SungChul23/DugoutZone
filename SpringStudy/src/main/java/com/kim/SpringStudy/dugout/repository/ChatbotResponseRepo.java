@@ -54,4 +54,37 @@ public interface ChatbotResponseRepo extends JpaRepository<KBOplayerInfo, Long> 
                                                     @Param("statType") String statType,
                                                     @Param("value") double value);
 
+    //조견형 기록 조회 (투수 전용)
+    @Query(value = """
+            SELECT p.name_kr AS nameKr, p.team, p.position,
+                   pit.w    AS w,
+                   pit.l    AS l,
+                   pit.sv   AS sv,
+                   pit.hld  AS hld,
+                   pit.ip   AS ip,
+                   pit.so   AS so,
+                   pit.era  AS era,
+                   pit.wpct AS wpct
+            FROM kboplayer_info p
+            JOIN pitcher_stats pit 
+              ON p.id = pit.player_id
+            WHERE pit.record_date = (SELECT MAX(record_date) FROM pitcher_stats)
+              AND (:team IS NULL OR p.team = :team)
+              AND (
+                  (:statType = 'W'     AND pit.w     >= :value) OR
+                  (:statType = 'L'     AND pit.l     >= :value) OR
+                  (:statType = 'SV'    AND pit.sv    >= :value) OR
+                  (:statType = 'HLD'   AND pit.hld   >= :value) OR
+                  (:statType = 'IP'    AND pit.ip    >= :value) OR
+                  (:statType = 'SO'    AND pit.so    >= :value) OR
+                  (:statType = 'ERA'   AND pit.era   <= :value) OR
+                  (:statType = 'WPCT'  AND pit.wpct  >= :value)
+              )
+            ORDER BY p.team, p.name_kr
+            LIMIT 50
+            """, nativeQuery = true)
+    List<Map<String, Object>> findPitcherByCondition(@Param("team") String team,
+                                                     @Param("statType") String statType,
+                                                     @Param("value") double value);
+
 }

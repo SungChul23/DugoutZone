@@ -196,17 +196,20 @@
 }
 #chatbot-input {
     flex: 1;
-    padding: 10px;
+    padding: 14px 16px;   /* 위아래 14px, 좌우 16px → 더 넉넉 */
     border: none;
     outline: none;
     background: #0f172a;
     color: #e2e8f0;
+    font-size: 20px;      /* 글씨 크기 확대 */
+    line-height: 1.4;     /* 줄 간격 */
 }
 #chatbot-send {
     background: #00f0ff;
     border: none;
     color: #0f172a;
-    padding: 0 15px;
+    padding: 0 20px;      /* 버튼 가로 크기 확대 */
+    font-size: 16px;      /* 버튼 글씨 키움 */
     cursor: pointer;
     font-weight: bold;
 }

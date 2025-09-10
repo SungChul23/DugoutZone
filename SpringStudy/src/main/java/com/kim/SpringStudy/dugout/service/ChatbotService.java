@@ -30,7 +30,18 @@ public class ChatbotService {
         if (text.contains("년생")) {
             return processBornYear(text);
         } else if (containsStatCondition(text)) {
-            return processCondition(text);
+            if (text.contains("투수")) {
+                return processPitcherCondition(text); // 투수 조건
+            } else if (text.contains("타자")) {
+                return processBatterCondition(text);  // 타자 조건
+            } else {
+                // 타자/투수 명시 안 한 경우
+                return new ChatbotResponse(
+                        text, "UNKNOWN", 0,
+                        "⚠️ '타자' 또는 '투수'를 질문에 꼭 붙여주세요.",
+                        List.of()
+                );
+            }
         } else {
             return new ChatbotResponse(
                     text, "UNKNOWN", 0,
@@ -89,10 +100,10 @@ public class ChatbotService {
     }
 
     // 2) 조건형 기록 조회 (타자 전용)
-    private ChatbotResponse processCondition(String text) {
-        String team = ChatbotTeamNameMapper.resolve(text);
+    private ChatbotResponse processBatterCondition(String text) {
+        String team = ChatbotTeamNameMapper.resolve(text); //팀명
         String statType = extractStatType(text);   // 홈런, 타율, OPS …
-        double value = extractConditionValue(text);
+        double value = extractConditionValue(text); // 사용자 텍스트중 숫자만 뽑음
 
         List<Map<String, Object>> rows =
                 playerRepository.findBatterByCondition(team, statType, value);
@@ -122,26 +133,76 @@ public class ChatbotService {
         return new ChatbotResponse(text, "BATTING_CONDITION_PLAYER", results.size(), summary, results);
     }
 
-    // 유틸 메서드 시작
 
+    // 3) 조건형 기록 조회 (타자 전용)
+    private ChatbotResponse processPitcherCondition(String text) {
+        String team = ChatbotTeamNameMapper.resolve(text); // 팀명
+        String statType = extractPitcherStatType(text); // 투수 지표
+        double value = extractConditionValue(text); // 사용자 텍스트중 숫자만 뽑음
+
+        List<Map<String, Object>> rows =
+                playerRepository.findPitcherByCondition(team, statType, value);
+
+        List<ChatbotResponseDTO> results = rows.stream()
+                .map(r -> new StatsPlayerDTO(
+                        (String) r.get("nameKr"),
+                        (String) r.get("team"),
+                        (String) r.get("position"),
+                        statType,
+                        String.valueOf(r.get(statType.toLowerCase()))
+                ))
+                .map(dto -> (ChatbotResponseDTO) dto)
+                .toList();
+
+        String summary = String.format("%s %s %.3f 이상의 투수는 %d명입니다: %s",
+                team != null ? team : "리그 전체",
+                statType,
+                value,
+                results.size(),
+                results.stream()
+                        .map(r -> ((StatsPlayerDTO) r).getNameKr())
+                        .limit(5)
+                        .collect(Collectors.joining(", "))
+        );
+
+        return new ChatbotResponse(text, "PITCHER_CONDITION_PLAYER", results.size(), summary, results);
+    }
+
+
+    // 유틸 메서드 시작
     private boolean containsStatCondition(String text) {
         return text.contains("이상") || text.contains("이하") || text.contains("넘는");
     }
 
+
+    //타자 텍스트 매핑
     private String extractStatType(String text) {
-        if (text.contains("홈런")) return "HR";
-        if (text.contains("타점")) return "RBI";
-        if (text.contains("득점")) return "R";
-        if (text.contains("안타")) return "H";
-        if (text.contains("삼진")) return "SO";
-        if (text.contains("병살")) return "GDP";
-        if (text.contains("타율")) return "AVG";
-        if (text.contains("출루율")) return "OBP";
-        if (text.contains("장타율")) return "SLG";
-        if (text.contains("OPS")) return "OPS";
-        return "HR"; // 기본값
+        if (text.contains("홈런") || text.contains("HR")) return "HR";
+        if (text.contains("타점") || text.contains("RBI")) return "RBI";
+        if (text.contains("득점") || text.contains("R")) return "R";
+        if (text.contains("안타") || text.contains("H")) return "H";
+        if (text.contains("삼진") || text.contains("SO")) return "SO";
+        if (text.contains("병살") || text.contains("GDP")) return "GDP";
+        if (text.contains("타율") || text.contains("AVG")) return "AVG";
+        if (text.contains("출루율") || text.contains("OBP")|| text.contains("obp")) return "OBP";
+        if (text.contains("장타율") || text.contains("SLG")|| text.contains("slg")) return "SLG";
+        if (text.contains("OPS") || text.contains("ops")) return "OPS";
+        return "HR";
     }
 
+    private String extractPitcherStatType(String text) {
+        if (text.contains("승") || text.contains("W")) return "W";
+        if (text.contains("패") || text.contains("L")) return "L";
+        if (text.contains("세이브") || text.contains("SV")) return "SV";
+        if (text.contains("홀드") || text.contains("HLD")) return "HLD";
+        if (text.contains("이닝") || text.contains("IP")) return "IP";
+        if (text.contains("삼진") || text.contains("SO")) return "SO";
+        if (text.contains("평균자책점") || text.contains("방어율") || text.contains("era")) return "ERA";
+        if (text.contains("승률") || text.contains("WPCT")) return "WPCT";
+        return "W";
+    }
+
+    //사용자가 입력한 텍스트에 숫자만 뽑는 역할
     private double extractConditionValue(String text) {
         Pattern numPattern = Pattern.compile("(\\d+(\\.\\d+)?)");
         Matcher matcher = numPattern.matcher(text);

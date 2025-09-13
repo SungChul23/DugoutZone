@@ -59,6 +59,25 @@
 | <img src="https://img.icons8.com/color/512/amazon-web-services.png" width="60" alt="AWS"/> | <img src="https://img.icons8.com/color/512/amazon-web-services.png" width="60" alt="AWS"/> | <img src="https://img.icons8.com/color/512/amazon-web-services.png" width="60" alt="AWS"/> | <img src="https://img.icons8.com/color/512/amazon-web-services.png" width="60" alt="AWS"/> |
 
 
+
+## 🏗️ 더그아웃존 아키텍처
+
+<p align="center">
+  <img src="https://dugoutzone.s3.ap-northeast-2.amazonaws.com/dugout_architecture.png" 
+       alt="Dugoutzone Architecture" width="800"/>
+</p>
+
+- **Route 53** → DNS, 도메인 관리 (dugoutzone.shop)  
+- **EC2 (Ubuntu + Nginx + Spring Boot)** → Web + REST API + DB Access  
+- **RDS (MySQL)** → 팀/선수/기록 데이터 저장  
+- **S3** → 구단 로고, 선수 사진 (미정) (브라우저가 URL로 직접 로드)  
+- **Lambda + EventBridge** → 크롤링 자동화 (순위, 타자, 투수 기록)  
+- **ECR Repository** → 크롤러 Docker 이미지 관리  
+- **CloudWatch** → 로그 및 모니터링  
+- **IAM / Security Group** → 서비스 간 권한 제어 및 보안 관리
+
+
+
 ---
 
 ## ⚾ 더그아웃 프로젝트 코딩 일지 (Coding Log)
@@ -243,6 +262,19 @@
 - 카드 1열/2열 레이아웃 조정 가능 → 모바일 해상도에 맞게 스크롤로 자연스럽게 탐색  
 → 결과: **PC·모바일 동일 경험(consistent UX)** 제공
 
+### ✅ 2025-09-10
+**🔒 보안 및 챗봇 기능**
+- **"더그아웃"** - **HTTPS 적용** (SSL 인증서 설정 완료)
+- **"더그아웃"** - **보안 대책 강화 계획 수립**
+- **"더그아웃"** - **"더그아웃이 말해주는 챗봇" 팀명 일관화**
+- **"더그아웃"** - **챗봇 기능 확장 (타자/투수 기록 질의 가능)**
+→ 결과: 서비스 안정성 강화 및 챗봇 기능 확장
+
+### ✅ 2025-09-13
+** 📖 문서 작성 및 최신화 **
+- **"더그아웃"** - 아키텍쳐 구성 및 작성
+→ 결과: → 결과: 프로젝트 전반 구조와 데이터 흐름을 시각적으로 정리하여, 개발/운영/보안 측면에서 일관된 참조 문서 확보
+
 
 </details>
 
@@ -250,14 +282,12 @@
 ---
 
 ## 🔜 지속적으로 해야 할 일
-- ⚙️ 컨트롤러 / 서비스 / 템플릿 **리팩토링**
-- 📦 스프링 스터디 프로젝트와 **분할 관리**
 - 📖 문서 최신화
 
 ---
 
 ## 🖐️ 프로젝트 마감일
-📌 **25시즌 KBO 종료일**
+📌 **2025 KBO 정규시즌 종료일**
 
 ---
 

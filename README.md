@@ -31,33 +31,31 @@
 
 ---
 
-## ⚙️ 사용하고 있는 기술 스택
+## ⚙️ 사용 기술 스택
 
-### 🖥️ 백엔드
-| Java | Spring Boot | Hibernate |
-|------|-------------|-----------|
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="50" height="50" alt="Java"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" width="50" height="50" alt="Spring Boot"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hibernate/hibernate-original.svg" width="50" height="50" alt="Hibernate"/> |
+**백엔드**  
+- Java  
+- Spring Boot  
+- Hibernate  
 
-### 🎨 프런트엔드
-| HTML5 | CSS3 | JavaScript | Chart.js | Thymeleaf |
-|-------|------|------------|----------|-----------|
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="50" height="50" alt="HTML5"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="50" height="50" alt="CSS3"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="50" height="50" alt="JavaScript"/> | <img src="https://www.chartjs.org/media/logo-title.svg" width="50" height="50" alt="Chart.js"/> | <img src="https://www.thymeleaf.org/images/thymeleaf.png" width="50" height="50" alt="Thymeleaf"/> |
+**프론트엔드**  
+- HTML5  
+- CSS3  
+- JavaScript  
+- Thymeleaf  
+- Chart.js  
 
-### 🗄️ 데이터베이스
-| MySQL |
-|-------|
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="50" height="50" alt="MySQL"/> |
+**데이터베이스**  
+- MySQL  
 
-### 📊 데이터 수집 및 분석
-| Python | Pandas | Selenium | Prophet |
-|--------|--------|----------|---------|
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="50" height="50" alt="Python"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" width="50" height="50" alt="Pandas"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg" width="50" height="50" alt="Selenium"/> | <img src="https://avatars.githubusercontent.com/u/986760?s=200&v=4" width="50" height="50" alt="Prophet"/> |
+**데이터 수집/분석**  
+- Python  
+- Pandas  
+- Selenium  
+- Prophet  
 
-### ☁️ 인프라 및 운영
-| AWS | EC2 | S3 | Lambda |
-|-----|-----|----|--------|
-| <img src="https://img.icons8.com/color/512/amazon-web-services.png" width="60" alt="AWS"/> | <img src="https://img.icons8.com/color/512/amazon-web-services.png" width="60" alt="AWS"/> | <img src="https://img.icons8.com/color/512/amazon-web-services.png" width="60" alt="AWS"/> | <img src="https://img.icons8.com/color/512/amazon-web-services.png" width="60" alt="AWS"/> |
-
+**인프라**  
+- AWS (EC2, S3, Lambda, RDS, ECR, CloudWatch, Route 53)
 
 
 ## 🏗️ 아키텍처

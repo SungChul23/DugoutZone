@@ -60,11 +60,13 @@
 
 
 
-## 🏗️ 더그아웃존 아키텍처
+## 🏗️ 아키텍처
 
 <p align="center">
-![Dugoutzone Architecture](https://dugoutzone.s3.ap-northeast-2.amazonaws.com/dugout_architecture.png)
+  <img src="https://dugoutzone.s3.ap-northeast-2.amazonaws.com/dugout_architecture.png" 
+       alt="Dugoutzone Architecture" width="800"/>
 </p>
+
 
 - **Route 53** → DNS, 도메인 관리 (dugoutzone.shop)  
 - **EC2 (Ubuntu + Nginx + Spring Boot)** → Web + REST API + DB Access  

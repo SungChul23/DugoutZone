@@ -62,7 +62,7 @@
 
 <p align="center">
   <img src="https://dugoutzone.s3.ap-northeast-2.amazonaws.com/dugout_architecture.png" 
-       alt="Dugoutzone Architecture" width="800"/>
+       alt="Dugoutzone Architecture" width="200"/>
 </p>
 
 - **Route 53** → DNS, 도메인 관리 (dugoutzone.shop)  

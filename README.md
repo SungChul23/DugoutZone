@@ -31,35 +31,67 @@
 
 ---
 
-## ⚙️ 사용하고 있는 기술 스택
+## ⚙️ 사용 기술 스택
 
-### 🖥️ 백엔드
-| Java | Spring Boot | Hibernate |
-|------|-------------|-----------|
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" width="50" height="50" alt="Java"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" width="50" height="50" alt="Spring Boot"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/hibernate/hibernate-original.svg" width="50" height="50" alt="Hibernate"/> |
+**백엔드**  
+- Java  
+- Spring Boot  
+- Hibernate  
 
-### 🎨 프런트엔드
-| HTML5 | CSS3 | JavaScript | Chart.js | Thymeleaf |
-|-------|------|------------|----------|-----------|
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="50" height="50" alt="HTML5"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="50" height="50" alt="CSS3"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="50" height="50" alt="JavaScript"/> | <img src="https://www.chartjs.org/media/logo-title.svg" width="50" height="50" alt="Chart.js"/> | <img src="https://www.thymeleaf.org/images/thymeleaf.png" width="50" height="50" alt="Thymeleaf"/> |
+**프론트엔드**  
+- HTML5  
+- CSS3  
+- JavaScript  
+- Thymeleaf  
+- Chart.js  
 
-### 🗄️ 데이터베이스
-| MySQL |
-|-------|
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" width="50" height="50" alt="MySQL"/> |
+**데이터베이스**  
+- MySQL  
 
-### 📊 데이터 수집 및 분석
-| Python | Pandas | Selenium | Prophet |
-|--------|--------|----------|---------|
-| <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="50" height="50" alt="Python"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" width="50" height="50" alt="Pandas"/> | <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/selenium/selenium-original.svg" width="50" height="50" alt="Selenium"/> | <img src="https://avatars.githubusercontent.com/u/986760?s=200&v=4" width="50" height="50" alt="Prophet"/> |
+**데이터 수집/분석**  
+- Python  
+- Pandas  
+- Selenium  
+- Prophet  
 
-### ☁️ 인프라 및 운영
-| AWS | EC2 | S3 | Lambda |
-|-----|-----|----|--------|
-| <img src="https://img.icons8.com/color/512/amazon-web-services.png" width="60" alt="AWS"/> | <img src="https://img.icons8.com/color/512/amazon-web-services.png" width="60" alt="AWS"/> | <img src="https://img.icons8.com/color/512/amazon-web-services.png" width="60" alt="AWS"/> | <img src="https://img.icons8.com/color/512/amazon-web-services.png" width="60" alt="AWS"/> |
+**인프라**  
+- AWS (EC2, S3, Lambda, RDS, ECR, CloudWatch, Route 53)
 
+
+## 🏗️ 아키텍처
+
+<p align="center">
+  <img src="https://dugoutzone.s3.ap-northeast-2.amazonaws.com/dugoutArc.png" alt="Dugoutzone Architecture" width="800"/>
+</p>
+
+- **Route 53** → DNS, 도메인 관리 (dugoutzone.shop)  
+- **EC2 (Ubuntu + Nginx + Spring Boot)** → Web + REST API + DB Access  
+- **RDS (MySQL)** → 팀/선수/기록 데이터 등 저장
+- **S3** → 구단 로고, 선수 사진 (미정) (브라우저가 URL로 직접 로드)  
+- **Lambda + EventBridge** → 크롤링 자동화 (순위, 타자, 투수 기록)  
+- **ECR Repository** → 크롤러 Docker 이미지 관리  
+- **CloudWatch** → 로그 및 모니터링  
+- **IAM / Security Group** → 서비스 간 권한 제어 및 보안 관리
 
 ---
+
+---
+## 주요 화면 (UI/UX) - 예정
+
+---
+
+---
+## API 문서 - 예정
+
+---
+
+## 📅 개발 일정 (Gantt Chart)
+
+<p align="center">
+  <img src="https://dugoutzone.s3.ap-northeast-2.amazonaws.com/dugoutchat.png" 
+       alt="Dugoutzone Gantt Chart" width="800"/>
+</p>
+
 
 ## ⚾ 더그아웃 프로젝트 코딩 일지 (Coding Log)
 
@@ -243,21 +275,45 @@
 - 카드 1열/2열 레이아웃 조정 가능 → 모바일 해상도에 맞게 스크롤로 자연스럽게 탐색  
 → 결과: **PC·모바일 동일 경험(consistent UX)** 제공
 
+### ✅ 2025-09-10
+**🔒 보안 및 챗봇 기능**
+- **"더그아웃"** - **HTTPS 적용** (SSL 인증서 설정 완료)
+- **"더그아웃"** - **보안 대책 강화 계획 수립**
+- **"더그아웃"** - **"더그아웃이 말해주는 챗봇" 팀명 일관화**
+- **"더그아웃"** - **챗봇 기능 확장 (타자/투수 기록 질의 가능)**
+→ 결과: 서비스 안정성 강화 및 챗봇 기능 확장
+
+### ✅ 2025-09-13
+** 📖 문서 작성 및 최신화 **
+- **"더그아웃"** - 아키텍쳐 구성 및 작성
+→ 결과: → 결과: 프로젝트 전반 구조와 데이터 흐름을 시각적으로 정리하여, 개발/운영/보안 측면에서 일관된 참조 문서 확보
+
 
 </details>
 
+---
+
+## 📝 프로젝트 회고
+
+이번 프로젝트를 진행하면서 아쉬움과 배움을 동시에 느꼈다.  
+무엇보다 **보안적인 부분이 다소 부족했다는 점**이 가장 크게 남았다. HTTPS 적용과 IAM 설정 등 기본적인 보안은 적용했지만, 더욱 견고한 체계를 갖추기 위해서는 앞으로 더 많은 노력이 필요하다고 느꼈다.  
+
+또한, 이 프로젝트는 여기서 끝이 아니라 **사용자 피드백을 반영하며 계속 발전할 예정**이다. 2026 시즌에는 더 많은 데이터를 기반으로 한 분석과 예측 기능을 선보일 수 있기를 기대한다. 특히 **타자와 투수의 누적 데이터를 더 빨리 축적하고 분석**하여 한층 더 정교한 예측 시스템을 구현하지 못한 점이 아쉬움으로 남았다.  
+
+개발 과정에서 깨달은 점도 많다. **백엔드 중심으로 개발했지만, 프런트엔드와의 합의와 협업이 프로젝트 완성도를 크게 좌우한다**는 사실을 몸소 느꼈다. 좋은 기능도 UI/UX와 잘 어우러져야 비로소 사용자에게 가치를 전달할 수 있다는 점이 큰 교훈이었다.  
+
+이번 작업은 **AWS의 다양한 서비스들을 직접 활용**하면서 클라우드 아키텍처와 DevOps 환경을 경험한 값진 시간이기도 했다. 1인 개발자로서 모든 것을 직접 구축하고 운영해 본 경험은 분명 앞으로의 성장에 큰 밑거름이 될 것이다.  
+
+무엇보다도, 내가 좋아하는 **야구**라는 주제를 내가 배우고 싶었던 **Spring Boot**와 결합해 구현했기에 재미가 두 배였다. 즐기면서 배울 수 있었던 이 시간이 개발자로서의 길에 큰 동기부여가 되었고, 앞으로도 꾸준히 발전시켜 나가고 싶은 프로젝트로 남을 것이다.  
 
 ---
 
 ## 🔜 지속적으로 해야 할 일
-- ⚙️ 컨트롤러 / 서비스 / 템플릿 **리팩토링**
-- 📦 스프링 스터디 프로젝트와 **분할 관리**
 - 📖 문서 최신화
-
 ---
 
 ## 🖐️ 프로젝트 마감일
-📌 **25시즌 KBO 종료일**
+📌 **2025 KBO 정규시즌 종료일**
 
 ---
 

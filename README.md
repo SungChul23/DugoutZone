@@ -61,12 +61,12 @@
 ## 🏗️ 아키텍처
 
 <p align="center">
-  <img src="https://dugoutzone.s3.ap-northeast-2.amazonaws.com/dugoutzonelogo.png" alt="Dugoutzone Logo" width="280"/>
+  <img src="https://dugoutzone.s3.ap-northeast-2.amazonaws.com/dugoutArc.png" alt="Dugoutzone Architecture" width="800"/>
 </p>
 
 - **Route 53** → DNS, 도메인 관리 (dugoutzone.shop)  
 - **EC2 (Ubuntu + Nginx + Spring Boot)** → Web + REST API + DB Access  
-- **RDS (MySQL)** → 팀/선수/기록 데이터 저장  
+- **RDS (MySQL)** → 팀/선수/기록 데이터 등 저장
 - **S3** → 구단 로고, 선수 사진 (미정) (브라우저가 URL로 직접 로드)  
 - **Lambda + EventBridge** → 크롤링 자동화 (순위, 타자, 투수 기록)  
 - **ECR Repository** → 크롤러 Docker 이미지 관리  
